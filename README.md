@@ -1,4 +1,4 @@
 dotemacs
 ========
 
-dotemacs
+Configuration files for emacs
