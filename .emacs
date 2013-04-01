@@ -1,7 +1,7 @@
 ;; coding look
 (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
 (load-theme 'solarized-dark t)
-(set-face-attribute 'default nil :font "Consolas" :height 113)
+(set-face-attribute 'default nil :font "Monaco" :height 113)
 (global-hl-line-mode 1)
 (setq line-number-mode t)
 (setq column-number-mode t)
@@ -13,6 +13,7 @@
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
+(setq inhibit-splash-screen t)
 
 ;; behavior
 (windmove-default-keybindings 'meta)
@@ -35,3 +36,15 @@
 (setq x-stretch-cursor t)
 (transient-mark-mode t)
 (delete-selection-mode t)
+
+;; clojure
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+(unless (package-installed-p 'clojure-mode)
+  (package-refresh-contents)
+  (package-install 'clojure-mode))
+(add-hook 'clojure-mode-hook 'paredit-mode)
+(when (not (package-installed-p 'nrepl))
+  (package-install 'nrepl))
