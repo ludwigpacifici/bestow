@@ -8,13 +8,13 @@
                            ("http" . "proxy:3128")))
 (package-initialize)
 
-(defvar my-packages '(auto-complete
-                      clojure-mode
-                      clojure-test-mode                      
+(defvar my-packages '(clojure-mode
+                      clojure-test-mode
+                      etags
                       nrepl
+                      p4
                       paredit
-                      solarized-theme
-                      yasnippet))
+                      solarized-theme))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -52,17 +52,6 @@
 (delete-selection-mode t) ;; delete selected text
 (setq x-stretch-cursor t) ;; cursor as wide as the character it is over
 (electric-pair-mode t) ;; handle open/close brackets
-(yas-global-mode t) ;; yasnippet
-;; auto complete mod
-;; should be loaded after yasnippet so that they can work together
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-;; set the trigger key so that it can work together with yasnippet on tab key,
-;; if the word exists in yasnippet, pressing tab will cause yasnippet to
-;; activate, otherwise, auto-complete will
-(ac-set-trigger-key "TAB")
-(ac-set-trigger-key "<tab>")
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
@@ -81,10 +70,45 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
-;; utf-8 / input-method
 (setq locale-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (set-language-environment "UTF-8") ;; prefer utf-8 for language settings
 (set-input-method nil) ;; no funky input for normal editing
+
+;;;;;;;;;;;;;;
+;; perforce ;;
+;;;;;;;;;;;;;;
+(load-library "p4")
+
+;;;;;;;;;;
+;; tags ;;
+;;;;;;;;;;
+;; Create tags
+(defun create-tags (dir-name)
+  "Create tags file."
+  (interactive "DDirectory: ")
+  (eshell-command 
+   (format "find %s -type f -name \"*.[ch]\" | etags -" dir-name)))
+  ;;;  Jonas.Jarnestrom<at>ki.ericsson.se A smarter               
+  ;;;  find-tag that automagically reruns etags when it cant find a               
+  ;;;  requested item and then makes a new try to locate it.  
+(defadvice find-tag (around refresh-etags activate)
+  "Rerun etags and reload tags if tag not found and redo find-tag.              
+   If buffer is modified, ask about save before running etags."
+  (let ((extension (file-name-extension (buffer-file-name))))
+    (condition-case err
+        ad-do-it
+      (error (and (buffer-modified-p)
+                  (not (ding))
+                  (y-or-n-p "Buffer is modified, save it? ")
+                  (save-buffer))
+             (er-refresh-etags extension)
+             ad-do-it))))
+(defun er-refresh-etags (&optional extension)
+  "Run etags on all peer files in current dir and reload them silently."
+  (interactive)
+  (shell-command (format "etags *.%s" (or extension "el")))
+  (let ((tags-revert-without-query t))  ; don't query, revert silently          
+    (visit-tags-table default-directory nil)))
