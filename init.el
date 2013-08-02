@@ -8,13 +8,15 @@
                            ("http" . "proxy:3128")))
 (package-initialize)
 
-(defvar my-packages '(clojure-mode
+(defvar my-packages '(
+		      clojure-mode
                       clojure-test-mode
                       etags
                       nrepl
                       p4
                       paredit
-                      solarized-theme))
+                      solarized-theme
+                      ))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -24,7 +26,7 @@
 ;; coding look ;;
 ;;;;;;;;;;;;;;;;;
 (load-theme 'solarized-dark t)
-(set-face-attribute 'default nil :font "Monaco" :height 113)
+(set-face-attribute 'default nil :font "Consolas" :height 125)
 (global-hl-line-mode t)
 (setq line-number-mode t)
 (setq column-number-mode t)
@@ -82,33 +84,13 @@
 ;;;;;;;;;;;;;;
 (load-library "p4")
 
-;;;;;;;;;;
-;; tags ;;
-;;;;;;;;;;
-;; Create tags
-(defun create-tags (dir-name)
-  "Create tags file."
-  (interactive "DDirectory: ")
-  (eshell-command 
-   (format "find %s -type f -name \"*.[ch]\" | etags -" dir-name)))
-  ;;;  Jonas.Jarnestrom<at>ki.ericsson.se A smarter               
-  ;;;  find-tag that automagically reruns etags when it cant find a               
-  ;;;  requested item and then makes a new try to locate it.  
-(defadvice find-tag (around refresh-etags activate)
-  "Rerun etags and reload tags if tag not found and redo find-tag.              
-   If buffer is modified, ask about save before running etags."
-  (let ((extension (file-name-extension (buffer-file-name))))
-    (condition-case err
-        ad-do-it
-      (error (and (buffer-modified-p)
-                  (not (ding))
-                  (y-or-n-p "Buffer is modified, save it? ")
-                  (save-buffer))
-             (er-refresh-etags extension)
-             ad-do-it))))
-(defun er-refresh-etags (&optional extension)
-  "Run etags on all peer files in current dir and reload them silently."
-  (interactive)
-  (shell-command (format "etags *.%s" (or extension "el")))
-  (let ((tags-revert-without-query t))  ; don't query, revert silently          
-    (visit-tags-table default-directory nil)))
+;;;;;;;;;;;;;;;;;
+;; match paren ;;
+;;;;;;;;;;;;;;;;;
+(global-set-key "%" 'match-paren)
+(defun match-paren (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+        (t (self-insert-command (or arg 1)))))
