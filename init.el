@@ -4,18 +4,21 @@
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
-(setq url-proxy-services '(("no_proxy" . "work\\.com")
-                           ("http" . "proxy:3128")))
+;;(setq url-proxy-services '(("no_proxy" . "work\\.com")
+;;                           ("http" . "proxy:3128")))
 (package-initialize)
 
 (defvar my-packages '(
-		      clojure-mode
+                      clojure-mode
                       clojure-test-mode
                       etags
                       nrepl
                       p4
                       paredit
                       solarized-theme
+                      starter-kit-lisp
+                      starter-kit-bindings
+                      starter-kit-eshell
                       ))
 
 (dolist (p my-packages)
@@ -26,7 +29,7 @@
 ;; coding look ;;
 ;;;;;;;;;;;;;;;;;
 (load-theme 'solarized-dark t)
-(set-face-attribute 'default nil :font "Consolas" :height 125)
+(set-face-attribute 'default nil :font "Monaco" :height 125)
 (global-hl-line-mode t)
 (setq line-number-mode t)
 (setq column-number-mode t)
@@ -46,6 +49,7 @@
 ;;;;;;;;;;;;;;
 (windmove-default-keybindings 'meta) ;; easy switching between visible buffers
 (ido-mode t)
+(setq ido-enable-flex-matching t)
 (iswitchb-mode t)
 (savehist-mode 1) ;; save minibuffer historic
 (setq frame-title-format "%b - Emacs") ;; buffer name in the title bar
@@ -54,6 +58,17 @@
 (delete-selection-mode t) ;; delete selected text
 (setq x-stretch-cursor t) ;; cursor as wide as the character it is over
 (electric-pair-mode t) ;; handle open/close brackets
+(require 'uniquify) ;; overrides Emacs’ default mechanism for making buffer names unique
+(setq uniquify-buffer-name-style 'forward)
+(require 'saveplace) ;; overrides Emacs’ default mechanism for making buffer names unique
+(setq-default save-place t)
+(global-set-key (kbd "M-/") 'hippie-expand)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(setq visible-bell nil)
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
@@ -65,9 +80,9 @@
 ;;;;;;;;;;;;;;;
 ;; C++ style ;;
 ;;;;;;;;;;;;;;;
-(setq-default c-basic-offset 3) ;; indent size
+(setq-default c-basic-offset 2) ;; indent size
 (setq c-default-style "k&r") ;; indent style
-(add-to-list 'auto-mode-alist '("\\.r\\'" . c-mode))
+;;(add-to-list 'auto-mode-alist '("\\.r\\'" . c-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
@@ -82,7 +97,7 @@
 ;;;;;;;;;;;;;;
 ;; perforce ;;
 ;;;;;;;;;;;;;;
-(load-library "p4")
+;;(load-library "p4")
 
 ;;;;;;;;;;;;;;;;;
 ;; match paren ;;
@@ -94,3 +109,4 @@
   (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
         (t (self-insert-command (or arg 1)))))
+
