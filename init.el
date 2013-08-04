@@ -94,11 +94,6 @@
 (set-language-environment "UTF-8") ;; prefer utf-8 for language settings
 (set-input-method nil) ;; no funky input for normal editing
 
-;;;;;;;;;;;;;;
-;; perforce ;;
-;;;;;;;;;;;;;;
-;;(load-library "p4")
-
 ;;;;;;;;;;;;;;;;;
 ;; match paren ;;
 ;;;;;;;;;;;;;;;;;
@@ -109,4 +104,9 @@
   (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
         (t (self-insert-command (or arg 1)))))
+
+;;;;;;;;;;;;;
+;; modules ;;
+;;;;;;;;;;;;;
+;;(load-file "job.el")
 
