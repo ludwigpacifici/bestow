@@ -4,8 +4,8 @@
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
-;;(setq url-proxy-services '(("no_proxy" . "work\\.com")
-;;                           ("http" . "proxy:3128")))
+(setq url-proxy-services '(("no_proxy" . "work\\.com")
+                           ("http" . "proxy:3128")))
 (package-initialize)
 
 (defvar my-packages '(
@@ -15,9 +15,6 @@
                       nrepl
                       p4
                       paredit
-                      solarized-theme
-                      starter-kit-lisp
-                      starter-kit-bindings
                       starter-kit-eshell
                       ))
 
@@ -28,8 +25,8 @@
 ;;;;;;;;;;;;;;;;;
 ;; coding look ;;
 ;;;;;;;;;;;;;;;;;
-(load-theme 'solarized-dark t)
-(set-face-attribute 'default nil :font "Monaco" :height 125)
+(set-background-color "#fdf6e3")
+(set-face-attribute 'default nil :font "Monaco" :height 115)
 (global-hl-line-mode t)
 (setq line-number-mode t)
 (setq column-number-mode t)
@@ -59,9 +56,19 @@
 (electric-pair-mode t) ;; handle open/close brackets
 (require 'uniquify) ;; overrides Emacs’ default mechanism for making buffer names unique
 (setq uniquify-buffer-name-style 'forward)
-(require 'saveplace) ;; overrides Emacs’ default mechanism for making buffer names unique
+(require 'saveplace) ;; When you visit a file, point goes to the last place where it was when you previously visited the same file
 (setq-default save-place t)
 (setq visible-bell nil)
+(global-set-key (kbd "M-/") 'hippie-expand)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(define-key global-map (kbd "C-+") 'text-scale-increase) ;; increase font size
+(define-key global-map (kbd "C--") 'text-scale-decrease) ;; decrease font size
+(windmove-default-keybindings 'meta) ;; move point from window to window 
+(define-key global-map "\C-x\C-r" 'rgrep)
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
@@ -100,5 +107,6 @@
 ;;;;;;;;;;;;;
 ;; modules ;;
 ;;;;;;;;;;;;;
-;;(load-file "job.el")
+(load-file "~/.emacs.d/job.el")
+(load-file "~/.emacs.d/tags.el")
 
