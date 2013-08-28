@@ -12,9 +12,11 @@
                       clojure-mode
                       clojure-test-mode
                       etags
+                      etags-table
                       nrepl
                       p4
                       paredit
+                      php-mode
                       starter-kit-eshell
                       ))
 
@@ -31,7 +33,8 @@
 (setq line-number-mode t)
 (setq column-number-mode t)
 (show-paren-mode t)
-(set-cursor-color "red")
+(set-cursor-color "blue")
+(setq-default cursor-type 'bar)
 
 ;;;;;;;;;
 ;; gui ;;
@@ -68,7 +71,8 @@
 (define-key global-map (kbd "C-+") 'text-scale-increase) ;; increase font size
 (define-key global-map (kbd "C--") 'text-scale-decrease) ;; decrease font size
 (windmove-default-keybindings 'meta) ;; move point from window to window 
-(define-key global-map "\C-x\C-r" 'rgrep)
+(cua-mode t)
+(setq cua-keep-region-after-copy t) ;; C-c, C-v and C-x default behavior
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
@@ -110,3 +114,7 @@
 (load-file "~/.emacs.d/job.el")
 (load-file "~/.emacs.d/tags.el")
 
+;;;;;;;;;
+;; php ;;
+;;;;;;;;;
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
