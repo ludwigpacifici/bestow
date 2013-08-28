@@ -13,6 +13,7 @@
                       clojure-test-mode
                       etags
                       etags-table
+                      highlight-symbol
                       nrepl
                       p4
                       paredit
@@ -35,6 +36,7 @@
 (show-paren-mode t)
 (set-cursor-color "blue")
 (setq-default cursor-type 'bar)
+(blink-cursor-mode 0) ;; no blinking cursor
 
 ;;;;;;;;;
 ;; gui ;;
@@ -49,11 +51,16 @@
 ;;;;;;;;;;;;;;
 (ido-mode t)
 (setq ido-enable-flex-matching t)
+(setq auto-save-timeout 60) ;; autosave every minute
+(setq-default indicate-empty-lines t) ;; show empty lines
+(setq scroll-preserve-screen-position t) ;; scroll without moving cursor
+(setq next-line-add-newlines t) ;; add newline when at buffer end
 (iswitchb-mode t)
 (savehist-mode 1) ;; save minibuffer historic
 (setq frame-title-format "%b - Emacs") ;; buffer name in the title bar
 (setq icon-title-format "%b - Emacs") ;; buffer name in the title bar
 (fset 'yes-or-no-p 'y-or-n-p) ;; yes-no shortcuts
+(setq show-paren-style 'expression) ;; highlight text between parens
 (delete-selection-mode t) ;; delete selected text
 (setq x-stretch-cursor t) ;; cursor as wide as the character it is over
 (electric-pair-mode t) ;; handle open/close brackets
@@ -118,3 +125,10 @@
 ;; php ;;
 ;;;;;;;;;
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; automatic and manual symbol highlighting for Emacs ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key [(control f3)] 'highlight-symbol-at-point)
+(global-set-key [f3] 'highlight-symbol-next)
+(global-set-key [(shift f3)] 'highlight-symbol-prev)
