@@ -14,6 +14,7 @@
                       etags
                       etags-table
                       highlight-symbol
+                      markdown-mode
                       nrepl
                       p4
                       paredit
@@ -91,7 +92,7 @@
 ;;;;;;;;;;;;;;;
 ;; C++ style ;;
 ;;;;;;;;;;;;;;;
-(setq-default c-basic-offset 2) ;; indent size
+(setq-default c-basic-offset 3) ;; indent size
 (setq c-default-style "k&r") ;; indent style
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -115,16 +116,14 @@
         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
         (t (self-insert-command (or arg 1)))))
 
-;;;;;;;;;;;;;
-;; modules ;;
-;;;;;;;;;;;;;
-(load-file "~/.emacs.d/job.el")
-(load-file "~/.emacs.d/tags.el")
-
-;;;;;;;;;
-;; php ;;
-;;;;;;;;;
+;;;;;;;;;;;
+;; Modes ;;
+;;;;;;;;;;;
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.r$" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; automatic and manual symbol highlighting for Emacs ;;
@@ -132,3 +131,13 @@
 (global-set-key [(control f3)] 'highlight-symbol-at-point)
 (global-set-key [f3] 'highlight-symbol-next)
 (global-set-key [(shift f3)] 'highlight-symbol-prev)
+
+;;;;;;;;;;;;;
+;; modules ;;
+;;;;;;;;;;;;;
+(load-file "~/.emacs.d/tags.el")
+
+;;;;;;;;;;;;;;
+;; perforce ;;
+;;;;;;;;;;;;;;
+(load-library "p4")
