@@ -4,8 +4,7 @@
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
-(setq url-proxy-services '(("no_proxy" . "work\\.com")
-                           ("http" . "proxy:3128")))
+(load-file "~/.emacs.d/proxy.el")
 (package-initialize)
 
 (defvar my-packages '(
