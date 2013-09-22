@@ -36,7 +36,7 @@
 (show-paren-mode t)
 (set-cursor-color "blue")
 (setq-default cursor-type 'box)
-(blink-cursor-mode 0) ;; no blinking cursor
+(blink-cursor-mode t) ;; blinking cursor
 
 ;;;;;;;;;
 ;; gui ;;
