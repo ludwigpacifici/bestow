@@ -86,12 +86,6 @@
 (setq-default indent-tabs-mode nil) ;; no tabs
 (setq tab-width 4) ;; tabs size
 
-;;;;;;;;;;;;;;;
-;; C++ style ;;
-;;;;;;;;;;;;;;;
-(setq-default c-basic-offset 3) ;; indent size
-(setq c-default-style "k&r") ;; indent style
-
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -101,15 +95,6 @@
 (prefer-coding-system 'utf-8)
 (set-language-environment "UTF-8") ;; prefer utf-8 for language settings
 (set-input-method nil) ;; no funky input for normal editing
-
-;;;;;;;;;;;
-;; Modes ;;
-;;;;;;;;;;;
-(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.r$" . c-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; automatic and manual symbol highlighting for Emacs ;;
@@ -122,6 +107,8 @@
 ;; modules ;;
 ;;;;;;;;;;;;;
 (load-file "~/.emacs.d/tags.el")
+(load-file "~/.emacs.d/cpp.el")
+(load-file "~/.emacs.d/modes.el")
 
 ;;;;;;;;;;;;;;
 ;; perforce ;;
