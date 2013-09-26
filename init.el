@@ -8,6 +8,7 @@
 (package-initialize)
 
 (defvar my-packages '(
+                      auctex
                       clojure-mode
                       clojure-test-mode
                       etags
@@ -109,6 +110,7 @@
 (load-file "~/.emacs.d/tags.el")
 (load-file "~/.emacs.d/cpp.el")
 (load-file "~/.emacs.d/modes.el")
+(load-file "~/.emacs.d/latex.el")
 
 ;;;;;;;;;;;;;;
 ;; perforce ;;
