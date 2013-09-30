@@ -29,7 +29,7 @@
 ;;;;;;;;;;;;;;;;;
 ;; coding look ;;
 ;;;;;;;;;;;;;;;;;
-(set-background-color "#eee8d5")
+(load-theme 'deeper-blue t)
 (set-face-attribute 'default nil :font "Monaco" :height 115)
 (global-hl-line-mode t)
 (setq line-number-mode t)
