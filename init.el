@@ -56,7 +56,6 @@
 (setq-default indicate-empty-lines t) ;; show empty lines
 (setq scroll-preserve-screen-position t) ;; scroll without moving cursor
 (setq next-line-add-newlines t) ;; add newline when at buffer end
-(iswitchb-mode t)
 (savehist-mode 1) ;; save minibuffer historic
 (setq frame-title-format "%b - Emacs") ;; buffer name in the title bar
 (setq icon-title-format "%b - Emacs") ;; buffer name in the title bar
