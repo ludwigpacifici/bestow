@@ -64,6 +64,7 @@
 (delete-selection-mode t) ;; delete selected text
 (setq x-stretch-cursor t) ;; cursor as wide as the character it is over
 (electric-pair-mode t) ;; handle open/close brackets
+(require 'uniquify)
 (setq uniquify-buffer-name-style 'forward) ;; overrides Emacs’ default mechanism for making buffer names unique
 (setq-default save-place t) ;; When you visit a file, point goes to the last place where it was when you previously visited the same file
 (setq visible-bell nil)
