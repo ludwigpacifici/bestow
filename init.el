@@ -35,7 +35,7 @@
 (setq line-number-mode t)
 (setq column-number-mode t)
 (show-paren-mode t)
-(set-cursor-color "blue")
+(set-cursor-color "yellow")
 (setq-default cursor-type 'box)
 (blink-cursor-mode t) ;; blinking cursor
 
