@@ -4,6 +4,8 @@
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/"))
 (load-file "~/.emacs.d/proxy.el")
 (package-initialize)
 
@@ -76,9 +78,10 @@
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 (define-key global-map (kbd "C-+") 'text-scale-increase) ;; increase font size
 (define-key global-map (kbd "C--") 'text-scale-decrease) ;; decrease font size
-(windmove-default-keybindings 'meta) ;; move point from window to window 
+(windmove-default-keybindings 'meta) ;; move point from window to window
 (cua-mode t)
 (setq cua-keep-region-after-copy t) ;; C-c, C-v and C-x default behavior
+(setq next-line-add-newlines nil)
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
@@ -111,8 +114,4 @@
 (load-file "~/.emacs.d/cpp.el")
 (load-file "~/.emacs.d/modes.el")
 (load-file "~/.emacs.d/latex.el")
-
-;;;;;;;;;;;;;;
-;; perforce ;;
-;;;;;;;;;;;;;;
-(load-library "p4")
+(load-file "~/.emacs.d/p4.el")
