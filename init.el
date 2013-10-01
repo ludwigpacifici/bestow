@@ -11,6 +11,7 @@
 
 (defvar my-packages '(
                       auctex
+                      auto-complete
                       clojure-mode
                       clojure-test-mode
                       etags
@@ -22,6 +23,7 @@
                       paredit
                       php-mode
                       starter-kit-eshell
+                      yasnippet
                       ))
 
 (dolist (p my-packages)
@@ -52,8 +54,9 @@
 ;;;;;;;;;;;;;;
 ;; behavior ;;
 ;;;;;;;;;;;;;;
-(ido-mode t)
 (setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
 (setq auto-save-timeout 60) ;; autosave every minute
 (setq-default indicate-empty-lines t) ;; show empty lines
 (setq scroll-preserve-screen-position t) ;; scroll without moving cursor
@@ -82,6 +85,13 @@
 (cua-mode t)
 (setq cua-keep-region-after-copy t) ;; C-c, C-v and C-x default behavior
 (setq next-line-add-newlines nil)
+(require 'yasnippet)
+(yas-global-mode 1)
+(setq yas-prompt-functions '(yas-ido-prompt))
+(require 'auto-complete-config)
+(ac-config-default)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
+(ac-set-trigger-key "TAB")
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
@@ -106,6 +116,11 @@
 (global-set-key [(control f3)] 'highlight-symbol-at-point)
 (global-set-key [f3] 'highlight-symbol-next)
 (global-set-key [(shift f3)] 'highlight-symbol-prev)
+
+;;;;;;;;;;;
+;; email ;;
+;;;;;;;;;;;
+(setq user-mail-address "ludwig@lud.cc")
 
 ;;;;;;;;;;;;;
 ;; modules ;;
