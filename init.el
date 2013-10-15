@@ -11,7 +11,6 @@
 
 (defvar my-packages '(
                       auctex
-                      auto-complete
                       clojure-mode
                       clojure-test-mode
                       etags
@@ -88,10 +87,6 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 (setq yas-prompt-functions '(yas-ido-prompt))
-(require 'auto-complete-config)
-(ac-config-default)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
-(ac-set-trigger-key "TAB")
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
@@ -130,3 +125,17 @@
 (load-file "~/.emacs.d/modes.el")
 (load-file "~/.emacs.d/latex.el")
 (load-file "~/.emacs.d/p4.el")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(p4-depot-added-face ((t (:foreground "pale green"))))
+ '(p4-depot-branched-face ((t (:foreground "green yellow"))))
+ '(p4-diff-inserted-face ((t (:foreground "DodgerBlue1")))))
