@@ -15,6 +15,7 @@
                       clojure-test-mode
                       etags
                       etags-table
+                      hackernews
                       highlight-symbol
                       markdown-mode
                       nrepl
@@ -53,6 +54,7 @@
 ;;;;;;;;;;;;;;
 ;; behavior ;;
 ;;;;;;;;;;;;;;
+(global-auto-revert-mode t)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
