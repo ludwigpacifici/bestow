@@ -24,6 +24,7 @@
                       php-mode
                       starter-kit-eshell
                       yasnippet
+                      xcscope
                       ))
 
 (dolist (p my-packages)
