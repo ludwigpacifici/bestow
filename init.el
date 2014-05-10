@@ -6,20 +6,16 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/"))
-(load-file "~/.emacs.d/proxy.el")
 (package-initialize)
 
 (defvar my-packages '(
                       auctex
                       clojure-mode
                       clojure-test-mode
-                      etags
-                      etags-table
                       hackernews
                       highlight-symbol
                       markdown-mode
                       nrepl
-                      p4
                       paredit
                       php-mode
                       starter-kit-eshell
@@ -35,7 +31,7 @@
 ;; coding look ;;
 ;;;;;;;;;;;;;;;;;
 (load-theme 'deeper-blue t)
-(set-face-attribute 'default nil :font "Monaco" :height 115)
+(set-face-attribute 'default nil :font "Monospace" :height 120)
 (global-hl-line-mode t)
 (setq line-number-mode t)
 (setq column-number-mode t)
@@ -123,22 +119,5 @@
 ;;;;;;;;;;;;;
 ;; modules ;;
 ;;;;;;;;;;;;;
-(load-file "~/.emacs.d/tags.el")
 (load-file "~/.emacs.d/cpp.el")
 (load-file "~/.emacs.d/modes.el")
-(load-file "~/.emacs.d/latex.el")
-(load-file "~/.emacs.d/p4.el")
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(p4-depot-added-face ((t (:foreground "pale green"))))
- '(p4-depot-branched-face ((t (:foreground "green yellow"))))
- '(p4-diff-inserted-face ((t (:foreground "DodgerBlue1")))))
