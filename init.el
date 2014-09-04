@@ -6,20 +6,26 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/"))
+(load-file "~/.emacs.d/proxy.el")
 (package-initialize)
 
 (defvar my-packages '(
                       auctex
                       clojure-mode
                       clojure-test-mode
+                      etags
+                      etags-table
+                      flycheck
                       hackernews
                       highlight-symbol
                       markdown-mode
                       nrepl
+                      nyan-mode
+                      p4
                       paredit
                       php-mode
+                      powerline
                       starter-kit-eshell
-                      yasnippet
                       xcscope
                       ))
 
@@ -31,14 +37,14 @@
 ;; coding look ;;
 ;;;;;;;;;;;;;;;;;
 (load-theme 'deeper-blue t)
-(set-face-attribute 'default nil :font "Monospace" :height 120)
+(set-face-attribute 'default nil :font "Monaco" :height 115)
 (global-hl-line-mode t)
 (setq line-number-mode t)
 (setq column-number-mode t)
 (show-paren-mode t)
 (set-cursor-color "yellow")
 (setq-default cursor-type 'box)
-(blink-cursor-mode t) ;; blinking cursor
+(blink-cursor-mode t)
 
 ;;;;;;;;;
 ;; gui ;;
@@ -47,6 +53,10 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (setq inhibit-splash-screen t)
+;;(require 'powerline)
+;;(powerline-default-theme)
+(defun toggle-full-screen () (interactive) (shell-command "emacs_fullscreen.exe"))
+(global-set-key [f11] 'toggle-full-screen)
 
 ;;;;;;;;;;;;;;
 ;; behavior ;;
@@ -80,12 +90,10 @@
 (define-key global-map (kbd "C-+") 'text-scale-increase) ;; increase font size
 (define-key global-map (kbd "C--") 'text-scale-decrease) ;; decrease font size
 (windmove-default-keybindings 'meta) ;; move point from window to window
-(cua-mode t)
-(setq cua-keep-region-after-copy t) ;; C-c, C-v and C-x default behavior
 (setq next-line-add-newlines nil)
-(require 'yasnippet)
-(yas-global-mode 1)
-(setq yas-prompt-functions '(yas-ido-prompt))
+(display-time-mode 1)
+(setq display-time-24hr-format t)
+(display-time)
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
@@ -116,8 +124,40 @@
 ;;;;;;;;;;;
 (setq user-mail-address "ludwig@lud.cc")
 
+;;;;;;;;;;;;
+;; cscope ;;
+;;;;;;;;;;;;
+(require 'xcscope)
+(cscope-setup)
+
+;;;;;;;;;;;;;;
+;; perforce ;;
+;;;;;;;;;;;;;;
+(load-library "p4")
+
 ;;;;;;;;;;;;;
 ;; modules ;;
 ;;;;;;;;;;;;;
+(load-file "~/.emacs.d/tags.el")
 (load-file "~/.emacs.d/cpp.el")
 (load-file "~/.emacs.d/modes.el")
+(load-file "~/.emacs.d/latex.el")
+(load-file "~/.emacs.d/job.el")
+(load-file "~/.emacs.d/flycheck.el")
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(p4-depot-added-face ((t (:foreground "pale green"))))
+ '(p4-depot-branched-face ((t (:foreground "green yellow"))))
+ '(p4-diff-inserted-face ((t (:foreground "DodgerBlue1"))))
+ '(powerline-active1 ((t (:inherit mode-line :background "gray45"))))
+ '(powerline-active2 ((t (:inherit mode-line :background "gray60")))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(powerline-default-separator (quote slant)))
