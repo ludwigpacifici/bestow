@@ -14,6 +14,7 @@
                       monokai-theme
                       org
                       org-plus-contrib
+                      yaml-mode
                       zenburn-theme
                       ))
 
@@ -79,6 +80,9 @@
 
 (require 'saveplace)
 (setq-default save-place t)
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
