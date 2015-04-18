@@ -44,7 +44,6 @@
 (setq frame-title-format "%b - Emacs") ;; Buffer name in the title bar
 (setq icon-title-format "%b - Emacs") ;; Buffer name in the title bar
 (delete-selection-mode t) ;; Delete selected text
-(toggle-frame-fullscreen)
 (setq mode-require-final-newline t)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (setq auto-save-timeout 60) ;; Autosave every minute
