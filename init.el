@@ -9,13 +9,12 @@
 (package-initialize)
 
 (defvar my-packages '(
-                      highlight-symbol
                       ido-ubiquitous
-                      monokai-theme
+                      markdown-mode
                       org
                       org-plus-contrib
+                      solarized-theme
                       yaml-mode
-                      zenburn-theme
                       ))
 
 (dolist (p my-packages)
@@ -28,7 +27,7 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode -1)
-(load-theme 'zenburn t)
+(load-theme 'solarized-dark t)
 (set-face-attribute 'default nil :family "Monaco")
 (set-face-attribute 'default nil :height 145)
 (global-hl-line-mode t) ;; Highlight current line
@@ -50,6 +49,7 @@
 (setq auto-save-timeout 60) ;; Autosave every minute
 (savehist-mode 1) ;; Save minibuffer historic
 (setq user-mail-address "ludwig@lud.cc")
+(toggle-frame-fullscreen)
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
@@ -62,11 +62,13 @@
 ;; Character encoding ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 (setq locale-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-input-method nil) ;; No funky input for normal editing
+(set-keyboard-coding-system 'utf-8)
 (set-language-environment "UTF-8") ;; prefer utf-8 for language settings
-(set-input-method nil) ;; no funky input for normal editing
+(set-selection-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward) ;; Overrides Emacs’ default mechanism for making buffer names unique
@@ -84,6 +86,12 @@
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
 ;;;;;;;;;;;;;;;
@@ -95,9 +103,13 @@
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 (windmove-default-keybindings 'meta) ;; Move point from window to window
-(global-set-key [(control f3)] 'highlight-symbol-at-point)
-(global-set-key [f3] 'highlight-symbol-next)
-(global-set-key [(shift f3)] 'highlight-symbol-prev)
+
+;;;;;;;;;;;;;;
+;; Mac OS X ;;
+;;;;;;;;;;;;;;
+;; key bindings
+(when (eq system-type 'darwin) ;; mac specific settings
+  (setq mac-command-modifier 'meta))
 
 ;;;;;;;;;;;;;;
 ;; includes ;;
