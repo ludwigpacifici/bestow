@@ -27,7 +27,7 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode -1)
-(load-theme 'solarized-dark t)
+(load-theme 'solarized-light t)
 (set-face-attribute 'default nil :family "Monaco")
 (set-face-attribute 'default nil :height 145)
 (global-hl-line-mode t) ;; Highlight current line
@@ -37,7 +37,6 @@
 (column-number-mode t)
 (setq-default cursor-type 'box)
 (blink-cursor-mode t)
-(set-cursor-color "yellow")
 (show-paren-mode t)
 (setq initial-scratch-message "")
 (setq inhibit-splash-screen t) ;; No splash screen
