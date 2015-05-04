@@ -9,10 +9,12 @@
 (package-initialize)
 
 (defvar my-packages '(
+                      expand-region
                       ido-ubiquitous
                       markdown-mode
                       org
                       org-plus-contrib
+                      scss-mode
                       solarized-theme
                       yaml-mode
                       ))
@@ -27,7 +29,7 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode -1)
-(load-theme 'solarized-light t)
+(load-theme 'zenburn t)
 (set-face-attribute 'default nil :family "Monaco")
 (set-face-attribute 'default nil :height 145)
 (global-hl-line-mode t) ;; Highlight current line
@@ -85,11 +87,16 @@
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
+(require 'expand-region)
+
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
