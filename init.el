@@ -88,6 +88,7 @@
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 (require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
