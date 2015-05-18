@@ -14,7 +14,6 @@
                       markdown-mode
                       org
                       org-plus-contrib
-                      python-mode
                       scss-mode
                       solarized-theme
                       yaml-mode
