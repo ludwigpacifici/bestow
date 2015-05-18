@@ -14,6 +14,7 @@
                       markdown-mode
                       org
                       org-plus-contrib
+                      python-mode
                       scss-mode
                       solarized-theme
                       yaml-mode
@@ -51,6 +52,7 @@
 (savehist-mode 1) ;; Save minibuffer historic
 (setq user-mail-address "ludwig@lud.cc")
 (toggle-frame-fullscreen)
+(setq current-language-environment "English")
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
@@ -58,6 +60,7 @@
 (setq require-final-newline 't) ;; newline at the end of the file
 (setq-default indent-tabs-mode nil) ;; no tabs
 (setq tab-width 4) ;; tabs size
+(setq indent-tabs-mode nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
@@ -121,7 +124,7 @@
 ;;;;;;;;;;;;;;
 ;; includes ;;
 ;;;;;;;;;;;;;;
-(load-file "~/.emacs.d/groundless-fear.el")
+(load-file "~/.emacs.d/python-as-ide.el")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
