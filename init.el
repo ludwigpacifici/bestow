@@ -60,7 +60,7 @@
 ;;;;;;;;;;;;;;;;;;
 (setq require-final-newline 't) ;; newline at the end of the file
 (setq-default indent-tabs-mode nil) ;; no tabs
-(setq tab-width 4) ;; tabs size
+(setq tab-width 2) ;; tabs size
 (setq indent-tabs-mode nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
