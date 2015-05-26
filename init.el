@@ -10,6 +10,7 @@
 
 (defvar my-packages '(
                       expand-region
+                      ggtags
                       ido-ubiquitous
                       markdown-mode
                       org
@@ -125,6 +126,7 @@
 ;;;;;;;;;;;;;;
 (load-file "~/.emacs.d/cplusplus.el")
 (load-file "~/.emacs.d/python-as-ide.el")
+(load-file "~/.emacs.d/gnu-global.el")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
