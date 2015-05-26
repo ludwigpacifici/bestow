@@ -53,6 +53,7 @@
 (setq user-mail-address "ludwig@lud.cc")
 (toggle-frame-fullscreen)
 (setq current-language-environment "English")
+(delete-selection-mode t)
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
