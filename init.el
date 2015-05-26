@@ -123,6 +123,7 @@
 ;;;;;;;;;;;;;;
 ;; includes ;;
 ;;;;;;;;;;;;;;
+(load-file "~/.emacs.d/cplusplus.el")
 (load-file "~/.emacs.d/python-as-ide.el")
 
 (custom-set-variables
