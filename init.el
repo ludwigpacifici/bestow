@@ -104,6 +104,9 @@
 (autoload 'scss-mode "scss-mode")
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
+(load "~/.emacs.d/clang-format.el")
+(global-set-key [C-M-tab] 'clang-format-region)
+
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
 ;;;;;;;;;;;;;;;
