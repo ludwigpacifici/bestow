@@ -54,6 +54,7 @@
 (toggle-frame-fullscreen)
 (setq current-language-environment "English")
 (delete-selection-mode t)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
