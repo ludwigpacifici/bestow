@@ -9,20 +9,32 @@
 (package-initialize)
 
 (defvar my-packages '(
+                      exec-path-from-shell
                       expand-region
                       ggtags
                       ido-ubiquitous
                       markdown-mode
+                      monokai-theme
                       org
                       org-plus-contrib
                       scss-mode
                       solarized-theme
                       yaml-mode
+                      zenburn-theme
                       ))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Mac Os X environment variables ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta))
 
 ;;;;;;;;;;;;;;
 ;; behavior ;;
@@ -30,7 +42,7 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode -1)
-(load-theme 'zenburn t)
+(load-theme 'monokai t)
 (set-face-attribute 'default nil :family "Monaco")
 (set-face-attribute 'default nil :height 145)
 (global-hl-line-mode t) ;; Highlight current line
@@ -120,13 +132,6 @@
 (windmove-default-keybindings 'meta) ;; Move point from window to window
 
 ;;;;;;;;;;;;;;
-;; Mac OS X ;;
-;;;;;;;;;;;;;;
-;; key bindings
-(when (eq system-type 'darwin) ;; mac specific settings
-  (setq mac-command-modifier 'meta))
-
-;;;;;;;;;;;;;;
 ;; includes ;;
 ;;;;;;;;;;;;;;
 (load-file "~/.emacs.d/cplusplus.el")
@@ -138,7 +143,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(custom-safe-themes
+   (quote
+    ("a041a61c0387c57bb65150f002862ebcfe41135a3e3425268de24200b82d6ec9" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

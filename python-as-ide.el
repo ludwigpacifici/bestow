@@ -4,7 +4,7 @@
 (require 'pydoc)
 (require 'pydoc-info)
 
-(setq-default py-shell-name "/usr/local/bin/python3")
+(setq-default py-shell-name "/usr/local/bin/ipython3")
 (setq python-shell-interpreter "/usr/local/bin/ipython3")
 
 (eval-after-load 'python
