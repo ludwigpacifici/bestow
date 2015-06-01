@@ -13,6 +13,7 @@
                       expand-region
                       ggtags
                       ido-ubiquitous
+                      magit
                       markdown-mode
                       monokai-theme
                       org
