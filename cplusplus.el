@@ -1,2 +1,2 @@
 (require 'cc-mode)
-(setq-default c-basic-offset 4)
+(setq-default c-basic-offset 2)
