@@ -74,6 +74,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-auto-revert-mode 1) ;; Auto refresh buffers when edits occur outside emacs
 (setq echo-keystrokes 0.1) ;; Show keystrokes in progress
+(display-time-mode 1)
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
