@@ -37,15 +37,19 @@
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta))
 
+;;;;;;;;;;;;;;;;
+;; Appearance ;;
+;;;;;;;;;;;;;;;;
+(load-theme 'monokai t)
+(set-face-attribute 'default nil :family "Monaco")
+(set-face-attribute 'default nil :height 145)
+
 ;;;;;;;;;;;;;;
 ;; behavior ;;
 ;;;;;;;;;;;;;;
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode -1)
-(load-theme 'monokai t)
-(set-face-attribute 'default nil :family "Monaco")
-(set-face-attribute 'default nil :height 145)
 (global-hl-line-mode t) ;; Highlight current line
 (setq x-stretch-cursor t) ;; Wide cursor on tabs
 (setq ring-bell-function 'ignore) ;; Turn off alarms
@@ -68,6 +72,8 @@
 (setq current-language-environment "English")
 (delete-selection-mode t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(global-auto-revert-mode 1) ;; Auto refresh buffers when edits occur outside emacs
+(setq echo-keystrokes 0.1) ;; Show keystrokes in progress
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
@@ -116,6 +122,7 @@
 
 (autoload 'scss-mode "scss-mode")
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+(add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
 
 (load "~/.emacs.d/clang-format.el")
 (global-set-key [C-M-tab] 'clang-format-region)
