@@ -11,6 +11,7 @@
 (defvar my-packages '(
                       exec-path-from-shell
                       expand-region
+                      flycheck
                       ggtags
                       ido-ubiquitous
                       magit
@@ -129,6 +130,8 @@
 (global-set-key [C-M-tab] 'clang-format-region)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
