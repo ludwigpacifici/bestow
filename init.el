@@ -1,6 +1,5 @@
 (load-file "~/.emacs.d/my-packages.el")
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mac Os X environment variables ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -121,6 +120,7 @@
 (windmove-default-keybindings 'meta) ;; Move point from window to window
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key "\C-cc" 'compile)
 
 ;;;;;;;;;;;;;;
 ;; includes ;;
@@ -128,3 +128,4 @@
 (load-file "~/.emacs.d/cplusplus.el")
 (load-file "~/.emacs.d/python-as-ide.el")
 (load-file "~/.emacs.d/gnu-global.el")
+(load-file "~/.emacs.d/compilation-mode.el")
