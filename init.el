@@ -103,6 +103,8 @@
 (require 'ido)
 (ido-mode t)
 (ido-everywhere t)
+(setq org-completion-use-ido t)
+(setq magit-completing-read-function 'magit-ido-completing-read)
 
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode 1)
@@ -133,8 +135,6 @@
 (global-set-key [C-M-tab] 'clang-format-region)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
-
-(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
