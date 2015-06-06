@@ -1,6 +1,7 @@
 *~
-ido.last
-places
+auto-save-list
 elpa
 history
-auto-save-list
+ido.last
+places
+smex-items
