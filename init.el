@@ -11,7 +11,6 @@
 (defvar my-packages '(
                       exec-path-from-shell
                       expand-region
-                      flycheck
                       ggtags
                       ido-ubiquitous
                       magit
@@ -20,6 +19,7 @@
                       org
                       org-plus-contrib
                       scss-mode
+                      smex
                       solarized-theme
                       yaml-mode
                       zenburn-theme
@@ -107,6 +107,9 @@
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode 1)
 
+(require 'smex) ; Not needed if you use package.el
+(smex-initialize)
+
 (require 'saveplace)
 (setq-default save-place t)
 
@@ -144,6 +147,8 @@
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 (windmove-default-keybindings 'meta) ;; Move point from window to window
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ;;;;;;;;;;;;;;
 ;; includes ;;
