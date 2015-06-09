@@ -107,6 +107,11 @@
 
 (setq magit-last-seen-setup-instructions "1.4.0")
 
+(require 'flymake-cppcheck)
+(add-hook 'c-mode-hook 'flymake-cppcheck-load)
+(add-hook 'c++-mode-hook 'flymake-cppcheck-load)
+(custom-set-variables '(flymake-cppcheck-enable "all"))
+
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
 ;;;;;;;;;;;;;;;

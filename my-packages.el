@@ -6,8 +6,11 @@
 (package-initialize)
 
 (defvar my-packages '(
+;                      cider
+;                      clojure-mode
                       exec-path-from-shell
                       expand-region
+                      flymake-cppcheck
                       ggtags
                       ido-ubiquitous
                       magit
@@ -16,6 +19,7 @@
                       org
                       org-plus-contrib
                       scss-mode
+;                      smartparens
                       smex
                       solarized-theme
                       yaml-mode
