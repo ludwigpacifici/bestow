@@ -29,7 +29,6 @@
 (column-number-mode t)
 (setq-default cursor-type 'box)
 (blink-cursor-mode t)
-(show-paren-mode t)
 (setq initial-scratch-message "")
 (setq inhibit-splash-screen t) ;; No splash screen
 (setq frame-title-format "%b - Emacs") ;; Buffer name in the title bar
@@ -130,7 +129,8 @@
 ;;;;;;;;;;;;;;
 ;; includes ;;
 ;;;;;;;;;;;;;;
-(load-file "~/.emacs.d/cplusplus.el")
-(load-file "~/.emacs.d/python-as-ide.el")
-(load-file "~/.emacs.d/gnu-global.el")
 (load-file "~/.emacs.d/compilation-mode.el")
+(load-file "~/.emacs.d/cplusplus.el")
+(load-file "~/.emacs.d/gnu-global.el")
+(load-file "~/.emacs.d/init-smartparens.el")
+(load-file "~/.emacs.d/python-as-ide.el")

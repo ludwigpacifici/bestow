@@ -6,8 +6,8 @@
 (package-initialize)
 
 (defvar my-packages '(
-;                      cider
-;                      clojure-mode
+                      cider
+                      clojure-mode
                       exec-path-from-shell
                       expand-region
                       flymake-cppcheck
@@ -19,7 +19,7 @@
                       org
                       org-plus-contrib
                       scss-mode
-;                      smartparens
+                      smartparens
                       smex
                       solarized-theme
                       yaml-mode
