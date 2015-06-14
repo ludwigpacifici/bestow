@@ -7,6 +7,7 @@
 
 (defvar my-packages '(
                       cider
+                      clang-format
                       clojure-mode
                       exec-path-from-shell
                       expand-region

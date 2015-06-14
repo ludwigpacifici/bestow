@@ -1,4 +1,4 @@
-(load-file "~/.emacs.d/my-packages.el")
+(load-file "~/.emacs.d/init-packages.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mac Os X environment variables ;;
@@ -101,9 +101,6 @@
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 (add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
 
-(load "~/.emacs.d/clang-format.el")
-(global-set-key [C-M-tab] 'clang-format-region)
-
 (setq magit-last-seen-setup-instructions "1.4.0")
 
 (require 'flymake-cppcheck)
@@ -114,6 +111,7 @@
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
 ;;;;;;;;;;;;;;;
+(windmove-default-keybindings 'meta) ;; Move point from window to window
 (global-set-key [f11] 'toggle-frame-fullscreen)
 (global-set-key "\M- " 'hippie-expand)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -121,16 +119,17 @@
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
-(windmove-default-keybindings 'meta) ;; Move point from window to window
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key "\C-cc" 'compile)
+(global-set-key  "\C-cc" 'compile)
+(global-set-key [C-M-tab] 'clang-format-region)
 
 ;;;;;;;;;;;;;;
 ;; includes ;;
 ;;;;;;;;;;;;;;
-(load-file "~/.emacs.d/compilation-mode.el")
-(load-file "~/.emacs.d/cplusplus.el")
-(load-file "~/.emacs.d/gnu-global.el")
+(load-file "~/.emacs.d/init-clang-format.el")
+(load-file "~/.emacs.d/init-compile.el")
+(load-file "~/.emacs.d/init-cpp.el")
+(load-file "~/.emacs.d/init-gnu-global.el")
+(load-file "~/.emacs.d/init-python.el")
 (load-file "~/.emacs.d/init-smartparens.el")
-(load-file "~/.emacs.d/python-as-ide.el")
