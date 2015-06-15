@@ -2,7 +2,7 @@
 
 (require 'python)
 
-(setq python-shell-interpreter "ipython")
+(setq python-shell-interpreter "python")
 
 (eval-after-load 'python
   '(define-key python-mode-map (kbd "C-c s") 'python-shell-switch-to-shell))
