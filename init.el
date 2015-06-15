@@ -90,7 +90,6 @@
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 (require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
@@ -107,7 +106,7 @@
 (require 'flymake-cppcheck)
 (add-hook 'c-mode-hook 'flymake-cppcheck-load)
 (add-hook 'c++-mode-hook 'flymake-cppcheck-load)
-(custom-set-variables '(flymake-cppcheck-enable "all"))
+(setq flymake-cppcheck-enable "all")
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
@@ -115,6 +114,7 @@
 (windmove-default-keybindings 'meta) ;; Move point from window to window
 (global-set-key [f11] 'toggle-frame-fullscreen)
 (global-set-key "\M- " 'hippie-expand)
+(global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
