@@ -114,6 +114,7 @@
 (global-set-key [f11] 'toggle-frame-fullscreen)
 (global-set-key "\M- " 'hippie-expand)
 (global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
