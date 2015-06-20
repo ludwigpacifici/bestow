@@ -128,7 +128,6 @@
 ;;;;;;;;;;;;;;
 ;; includes ;;
 ;;;;;;;;;;;;;;
-(load-file "~/.emacs.d/init-clang-format.el")
 (load-file "~/.emacs.d/init-compile.el")
 (load-file "~/.emacs.d/init-cpp.el")
 (load-file "~/.emacs.d/init-gnu-global.el")
