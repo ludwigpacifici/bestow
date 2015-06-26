@@ -19,6 +19,7 @@
                       monokai-theme
                       org
                       org-plus-contrib
+                      scratch
                       scss-mode
                       smartparens
                       smex

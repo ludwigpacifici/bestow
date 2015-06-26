@@ -68,6 +68,10 @@
 (set-selection-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 
+;;;;;;;;;;;;;
+;; Modules ;;
+;;;;;;;;;;;;;
+
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward) ;; Overrides Emacs’ default mechanism for making buffer names unique
 
@@ -106,6 +110,8 @@
 (add-hook 'c-mode-hook 'flymake-cppcheck-load)
 (add-hook 'c++-mode-hook 'flymake-cppcheck-load)
 (setq flymake-cppcheck-enable "all")
+
+(autoload 'scratch "scratch" nil t)
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
