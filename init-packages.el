@@ -9,6 +9,7 @@
                       cider
                       clang-format
                       clojure-mode
+                      csv-mode
                       exec-path-from-shell
                       expand-region
                       flymake-cppcheck
