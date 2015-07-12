@@ -112,8 +112,6 @@
 (add-hook 'c++-mode-hook 'flymake-cppcheck-load)
 (setq flymake-cppcheck-enable "all")
 
-(autoload 'scratch "scratch" nil t)
-
 (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
 (autoload 'csv-mode "csv-mode"
   "Major mode for editing comma-separated value files." t)
