@@ -4,6 +4,7 @@
 (package-initialize)
 
 (defvar my-packages '(
+                      avy
                       cider
                       clang-format
                       clojure-mode

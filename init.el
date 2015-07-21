@@ -119,19 +119,20 @@
 ;; shortcuts ;;
 ;;;;;;;;;;;;;;;
 (windmove-default-keybindings 'meta) ;; Move point from window to window
-(global-set-key [f11] 'toggle-frame-fullscreen)
-(global-set-key "\M- " 'hippie-expand)
-(global-set-key (kbd "C-=") 'er/expand-region)
-(global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key (kbd "C-M-s") 'isearch-forward)
-(global-set-key (kbd "C-M-r") 'isearch-backward)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key  "\C-cc" 'compile)
+(global-set-key "\M- " 'hippie-expand)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "M-x") 'smex)
 (global-set-key [C-M-tab] 'clang-format-region)
+(global-set-key [f11] 'toggle-frame-fullscreen)
 
 ;;;;;;;;;;;;;;
 ;; includes ;;
