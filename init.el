@@ -79,7 +79,6 @@
 (require 'ido)
 (ido-mode t)
 (ido-everywhere t)
-(setq org-completion-use-ido t)
 (setq magit-completing-read-function 'magit-ido-completing-read)
 
 (require 'ido-ubiquitous)
