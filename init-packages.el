@@ -10,7 +10,8 @@
                       csv-mode
                       exec-path-from-shell
                       expand-region
-                      flymake-cppcheck
+                      flycheck
+                      flycheck-clojure
                       ggtags
                       ido-ubiquitous
                       magit

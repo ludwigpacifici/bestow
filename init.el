@@ -45,8 +45,8 @@
 (delete-selection-mode t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-auto-revert-mode 1) ;; Auto refresh buffers when edits occur outside emacs
-(setq display-time-day-and-date t
-      display-time-24hr-format t)
+(setq display-time-day-and-date t)
+(setq display-time-24hr-format t)
 (display-time)
 
 ;;;;;;;;;;;;;;;;;;
@@ -79,7 +79,6 @@
 (require 'ido)
 (ido-mode t)
 (ido-everywhere t)
-(setq magit-completing-read-function 'magit-ido-completing-read)
 
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode 1)
@@ -104,16 +103,12 @@
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 (add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
 
-(setq magit-last-seen-setup-instructions "1.4.0")
-
-(require 'flymake-cppcheck)
-(add-hook 'c-mode-hook 'flymake-cppcheck-load)
-(add-hook 'c++-mode-hook 'flymake-cppcheck-load)
-(setq flymake-cppcheck-enable "all")
-
 (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
 (autoload 'csv-mode "csv-mode"
   "Major mode for editing comma-separated value files." t)
+
+(eval-after-load 'flycheck '(flycheck-clojure-setup))
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
