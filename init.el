@@ -14,7 +14,7 @@
 ;;;;;;;;;;;;;;;;
 (load-theme 'monokai t)
 (set-face-attribute 'default nil :family "Monaco")
-(set-face-attribute 'default nil :height 135)
+(set-face-attribute 'default nil :height 115)
 
 ;;;;;;;;;;;;;;
 ;; behavior ;;
