@@ -14,7 +14,7 @@
 ;;;;;;;;;;;;;;;;
 (load-theme 'monokai t)
 (set-face-attribute 'default nil :family "Monaco")
-(set-face-attribute 'default nil :height 145)
+(set-face-attribute 'default nil :height 135)
 
 ;;;;;;;;;;;;;;
 ;; behavior ;;
@@ -106,9 +106,6 @@
 (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
 (autoload 'csv-mode "csv-mode"
   "Major mode for editing comma-separated value files." t)
-
-(eval-after-load 'flycheck '(flycheck-clojure-setup))
-(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
