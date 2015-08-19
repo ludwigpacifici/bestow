@@ -45,9 +45,7 @@
 (delete-selection-mode t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-auto-revert-mode 1) ;; Auto refresh buffers when edits occur outside emacs
-(setq display-time-day-and-date t)
-(setq display-time-24hr-format t)
-(display-time)
+(show-paren-mode 1)
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
