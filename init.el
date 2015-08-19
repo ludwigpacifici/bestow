@@ -129,3 +129,4 @@
 (load-file "~/.emacs.d/init-cpp.el")
 (load-file "~/.emacs.d/init-gnu-global.el")
 (load-file "~/.emacs.d/init-python.el")
+(load-file "~/.emacs.d/init-paredit.el")

@@ -17,6 +17,7 @@
                       magit
                       markdown-mode
                       monokai-theme
+                      paredit
                       scss-mode
                       smartparens
                       smex
