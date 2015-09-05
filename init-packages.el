@@ -7,6 +7,7 @@
                       cider
                       clang-format
                       clojure-mode
+                      cmake-font-lock
                       csv-mode
                       exec-path-from-shell
                       expand-region

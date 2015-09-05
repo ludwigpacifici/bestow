@@ -81,7 +81,7 @@
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode 1)
 
-(require 'smex) ; Not needed if you use package.el
+(require 'smex)
 (smex-initialize)
 
 (require 'saveplace)
@@ -104,6 +104,9 @@
 (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
 (autoload 'csv-mode "csv-mode"
   "Major mode for editing comma-separated value files." t)
+
+(autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
+(add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
