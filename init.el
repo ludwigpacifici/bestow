@@ -77,6 +77,7 @@
 (require 'ido)
 (ido-mode t)
 (ido-everywhere t)
+(setq ido-auto-merge-work-directories-length -1)
 
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode 1)
@@ -107,6 +108,8 @@
 
 (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
 (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
+
+(setq tramp-default-method "ssh")
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;

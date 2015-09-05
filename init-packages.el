@@ -14,6 +14,7 @@
                       flycheck
                       flycheck-clojure
                       ggtags
+                      idle-highlight-mode
                       ido-ubiquitous
                       magit
                       markdown-mode
