@@ -9,26 +9,14 @@
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta))
 
-;;;;;;;;;;;;;;;;
-;; Appearance ;;
-;;;;;;;;;;;;;;;;
-(load-theme 'monokai t)
-(set-face-attribute 'default nil :family "Monaco")
-(set-face-attribute 'default nil :height 115)
-
 ;;;;;;;;;;;;;;
 ;; behavior ;;
 ;;;;;;;;;;;;;;
-(tool-bar-mode 0)
-(menu-bar-mode 0)
-(scroll-bar-mode -1)
-(global-hl-line-mode t) ;; Highlight current line
 (setq x-stretch-cursor t) ;; Wide cursor on tabs
 (setq ring-bell-function 'ignore) ;; Turn off alarms
 (line-number-mode t)
 (column-number-mode t)
 (setq-default cursor-type 'bar)
-(set-cursor-color "gold")
 (blink-cursor-mode t)
 (setq initial-scratch-message "")
 (setq inhibit-splash-screen t) ;; No splash screen
@@ -132,7 +120,9 @@
 ;;;;;;;;;;;;;;
 ;; includes ;;
 ;;;;;;;;;;;;;;
+(load-file "~/.emacs.d/init-appearance.el")
 (load-file "~/.emacs.d/init-cpp.el")
 (load-file "~/.emacs.d/init-gnu-global.el")
-(load-file "~/.emacs.d/init-python.el")
 (load-file "~/.emacs.d/init-paredit.el")
+(load-file "~/.emacs.d/init-python.el")
+
