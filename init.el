@@ -121,6 +121,7 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key [C-M-tab] 'clang-format-region)
 (global-set-key [f11] 'toggle-frame-fullscreen)
+(global-unset-key (kbd "C-z"))
 
 ;;;;;;;;;;;;;;
 ;; includes ;;
