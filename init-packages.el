@@ -11,6 +11,8 @@
                       csv-mode
                       exec-path-from-shell
                       expand-region
+                      flx
+                      flx-ido
                       flycheck
                       flycheck-clojure
                       ggtags
