@@ -16,7 +16,7 @@
 (setq ring-bell-function 'ignore) ;; Turn off alarms
 (line-number-mode t)
 (column-number-mode t)
-(setq-default cursor-type 'bar)
+(setq-default cursor-type 'box)
 (blink-cursor-mode t)
 (setq initial-scratch-message "")
 (setq inhibit-splash-screen t) ;; No splash screen
