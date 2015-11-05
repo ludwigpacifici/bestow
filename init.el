@@ -102,13 +102,12 @@
 (defun dont-kill-emacs ()
   (interactive)
   (error (substitute-command-keys "To exit emacs: \\[kill-emacs]")))
-(global-set-key "\C-x\C-c" 'dont-kill-emacs)
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
 ;;;;;;;;;;;;;;;
-(windmove-default-keybindings 'meta) ;; Move point from window to window
-(global-set-key  "\C-cc" 'compile)
+(global-set-key "\C-cc" 'compile)
+(global-set-key "\C-x\C-c" 'dont-kill-emacs)
 (global-set-key "\M- " 'hippie-expand)
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
@@ -119,6 +118,7 @@
 (global-set-key [C-M-tab] 'clang-format-region)
 (global-set-key [f11] 'toggle-frame-fullscreen)
 (global-unset-key (kbd "C-z"))
+(windmove-default-keybindings 'meta) ;; Move point from window to window
 
 ;;;;;;;;;;;;;;
 ;; includes ;;
