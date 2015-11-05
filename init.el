@@ -58,20 +58,24 @@
 ;;;;;;;;;;;;;
 ;; Modules ;;
 ;;;;;;;;;;;;;
-
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward) ;; Overrides Emacs’ default mechanism for making buffer names unique
-
 (require 'ido)
 (ido-mode t)
 (ido-everywhere t)
-(setq ido-auto-merge-work-directories-length -1)
+(setq ido-auto-merge-work-directories-length -1
+      ido-enable-flex-matching t
+      ido-use-faces nil)
 
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode 1)
 
 (require 'smex)
 (smex-initialize)
+
+(require 'flx-ido)
+(flx-ido-mode 1)
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward) ;; Overrides Emacs’ default mechanism for making buffer names unique
 
 (require 'saveplace)
 (setq-default save-place t)
