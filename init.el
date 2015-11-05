@@ -17,7 +17,7 @@
 (line-number-mode t)
 (column-number-mode t)
 (setq-default cursor-type 'box)
-(blink-cursor-mode t)
+(blink-cursor-mode 0)
 (setq initial-scratch-message "")
 (setq inhibit-splash-screen t) ;; No splash screen
 (setq frame-title-format "%b - Emacs") ;; Buffer name in the title bar
