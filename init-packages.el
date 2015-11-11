@@ -16,6 +16,7 @@
                       flycheck
                       flycheck-clojure
                       ggtags
+                      ido-grid-mode
                       ido-ubiquitous
                       magit
                       markdown-mode
