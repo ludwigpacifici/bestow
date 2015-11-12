@@ -72,7 +72,8 @@
 (flx-ido-mode 1)
 (ido-grid-mode 1)
 (setq ido-grid-mode-first-line nil
-      ido-grid-mode-start-collapsed t)
+      ido-grid-mode-max-rows 3
+      ido-grid-mode-min-rows 3)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward) ;; Overrides Emacs’ default mechanism for making buffer names unique
