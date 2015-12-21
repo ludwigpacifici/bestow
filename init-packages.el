@@ -11,6 +11,7 @@
                       csv-mode
                       exec-path-from-shell
                       expand-region
+                      fireplace
                       flx
                       flx-ido
                       flycheck
