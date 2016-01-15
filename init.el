@@ -54,6 +54,8 @@
 (set-language-environment "UTF-8") ;; prefer utf-8 for language settings
 (set-selection-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
+(when (display-graphic-p)
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 
 ;;;;;;;;;;;;;
 ;; Modules ;;
