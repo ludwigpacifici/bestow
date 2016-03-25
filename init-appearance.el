@@ -1,5 +1,5 @@
 (when (display-graphic-p)
-  (load-theme 'monokai t)
+  (load-theme 'solarized-dark t)
   (global-hl-line-mode t)
   (tool-bar-mode 0)
   (scroll-bar-mode -1))
