@@ -110,6 +110,8 @@
   (interactive)
   (error (substitute-command-keys "To exit emacs: \\[kill-emacs]")))
 
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
 ;;;;;;;;;;;;;;;

@@ -23,6 +23,7 @@
                       markdown-mode
                       monokai-theme
                       paredit
+                      rainbow-delimiters
                       scss-mode
                       smartparens
                       smex
