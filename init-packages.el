@@ -10,6 +10,7 @@
                       cmake-font-lock
                       csv-mode
                       d-mode
+                      elpy
                       exec-path-from-shell
                       expand-region
                       fireplace
