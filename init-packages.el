@@ -29,6 +29,7 @@
                       smartparens
                       smex
                       solarized-theme
+                      typit
                       yaml-mode
                       zenburn-theme
                       ))
