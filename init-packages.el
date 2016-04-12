@@ -26,7 +26,6 @@
                       paredit
                       rainbow-delimiters
                       scss-mode
-                      smartparens
                       smex
                       solarized-theme
                       typit
