@@ -1,3 +1,4 @@
+(setq gc-cons-threshold 100000000)
 (load-file "~/.emacs.d/init-packages.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
