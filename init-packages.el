@@ -25,6 +25,7 @@
                       monokai-theme
                       paredit
                       rainbow-delimiters
+                      rainbow-mode
                       scss-mode
                       smex
                       solarized-theme

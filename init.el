@@ -38,6 +38,22 @@
 (setq scroll-preserve-screen-position 1)
 (size-indication-mode 0)
 
+(when (display-graphic-p)
+  (load-theme 'solarized-dark t)
+  (global-hl-line-mode t)
+  (tool-bar-mode 0)
+  (scroll-bar-mode -1))
+
+(if (eq system-type 'darwin)
+    (progn
+      (set-face-attribute 'default nil :family "Monaco")
+      (set-face-attribute 'default nil :height 115))
+  (set-face-attribute 'default nil :family "Courier 10 Pitch")
+  (set-face-attribute 'default nil :height 130))
+
+(set-cursor-color "gold")
+(menu-bar-mode 0)
+
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
 ;;;;;;;;;;;;;;;;;;
@@ -45,6 +61,23 @@
 (setq-default indent-tabs-mode nil) ;; no tabs
 (setq tab-width 2) ;; tabs size
 (setq indent-tabs-mode nil)
+
+;;;;;;;;;
+;; C++ ;;
+;;;;;;;;;
+(require 'cc-mode)
+(setq-default c-basic-offset 2)
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+;;;;;;;;;;
+;; Tags ;;
+;;;;;;;;;;
+(require 'ggtags)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+              (ggtags-mode 1))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
@@ -115,6 +148,18 @@
 
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
+(add-hook 'prog-mode-hook #'rainbow-mode)
+
+(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+(add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+(add-hook 'ielm-mode-hook #'enable-paredit-mode)
+(add-hook 'lisp-mode-hook #'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+(add-hook 'scheme-mode-hook #'enable-paredit-mode)
+(add-hook 'clojure-mode-hook #'paredit-mode)
+(add-hook 'cider-repl-mode-hook #'paredit-mode)
+
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
 ;;;;;;;;;;;;;;;
@@ -132,14 +177,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key [C-M-tab] 'clang-format-region)
+(define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
 (global-set-key [f11] 'toggle-frame-fullscreen)
 (global-unset-key (kbd "C-z"))
 (windmove-default-keybindings 'meta) ;; Move point from window to window
-
-;;;;;;;;;;;;;;
-;; includes ;;
-;;;;;;;;;;;;;;
-(load-file "~/.emacs.d/init-appearance.el")
-(load-file "~/.emacs.d/init-cpp.el")
-(load-file "~/.emacs.d/init-gnu-global.el")
-(load-file "~/.emacs.d/init-paredit.el")

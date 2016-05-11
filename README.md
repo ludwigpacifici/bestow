@@ -1,4 +1,4 @@
 dotemacs
 ========
 
-Configuration files for emacs
+Personal configuration files for emacs. Feel free to use some part of it!
