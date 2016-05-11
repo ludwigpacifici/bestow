@@ -35,6 +35,8 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-auto-revert-mode 1) ;; Auto refresh buffers when edits occur outside emacs
 (show-paren-mode 1)
+(setq scroll-preserve-screen-position 1)
+(size-indication-mode 0)
 
 ;;;;;;;;;;;;;;;;;;
 ;; coding style ;;
