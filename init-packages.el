@@ -8,7 +8,6 @@
                       clang-format
                       clojure-mode
                       cmake-font-lock
-                      csv-mode
                       d-mode
                       exec-path-from-shell
                       expand-region
