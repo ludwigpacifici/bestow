@@ -1,5 +1,44 @@
+;; Garbage collector kicks in when 100Mb is used
 (setq gc-cons-threshold 100000000)
-(load-file "~/.emacs.d/init-packages.el")
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
+
+(defvar my-packages '(
+                      cider
+                      clang-format
+                      clojure-mode
+                      cmake-font-lock
+                      d-mode
+                      exec-path-from-shell
+                      expand-region
+                      flx
+                      flx-ido
+                      ggtags
+                      ido-grid-mode
+                      ido-ubiquitous
+                      magit
+                      markdown-mode
+                      monokai-theme
+                      paredit
+                      rainbow-delimiters
+                      rainbow-mode
+                      scss-mode
+                      smex
+                      solarized-theme
+                      typit
+                      yaml-mode
+                      zenburn-theme
+                      ))
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
+(setq user-mail-address "ludwig@lud.cc"
+      user-full-name "Ludwig PACIFICI")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mac Os X environment variables ;;
@@ -28,7 +67,7 @@
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (setq auto-save-timeout 60) ;; Autosave every minute
 (savehist-mode 1) ;; Save minibuffer historic
-(setq user-mail-address "ludwig@lud.cc")
+
 (toggle-frame-fullscreen)
 (setq current-language-environment "English")
 (delete-selection-mode t)
@@ -77,7 +116,6 @@
           (lambda ()
             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
               (ggtags-mode 1))))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
