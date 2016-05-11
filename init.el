@@ -6,6 +6,9 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+(unless package-archive-contents
+  (package-refresh-contents))
+
 (defvar my-packages '(
                       cider
                       clang-format
@@ -57,7 +60,7 @@
 (line-number-mode t)
 (column-number-mode t)
 (setq-default cursor-type 'box)
-(blink-cursor-mode 0)
+(blink-cursor-mode -1)
 (setq initial-scratch-message "")
 (setq inhibit-splash-screen t) ;; No splash screen
 (setq frame-title-format "%b - Emacs") ;; Buffer name in the title bar
@@ -66,15 +69,15 @@
 (setq mode-require-final-newline t)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (setq auto-save-timeout 60) ;; Autosave every minute
-(savehist-mode 1) ;; Save minibuffer historic
-
+(savehist-mode t) ;; Save minibuffer historic
+(setq load-prefer-newer t)
 (toggle-frame-fullscreen)
 (setq current-language-environment "English")
 (delete-selection-mode t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(global-auto-revert-mode 1) ;; Auto refresh buffers when edits occur outside emacs
-(show-paren-mode 1)
-(setq scroll-preserve-screen-position 1)
+(global-auto-revert-mode t) ;; Auto refresh buffers when edits occur outside emacs
+(show-paren-mode t)
+(setq scroll-preserve-screen-position t)
 (size-indication-mode 0)
 
 (when (display-graphic-p)
@@ -82,13 +85,6 @@
   (global-hl-line-mode t)
   (tool-bar-mode 0)
   (scroll-bar-mode -1))
-
-(if (eq system-type 'darwin)
-    (progn
-      (set-face-attribute 'default nil :family "Monaco")
-      (set-face-attribute 'default nil :height 115))
-  (set-face-attribute 'default nil :family "Courier 10 Pitch")
-  (set-face-attribute 'default nil :height 130))
 
 (set-cursor-color "gold")
 (menu-bar-mode 0)
