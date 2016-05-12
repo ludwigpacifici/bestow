@@ -104,7 +104,7 @@
         ido-create-new-buffer 'always
         ido-default-file-method 'selected-window
         ido-enable-flex-matching t
-        ido-use-filename-at-point 'guess)
+        ido-use-filename-at-point nil)
   (ido-mode t)
   (ido-everywhere t))
 
