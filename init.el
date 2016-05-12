@@ -50,6 +50,12 @@
 (toggle-frame-fullscreen)
 (tool-bar-mode 0)
 
+(use-package cc-mode
+  :ensure t
+  :config
+  (setq-default c-basic-offset 2)
+  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode)))
+
 (use-package cider
   :ensure t
   :config
@@ -187,13 +193,6 @@
 (setq-default indent-tabs-mode nil) ;; no tabs
 (setq tab-width 2) ;; tabs size
 (setq indent-tabs-mode nil)
-
-;;;;;;;;;
-;; C++ ;;
-;;;;;;;;;
-(require 'cc-mode)
-(setq-default c-basic-offset 2)
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
