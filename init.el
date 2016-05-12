@@ -50,9 +50,16 @@
 (toggle-frame-fullscreen)
 (tool-bar-mode 0)
 
+(use-package ggtags
+  :ensure t
+  :bind
+  ("M-," . pop-tag-mark))
+
 (use-package cc-mode
   :ensure t
   :config
+  (add-hook 'c-mode-hook #'ggtags-mode)
+  (add-hook 'c++-mode-hook #'ggtags-mode)
   (setq-default c-basic-offset 2)
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode)))
 
@@ -92,16 +99,6 @@
 (use-package expand-region
   :ensure t
   :bind ("C-=" . er/expand-region))
-
-(use-package ggtags
-  :ensure t
-  :bind
-  ("M-," . pop-tag-mark)
-  :config
-  (add-hook 'c-mode-common-hook
-          (lambda ()
-            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-              (ggtags-mode 1)))))
 
 (use-package ido
   :ensure t
