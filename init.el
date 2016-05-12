@@ -22,34 +22,6 @@
 (setq user-mail-address "ludwig@lud.cc"
       user-full-name "Ludwig PACIFICI")
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-(autoload 'ibuffer "ibuffer" "List buffers." t)
-(blink-cursor-mode -1)
-(column-number-mode t)
-(delete-selection-mode t)
-(delete-selection-mode t) ;; Delete selected text
-(global-auto-revert-mode t) ;; Auto refresh buffers when edits occur outside emacs
-(global-hl-line-mode t)
-(line-number-mode t)
-(menu-bar-mode 0)
-(savehist-mode t) ;; Save minibuffer historic
-(scroll-bar-mode -1)
-(setq auto-save-timeout 60) ;; Autosave every minute
-(setq current-language-environment "English")
-(setq inhibit-splash-screen t)
-(setq initial-scratch-message "")
-(setq load-prefer-newer t)
-(setq mode-require-final-newline t)
-(setq ring-bell-function 'ignore) ;; Turn off alarms
-(setq scroll-preserve-screen-position t)
-(setq tramp-default-method "ssh")
-(setq x-stretch-cursor t) ;; Wide cursor on tabs
-(setq-default cursor-type 'box)
-(show-paren-mode t)
-(size-indication-mode 0)
-(toggle-frame-fullscreen)
-(tool-bar-mode 0)
-
 (use-package ggtags
   :ensure t
   :bind
@@ -183,13 +155,37 @@
 (use-package yaml-mode
   :ensure t)
 
-;;;;;;;;;;;;;;;;;;
-;; coding style ;;
-;;;;;;;;;;;;;;;;;;
-(setq require-final-newline 't) ;; newline at the end of the file
-(setq-default indent-tabs-mode nil) ;; no tabs
-(setq tab-width 2) ;; tabs size
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(autoload 'ibuffer "ibuffer" "List buffers." t)
+(blink-cursor-mode -1)
+(column-number-mode t)
+(delete-selection-mode t)
+(delete-selection-mode t) ;; Delete selected text
+(global-auto-revert-mode t) ;; Auto refresh buffers when edits occur outside emacs
+(global-hl-line-mode t)
+(line-number-mode t)
+(menu-bar-mode 0)
+(savehist-mode t) ;; Save minibuffer historic
+(scroll-bar-mode -1)
+(setq auto-save-timeout 60) ;; Autosave every minute
+(setq current-language-environment "English")
 (setq indent-tabs-mode nil)
+(setq inhibit-splash-screen t)
+(setq initial-scratch-message "")
+(setq load-prefer-newer t)
+(setq mode-require-final-newline t)
+(setq require-final-newline 't) ;; newline at the end of the file
+(setq ring-bell-function 'ignore) ;; Turn off alarms
+(setq scroll-preserve-screen-position t)
+(setq tab-width 2) ;; tabs size
+(setq tramp-default-method "ssh")
+(setq x-stretch-cursor t) ;; Wide cursor on tabs
+(setq-default cursor-type 'box)
+(setq-default indent-tabs-mode nil) ;; no tabs
+(show-paren-mode t)
+(size-indication-mode 0)
+(toggle-frame-fullscreen)
+(tool-bar-mode 0)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
