@@ -149,11 +149,6 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-(use-package rainbow-mode
-  :ensure t
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-mode))
-
 (use-package saveplace
   :config
   (setq-default save-place t))
