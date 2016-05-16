@@ -3,7 +3,7 @@
 ;;; Code:
 
 ;; Garbage collector kicks in when 100Mb is used
-(setq gc-cons-threshold 100000000)
+(setq gc-cons-threshold 50000000)
 
 (require 'package)
 (add-to-list 'package-archives
@@ -35,6 +35,11 @@
   (setq-default c-basic-offset 2)
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode)))
 
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
 (use-package cider
   :ensure t
   :config
@@ -65,8 +70,7 @@
 (use-package exec-path-from-shell
   :ensure t
   :config
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize)))
+  (exec-path-from-shell-initialize))
 
 (use-package expand-region
   :ensure t
@@ -127,11 +131,6 @@
   (add-hook 'ielm-mode-hook #'paredit-mode)
   (add-hook 'lisp-mode-hook #'paredit-mode)
   (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
-
-(use-package rainbow-delimiters
-  :ensure t
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package saveplace
   :config
@@ -218,10 +217,10 @@
 (global-set-key "\C-cc" 'compile)
 (global-set-key "\C-x\C-c" 'dont-kill-emacs)
 (global-set-key "\M- " 'hippie-expand)
-(global-set-key (kbd "C-c <down>")  'windmove-down)
-(global-set-key (kbd "C-c <left>")  'windmove-left)
+(global-set-key (kbd "C-c <down>") 'windmove-down)
+(global-set-key (kbd "C-c <left>") 'windmove-left)
 (global-set-key (kbd "C-c <right>") 'windmove-right)
-(global-set-key (kbd "C-c <up>")    'windmove-up)
+(global-set-key (kbd "C-c <up>") 'windmove-up)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
