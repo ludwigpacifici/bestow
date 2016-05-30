@@ -27,13 +27,25 @@
   :bind
   ("M-," . pop-tag-mark))
 
+(use-package xah-lookup
+  :ensure t)
+
 (use-package cc-mode
   :ensure t
   :config
   (add-hook 'c-mode-hook #'ggtags-mode)
   (add-hook 'c++-mode-hook #'ggtags-mode)
   (setq-default c-basic-offset 2)
-  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode)))
+  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+  (defun xah-lookup-cppreference (&optional φword)
+    "Lookup definition of current word or text selection in URL `http://en.cppreference.com'."
+    (interactive)
+    (xah-lookup-word-on-internet
+     φword
+     "http://en.cppreference.com/mwiki/index.php?search=�"
+     xah-lookup-dictionary-browser-function))
+  (define-key c++-mode-map (kbd "C-c C-d") #'xah-lookup-cppreference)
+  (define-key c++-mode-map (kbd "C-M-<tab>") #'clang-format-region))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -49,8 +61,7 @@
   (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
 
 (use-package clang-format
-  :ensure t
-  :bind ("C-M-<tab>" . clang-format-region))
+  :ensure t)
 
 (use-package clojure-mode
   :ensure t
