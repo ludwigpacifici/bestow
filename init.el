@@ -44,7 +44,14 @@
      word
      "http://en.cppreference.com/mwiki/index.php?search=�"
      xah-lookup-browser-function))
-  (define-key c++-mode-map (kbd "C-c C-d") #'xah-lookup-cppreference)
+  (define-key c++-mode-map (kbd "C-c d") #'xah-lookup-cppreference)
+  (defun xah-lookup-boost (&optional word)
+    (interactive)
+    (xah-lookup-word-on-internet
+     word
+     "https://cse.google.com/cse?cx=011577717147771266991:jigzgqluebe&q=�"
+     xah-lookup-browser-function))
+  (define-key c++-mode-map (kbd "C-c b") #'xah-lookup-boost)
   (define-key c++-mode-map (kbd "C-M-<tab>") #'clang-format-region))
 
 (use-package rainbow-delimiters
@@ -157,6 +164,8 @@
 (use-package solarized-theme
   :ensure t
   :config
+  (setq x-use-underline-position-properties nil)
+  (setq underline-minimum-offset 4)
   (load-theme 'solarized-dark t))
 
 (use-package typit
