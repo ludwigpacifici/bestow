@@ -164,8 +164,7 @@
 (use-package solarized-theme
   :ensure t
   :config
-  (setq x-use-underline-position-properties nil)
-  (setq underline-minimum-offset 4)
+  (setq x-underline-at-descent-line t)
   (load-theme 'solarized-dark t))
 
 (use-package typit
