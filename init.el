@@ -161,11 +161,19 @@
   :ensure t
   :bind ("M-x" . smex))
 
-(use-package solarized-theme
+(use-package monokai-theme
   :ensure t
   :config
   (setq x-underline-at-descent-line t)
-  (load-theme 'solarized-dark t))
+  (load-theme 'monokai t))
+
+(use-package spaceline-config
+  :ensure spaceline
+  :config
+  (setq powerline-default-separator 'slant)
+  (setq powerline-height 20)
+  (setq ns-use-srgb-colorspace nil)
+  (spaceline-emacs-theme))
 
 (use-package typit
   :ensure t)
