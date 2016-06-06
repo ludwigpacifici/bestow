@@ -125,6 +125,9 @@
   ;; disable ido faces to see flx highlights
   (setq ido-use-faces nil))
 
+(use-package json-mode
+  :ensure t)
+
 (use-package lisp-mode
   :config
   (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
