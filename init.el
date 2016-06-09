@@ -36,6 +36,7 @@
   (add-hook 'c-mode-hook #'ggtags-mode)
   (add-hook 'c++-mode-hook #'ggtags-mode)
   (setq-default c-basic-offset 2)
+  (setq c-default-style "linux")
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
   (defun xah-lookup-cppreference (&optional word)
     "Lookup definition of current word or text selection in URL."
