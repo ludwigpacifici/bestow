@@ -242,11 +242,16 @@
   (interactive)
   (error (substitute-command-keys "To exit emacs: \\[kill-emacs]")))
 
+(defun dont-suspend-emacs ()
+  (interactive)
+  (error (substitute-command-keys "To suspend emacs: \\[suspend-frame]")))
+
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
 ;;;;;;;;;;;;;;;
 (global-set-key "\C-cc" 'compile)
 (global-set-key "\C-x\C-c" 'dont-kill-emacs)
+(global-set-key "\C-x\C-z" 'dont-suspend-emacs)
 (global-set-key "\M- " 'hippie-expand)
 (global-set-key (kbd "C-c <down>") 'windmove-down)
 (global-set-key (kbd "C-c <left>") 'windmove-left)
