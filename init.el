@@ -95,6 +95,12 @@
   :ensure t
   :bind ("C-=" . er/expand-region))
 
+(use-package faceup
+  :ensure t)
+
+(use-package font-lock-studio
+  :ensure t)
+
 (use-package ido
   :ensure t
   :config
