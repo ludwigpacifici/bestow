@@ -177,14 +177,6 @@
   (setq x-underline-at-descent-line t)
   (load-theme 'monokai t))
 
-(use-package spaceline-config
-  :ensure spaceline
-  :config
-  (setq powerline-default-separator 'slant)
-  (setq powerline-height 20)
-  (setq ns-use-srgb-colorspace nil)
-  (spaceline-emacs-theme))
-
 (use-package typit
   :ensure t)
 
@@ -229,7 +221,6 @@
 (setq-default indent-tabs-mode nil) ;; no tabs
 (show-paren-mode t)
 (size-indication-mode 0)
-(toggle-frame-fullscreen)
 (tool-bar-mode 0)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
