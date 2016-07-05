@@ -262,3 +262,4 @@
 (windmove-default-keybindings 'meta) ;; Move point from window to window
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta))
+(setq x-super-keysym 'meta)
