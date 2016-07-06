@@ -164,6 +164,9 @@
   :config
   (setq-default save-place t))
 
+(use-package lua-mode
+  :ensure t)
+
 (use-package scss-mode
   :ensure t)
 
