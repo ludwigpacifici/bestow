@@ -225,6 +225,7 @@
 (show-paren-mode t)
 (size-indication-mode 0)
 (tool-bar-mode 0)
+(set-face-attribute 'default nil :family "Monospace" :height 90)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
