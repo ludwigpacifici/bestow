@@ -224,6 +224,7 @@
 (setq-default indent-tabs-mode nil) ;; no tabs
 (show-paren-mode t)
 (size-indication-mode 0)
+(toggle-frame-fullscreen)
 (tool-bar-mode 0)
 (set-face-attribute 'default nil :family "Monospace" :height 90)
 
