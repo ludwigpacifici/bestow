@@ -226,7 +226,7 @@
 (size-indication-mode 0)
 (toggle-frame-fullscreen)
 (tool-bar-mode 0)
-(set-face-attribute 'default nil :family "Monospace" :height 90)
+(set-face-attribute 'default nil :family "Meslo LG M Regular for Powerline" :height 100)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
