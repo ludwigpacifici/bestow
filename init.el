@@ -151,6 +151,16 @@
 (use-package markdown-mode
   :ensure t)
 
+(use-package octave-mode
+  :mode "\\.m\\'"  :config
+  (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+  (add-hook 'octave-mode-hook
+            (lambda ()
+              (abbrev-mode 1)
+              (auto-fill-mode 1)
+              (if (eq window-system 'x)
+                  (font-lock-mode 1)))))
+
 (use-package paredit
   :ensure t
   :config
