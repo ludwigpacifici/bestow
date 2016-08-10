@@ -171,11 +171,10 @@
   :ensure t
   :bind ("M-x" . smex))
 
-(use-package monokai-theme
+(use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
-  (setq x-underline-at-descent-line t)
-  (load-theme 'monokai t))
+  (load-theme 'sanityinc-tomorrow-eighties t))
 
 (use-package typit
   :ensure t)
