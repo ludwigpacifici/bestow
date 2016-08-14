@@ -186,9 +186,6 @@
   :config
   (load-theme 'sanityinc-tomorrow-eighties t))
 
-(use-package typit
-  :ensure t)
-
 (use-package uniquify
   :config
   (setq uniquify-buffer-name-style 'forward)
