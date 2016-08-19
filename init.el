@@ -207,6 +207,11 @@
               (unless (eq ibuffer-sorting-mode 'alphabetic)
                 (ibuffer-do-sort-by-alphabetic)))))
 
+(use-package doc-view
+  :config
+  (setq doc-view-continuous t)
+  (setq doc-view-resolution 500))
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
