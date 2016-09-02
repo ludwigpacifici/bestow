@@ -181,6 +181,12 @@
   :ensure t
   :bind ("M-x" . smex))
 
+(use-package spaceline-config
+  :ensure spaceline
+  :config
+  (setq powerline-default-separator 'slant)
+  (spaceline-emacs-theme))
+
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
