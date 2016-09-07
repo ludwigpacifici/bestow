@@ -185,7 +185,7 @@
   :ensure spaceline
   :config
   (setq powerline-default-separator 'bar)
-  (setq powerline-height 20)
+  (setq powerline-height 35)
   (spaceline-emacs-theme))
 
 (use-package color-theme-sanityinc-tomorrow
