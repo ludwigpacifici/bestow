@@ -184,8 +184,9 @@
 (use-package spaceline-config
   :ensure spaceline
   :config
-  (setq powerline-default-separator 'bar)
-  (setq powerline-height 35)
+  (setq-default powerline-default-separator 'bar
+                powerline-height 35
+                spaceline-highlight-face-func 'spaceline-highlight-face-modified)
   (spaceline-emacs-theme))
 
 (use-package color-theme-sanityinc-tomorrow
@@ -233,6 +234,7 @@
 (scroll-bar-mode -1)
 (setq auto-save-timeout 60) ;; Autosave every minute
 (setq current-language-environment "English")
+(setq cursor-in-non-selected-windows t)
 (setq indent-tabs-mode nil)
 (setq inhibit-splash-screen t)
 (setq initial-scratch-message "")
