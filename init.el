@@ -86,6 +86,11 @@
 (use-package d-mode
   :ensure t)
 
+(use-package doc-view
+  :config
+  (setq doc-view-continuous t)
+  (setq doc-view-resolution 500))
+
 (use-package exec-path-from-shell
   :ensure t
   :config
@@ -170,6 +175,9 @@
   (add-hook 'lisp-mode-hook #'paredit-mode)
   (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
 
+(use-package rust-mode
+  :ensure t)
+
 (use-package saveplace
   :config
   (setq-default save-place t))
@@ -198,9 +206,7 @@
   :config
   (setq uniquify-buffer-name-style 'forward)
   (setq uniquify-separator "/")
-  ;; rename after killing uniquified
   (setq uniquify-after-kill-buffer-p t)
-  ;; don't muck with special buffers
   (setq uniquify-ignore-buffers-re "^\\*"))
 
 (use-package yaml-mode
@@ -214,11 +220,6 @@
               (ibuffer-vc-set-filter-groups-by-vc-root)
               (unless (eq ibuffer-sorting-mode 'alphabetic)
                 (ibuffer-do-sort-by-alphabetic)))))
-
-(use-package doc-view
-  :config
-  (setq doc-view-continuous t)
-  (setq doc-view-resolution 500))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
