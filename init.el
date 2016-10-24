@@ -227,6 +227,7 @@
 (column-number-mode t)
 (delete-selection-mode t)
 (delete-selection-mode t)
+(electric-pair-mode 1)
 (global-auto-revert-mode t)
 (global-hl-line-mode t)
 (line-number-mode t)
