@@ -290,9 +290,16 @@ Use in `isearch-mode-end-hook'."
     (goto-char isearch-other-end)))
 (add-hook 'isearch-mode-end-hook #'endless/goto-match-beginning)
 
-;;;;;;;;;;;;;;;
-;; shortcuts ;;
-;;;;;;;;;;;;;;;
+(defun endless/isearch-symbol-with-prefix (p)
+  "Like isearch, unless prefix argument is provided.
+With a prefix argument P, isearch for the symbol at point."
+  (interactive "P")
+  (let ((current-prefix-arg nil))
+    (call-interactively
+     (if p #'isearch-forward-symbol-at-point
+       #'isearch-forward))))
+(global-set-key [remap isearch-forward] #'endless/isearch-symbol-with-prefix)
+
 (global-set-key "\C-cc" 'compile)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key [f11] 'toggle-frame-fullscreen)
