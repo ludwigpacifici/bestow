@@ -273,21 +273,30 @@
 (defun dont-kill-emacs ()
   (interactive)
   (error (substitute-command-keys "To exit emacs: \\[kill-emacs]")))
+(global-set-key "\C-x\C-c" 'dont-kill-emacs)
 
 (defun dont-suspend-emacs ()
   (interactive)
   (error (substitute-command-keys "To suspend emacs: \\[suspend-frame]")))
+(global-set-key "\C-x\C-z" 'dont-suspend-emacs)
+
+(defun endless/goto-match-beginning ()
+  "Go to the start of current isearch match.
+Use in `isearch-mode-end-hook'."
+  (when (and isearch-forward
+             (number-or-marker-p isearch-other-end)
+             (not mark-active)
+             (not isearch-mode-end-hook-quit))
+    (goto-char isearch-other-end)))
+(add-hook 'isearch-mode-end-hook #'endless/goto-match-beginning)
 
 ;;;;;;;;;;;;;;;
 ;; shortcuts ;;
 ;;;;;;;;;;;;;;;
 (global-set-key "\C-cc" 'compile)
-(global-set-key "\C-x\C-c" 'dont-kill-emacs)
-(global-set-key "\C-x\C-z" 'dont-suspend-emacs)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key [f11] 'toggle-frame-fullscreen)
 (global-unset-key (kbd "C-z"))
-(windmove-default-keybindings 'meta) ;; Move point from window to window
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta))
 (setq x-super-keysym 'meta)
