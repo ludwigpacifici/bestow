@@ -178,7 +178,22 @@
   (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
 
 (use-package rust-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq racer-rust-src-path "~/rust/src/")
+  (add-hook 'rust-mode-hook #'rust-enable-format-on-save)
+  (add-hook 'rust-mode-hook #'racer-mode))
+
+(use-package racer
+  :ensure t
+  :config
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode))
+
+(use-package cargo
+  :ensure t
+  :config
+  (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 (use-package saveplace
   :config
