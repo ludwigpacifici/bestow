@@ -235,7 +235,7 @@
 (menu-bar-mode 0)
 (savehist-mode t)
 (scroll-bar-mode -1)
-(set-face-attribute 'default nil :family "Meslo LG M Regular for Powerline" :height 100)
+(set-face-attribute 'default nil :family "Fira Mono" :height 100)
 (setq indent-tabs-mode nil
       tab-width 2)
 (setq-default auto-save-timeout 60
