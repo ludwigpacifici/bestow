@@ -296,16 +296,6 @@
   (error (substitute-command-keys "To suspend emacs: \\[suspend-frame]")))
 (global-set-key "\C-x\C-z" 'dont-suspend-emacs)
 
-(defun endless/goto-match-beginning ()
-  "Go to the start of current isearch match.
-Use in `isearch-mode-end-hook'."
-  (when (and isearch-forward
-             (number-or-marker-p isearch-other-end)
-             (not mark-active)
-             (not isearch-mode-end-hook-quit))
-    (goto-char isearch-other-end)))
-(add-hook 'isearch-mode-end-hook #'endless/goto-match-beginning)
-
 (defun endless/isearch-symbol-with-prefix (p)
   "Like isearch, unless prefix argument is provided.
 With a prefix argument P, isearch for the symbol at point."
