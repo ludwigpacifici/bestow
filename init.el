@@ -78,14 +78,6 @@
   (add-hook 'clojure-mode-hook #'subword-mode)
   (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
 
-(use-package cmake-font-lock
-  :ensure t
-  :config
-  (add-hook 'cmake-mode-hook #'cmake-font-lock-activate))
-
-(use-package d-mode
-  :ensure t)
-
 (use-package doc-view
   :config
   (setq doc-view-continuous t)
@@ -210,7 +202,7 @@
   :ensure spaceline
   :config
   (setq-default powerline-default-separator 'bar
-                powerline-height 35
+                powerline-height 45
                 spaceline-highlight-face-func 'spaceline-highlight-face-modified)
   (spaceline-emacs-theme))
 
@@ -313,3 +305,5 @@ With a prefix argument P, isearch for the symbol at point."
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta))
 (setq x-super-keysym 'meta)
+
+;; init.el ends here
