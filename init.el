@@ -22,6 +22,11 @@
 (setq user-mail-address "ludwig@lud.cc"
       user-full-name "Ludwig PACIFICI")
 
+(use-package avy
+  :ensure t
+  :bind
+  ("C-'" . avy-goto-char-2))
+
 (use-package ggtags
   :ensure t
   :bind
