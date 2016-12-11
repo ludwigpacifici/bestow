@@ -216,6 +216,11 @@
   :config
   (load-theme 'sanityinc-tomorrow-eighties t))
 
+(use-package toml-mode
+  :ensure t
+  :config
+  (add-hook 'rust-mode-hook 'cargo-minor-mode))
+
 (use-package uniquify
   :config
   (setq uniquify-buffer-name-style 'forward)
