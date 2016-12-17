@@ -308,6 +308,7 @@ With a prefix argument P, isearch for the symbol at point."
        #'isearch-forward))))
 (global-set-key [remap isearch-forward] #'endless/isearch-symbol-with-prefix)
 
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
 (global-set-key "\C-cc" 'compile)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key [f11] 'toggle-frame-fullscreen)
