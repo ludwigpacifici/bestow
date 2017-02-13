@@ -215,7 +215,8 @@
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-eighties t))
+  (load-theme 'sanityinc-tomorrow-eighties t)
+  (set-face-foreground 'vertical-border (face-background 'default)))
 
 (use-package toml-mode
   :ensure t
@@ -245,8 +246,6 @@
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
 (column-number-mode t)
-(delete-selection-mode t)
-(delete-selection-mode t)
 (global-auto-revert-mode t)
 (global-hl-line-mode t)
 (line-number-mode t)
@@ -260,6 +259,7 @@
               current-language-environment "English"
               cursor-in-non-selected-windows t
               cursor-type 'box
+              delete-selection-mode t
               grep-highlight-matches t
               grep-scroll-output t
               indent-tabs-mode nil
@@ -276,6 +276,7 @@
 (size-indication-mode 0)
 (toggle-frame-fullscreen)
 (tool-bar-mode 0)
+(transient-mark-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
