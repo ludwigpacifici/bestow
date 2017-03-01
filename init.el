@@ -44,21 +44,6 @@
   (setq-default c-basic-offset 2)
   (setq c-default-style "linux")
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-  (defun xah-lookup-cppreference (&optional word)
-    "Lookup definition of current word or text selection in URL."
-    (interactive)
-    (xah-lookup-word-on-internet
-     word
-     "http://en.cppreference.com/mwiki/index.php?search=�"
-     xah-lookup-browser-function))
-  (define-key c++-mode-map (kbd "C-c d") #'xah-lookup-cppreference)
-  (defun xah-lookup-boost (&optional word)
-    (interactive)
-    (xah-lookup-word-on-internet
-     word
-     "https://cse.google.com/cse?cx=011577717147771266991:jigzgqluebe&q=�"
-     xah-lookup-browser-function))
-  (define-key c++-mode-map (kbd "C-c b") #'xah-lookup-boost)
   (define-key c++-mode-map (kbd "C-M-<tab>") #'clang-format-region))
 
 (use-package rainbow-delimiters
