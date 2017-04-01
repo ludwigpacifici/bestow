@@ -27,6 +27,12 @@
   :bind
   ("C-'" . avy-goto-char-2))
 
+(use-package swiper
+  :ensure t
+  :config
+  (setq ivy-height 4)
+  :bind ("C-c s" . swiper))
+
 (use-package ggtags
   :ensure t
   :bind
@@ -80,7 +86,10 @@
 
 (use-package expand-region
   :ensure t
-  :bind ("C-=" . er/expand-region))
+  :bind ("C-=" . er/expand-region)
+  :config
+  (setq shift-select-mode nil) ; https://github.com/magnars/expand-region.el/issues/220
+  )
 
 (use-package faceup
   :ensure t)
