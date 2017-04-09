@@ -38,9 +38,6 @@
   :bind
   ("M-," . pop-tag-mark))
 
-(use-package xah-lookup
-  :ensure t)
-
 (use-package cc-mode
   :ensure t
   :config
