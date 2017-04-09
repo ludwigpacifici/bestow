@@ -205,7 +205,7 @@
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-eighties t)
+  (load-theme 'sanityinc-tomorrow-bright t)
   (set-face-foreground 'vertical-border (face-background 'default)))
 
 (use-package toml-mode
