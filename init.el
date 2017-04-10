@@ -236,6 +236,7 @@
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
 (column-number-mode t)
+(delete-selection-mode t)
 (global-auto-revert-mode t)
 (global-hl-line-mode t)
 (line-number-mode t)
@@ -249,7 +250,6 @@
               current-language-environment "English"
               cursor-in-non-selected-windows t
               cursor-type 'box
-              delete-selection-mode t
               grep-highlight-matches t
               grep-scroll-output t
               indent-tabs-mode nil
