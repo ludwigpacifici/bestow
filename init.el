@@ -173,7 +173,7 @@
 (use-package rust-mode
   :ensure t
   :config
-  (setq racer-rust-src-path "~/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src")
+  (setq racer-rust-src-path "~/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src")
   (add-hook 'rust-mode-hook #'rust-enable-format-on-save)
   (add-hook 'rust-mode-hook #'racer-mode))
 
