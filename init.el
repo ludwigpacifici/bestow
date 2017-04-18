@@ -33,6 +33,11 @@
   (setq ivy-height 4)
   :bind ("C-c s" . swiper))
 
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+
 (use-package ggtags
   :ensure t
   :bind
@@ -176,7 +181,8 @@
   :ensure t
   :config
   (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode))
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  (add-hook 'racer-mode-hook #'company-mode))
 
 (use-package cargo
   :ensure t
