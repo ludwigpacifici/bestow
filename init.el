@@ -204,7 +204,7 @@
   :ensure spaceline
   :config
   (setq-default powerline-default-separator 'bar
-                powerline-height 45
+                powerline-height 35
                 spaceline-highlight-face-func 'spaceline-highlight-face-modified)
   (spaceline-emacs-theme))
 
@@ -249,7 +249,7 @@
 (menu-bar-mode 0)
 (savehist-mode t)
 (scroll-bar-mode -1)
-(set-face-attribute 'default nil :family "Fira Mono" :height 100)
+(set-face-attribute 'default nil :family "Fira Mono" :height 160)
 (setq indent-tabs-mode nil
       tab-width 2)
 (setq-default auto-save-timeout 60
