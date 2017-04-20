@@ -34,9 +34,7 @@
   :bind ("C-c s" . swiper))
 
 (use-package company
-  :ensure t
-  :config
-  (add-hook 'after-init-hook 'global-company-mode))
+  :ensure t)
 
 (use-package ggtags
   :ensure t
@@ -72,9 +70,10 @@
 (use-package clojure-mode
   :ensure t
   :config
+  (add-hook 'clojure-mode-hook #'company-mode)
   (add-hook 'clojure-mode-hook #'paredit-mode)
-  (add-hook 'clojure-mode-hook #'subword-mode)
-  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
+  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'clojure-mode-hook #'subword-mode))
 
 (use-package doc-view
   :config
@@ -136,6 +135,7 @@
 (use-package lisp-mode
   :config
   (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
+  (add-hook 'emacs-lisp-mode-hook #'company-mode)
   (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
   (define-key emacs-lisp-mode-map (kbd "C-c C-c") #'eval-defun)
   (define-key emacs-lisp-mode-map (kbd "C-c C-b") #'eval-buffer)
