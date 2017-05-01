@@ -182,7 +182,10 @@
   :config
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
-  (add-hook 'racer-mode-hook #'company-mode))
+  (add-hook 'racer-mode-hook #'company-mode)
+  (setq company-tooltip-align-annotations t)
+  :bind
+  ("TAB" . company-indent-or-complete-common))
 
 (use-package cargo
   :ensure t
@@ -270,7 +273,6 @@
               x-stretch-cursor t)
 (show-paren-mode t)
 (size-indication-mode 0)
-(toggle-frame-fullscreen)
 (tool-bar-mode 0)
 (transient-mark-mode t)
 
