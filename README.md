@@ -3,6 +3,6 @@ dotemacs
 
 Personal configuration files for emacs. Feel free to use some part of it!
 
-![Screenshot](Screenshot_20160925_135659.png)
+![Screenshot](oye-oye.jpg)
 
 [Lud](http://lud.cc)
