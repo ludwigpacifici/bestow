@@ -200,14 +200,6 @@
   :ensure t
   :bind ("M-x" . smex))
 
-(use-package spaceline-config
-  :ensure spaceline
-  :config
-  (setq-default powerline-default-separator 'bar
-                powerline-height 40
-                spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-  (spaceline-emacs-theme))
-
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
@@ -255,16 +247,27 @@
 (setq-default initial-scratch-message "
 
 
-       ▒█████ ▓██   ██▓▓█████     ▒█████ ▓██   ██▓▓█████  ▐██▌
-      ▒██▒  ██▒▒██  ██▒▓█   ▀    ▒██▒  ██▒▒██  ██▒▓█   ▀  ▐██▌
-      ▒██░  ██▒ ▒██ ██░▒███      ▒██░  ██▒ ▒██ ██░▒███    ▐██▌
-      ▒██   ██░ ░ ▐██▓░▒▓█  ▄    ▒██   ██░ ░ ▐██▓░▒▓█  ▄  ▓██▒
-      ░ ████▓▒░ ░ ██▒▓░░▒████▒   ░ ████▓▒░ ░ ██▒▓░░▒████▒ ▒▄▄
-      ░ ▒░▒░▒░   ██▒▒▒ ░░ ▒░ ░   ░ ▒░▒░▒░   ██▒▒▒ ░░ ▒░ ░ ░▀▀▒
-        ░ ▒ ▒░ ▓██ ░▒░  ░ ░  ░     ░ ▒ ▒░ ▓██ ░▒░  ░ ░  ░ ░  ░
-      ░ ░ ░ ▒  ▒ ▒ ░░     ░      ░ ░ ░ ▒  ▒ ▒ ░░     ░       ░
-          ░ ░  ░ ░        ░  ░       ░ ░  ░ ░        ░  ░ ░
-               ░ ░                        ░ ░
+
+                  ██████╗ ███████╗ █████╗  ██████╗███████╗
+                  ██╔══██╗██╔════╝██╔══██╗██╔════╝██╔════╝
+                  ██████╔╝█████╗  ███████║██║     █████╗
+                  ██╔═══╝ ██╔══╝  ██╔══██║██║     ██╔══╝
+                  ██║     ███████╗██║  ██║╚██████╗███████╗
+                  ╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝╚══════╝
+
+               █████╗ ███╗   ███╗ ██████╗ ███╗   ██╗ ██████╗
+              ██╔══██╗████╗ ████║██╔═══██╗████╗  ██║██╔════╝
+              ███████║██╔████╔██║██║   ██║██╔██╗ ██║██║  ███╗
+              ██╔══██║██║╚██╔╝██║██║   ██║██║╚██╗██║██║   ██║
+              ██║  ██║██║ ╚═╝ ██║╚██████╔╝██║ ╚████║╚██████╔╝
+              ╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝
+
+              ██╗    ██╗ ██████╗ ██████╗ ██╗     ██████╗ ███████╗
+              ██║    ██║██╔═══██╗██╔══██╗██║     ██╔══██╗██╔════╝
+              ██║ █╗ ██║██║   ██║██████╔╝██║     ██║  ██║███████╗
+              ██║███╗██║██║   ██║██╔══██╗██║     ██║  ██║╚════██║
+              ╚███╔███╔╝╚██████╔╝██║  ██║███████╗██████╔╝███████║
+               ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝
 ")
 (setq-default auto-save-timeout 60
               current-language-environment "English"
@@ -275,6 +278,7 @@
               indent-tabs-mode nil
               inhibit-splash-screen t
               load-prefer-newer t
+              mode-line-format nil
               mode-require-final-newline t
               require-final-newline 't
               ring-bell-function 'ignore
@@ -285,7 +289,7 @@
 (size-indication-mode 0)
 (tool-bar-mode 0)
 (transient-mark-mode t)
-(toggle-frame-fullscreen)
+;; (toggle-frame-fullscreen)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
@@ -319,7 +323,14 @@ With a prefix argument P, isearch for the symbol at point."
        #'isearch-forward))))
 (global-set-key [remap isearch-forward] #'endless/isearch-symbol-with-prefix)
 
+(defun show-file-name ()
+  "Show the full path file name in the minibuffer."
+  (interactive)
+  (message (buffer-file-name)))
+(global-set-key (kbd "C-c n") 'show-file-name)
+
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
+(global-set-key (kbd "C-c l") 'what-line)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key "\C-cc" 'compile)
 (global-set-key "\C-cr" 'recompile)
