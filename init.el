@@ -342,8 +342,4 @@ With a prefix argument P, isearch for the symbol at point."
   (setq mac-command-modifier 'meta))
 (setq x-super-keysym 'meta)
 
-(add-to-list 'load-path "~/modern-cpp-font-lock/")
-(require 'modern-cpp-font-lock)
-(modern-c++-font-lock-global-mode t)
-
 ;; init.el ends here
