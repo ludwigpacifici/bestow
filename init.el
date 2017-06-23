@@ -75,6 +75,11 @@
   (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'clojure-mode-hook #'subword-mode))
 
+(use-package inf-clojure
+  :ensure t
+  :config
+  (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode))
+
 (use-package doc-view
   :config
   (setq doc-view-continuous t)
@@ -244,31 +249,7 @@
 (set-face-attribute 'default nil :family "DejaVu Sans Mono" :height 158)
 (setq indent-tabs-mode nil
       tab-width 2)
-(setq-default initial-scratch-message "
 
-
-
-                  ██████╗ ███████╗ █████╗  ██████╗███████╗
-                  ██╔══██╗██╔════╝██╔══██╗██╔════╝██╔════╝
-                  ██████╔╝█████╗  ███████║██║     █████╗
-                  ██╔═══╝ ██╔══╝  ██╔══██║██║     ██╔══╝
-                  ██║     ███████╗██║  ██║╚██████╗███████╗
-                  ╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝╚══════╝
-
-               █████╗ ███╗   ███╗ ██████╗ ███╗   ██╗ ██████╗
-              ██╔══██╗████╗ ████║██╔═══██╗████╗  ██║██╔════╝
-              ███████║██╔████╔██║██║   ██║██╔██╗ ██║██║  ███╗
-              ██╔══██║██║╚██╔╝██║██║   ██║██║╚██╗██║██║   ██║
-              ██║  ██║██║ ╚═╝ ██║╚██████╔╝██║ ╚████║╚██████╔╝
-              ╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝
-
-              ██╗    ██╗ ██████╗ ██████╗ ██╗     ██████╗ ███████╗
-              ██║    ██║██╔═══██╗██╔══██╗██║     ██╔══██╗██╔════╝
-              ██║ █╗ ██║██║   ██║██████╔╝██║     ██║  ██║███████╗
-              ██║███╗██║██║   ██║██╔══██╗██║     ██║  ██║╚════██║
-              ╚███╔███╔╝╚██████╔╝██║  ██║███████╗██████╔╝███████║
-               ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝
-")
 (setq-default auto-save-timeout 60
               current-language-environment "English"
               cursor-in-non-selected-windows t
@@ -277,6 +258,7 @@
               grep-scroll-output t
               indent-tabs-mode nil
               inhibit-splash-screen t
+              initial-scratch-message ""
               load-prefer-newer t
               mode-line-format nil
               mode-require-final-newline t
@@ -289,7 +271,7 @@
 (size-indication-mode 0)
 (tool-bar-mode 0)
 (transient-mark-mode t)
-;; (toggle-frame-fullscreen)
+(toggle-frame-fullscreen)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
