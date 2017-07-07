@@ -22,6 +22,21 @@
 (setq user-mail-address "ludwig@lud.cc"
       user-full-name "Ludwig PACIFICI")
 
+(use-package parinfer
+  :ensure t
+  :init
+  (progn
+    (setq parinfer-extensions
+          '(defaults       ; should be included.
+             pretty-parens  ; different paren styles for different modes.
+             smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+             smart-yank))   ; Yank behavior depend on mode.
+    (add-hook 'clojure-mode-hook #'parinfer-mode)
+    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'scheme-mode-hook #'parinfer-mode)
+    (add-hook 'lisp-mode-hook #'parinfer-mode)))
+
 (use-package avy
   :ensure t
   :bind
@@ -134,21 +149,6 @@
   (add-hook 'lisp-interaction-mode-hook #'eldoc-mode)
   (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode))
 
-(use-package parinfer
-  :ensure t
-  :init
-  (progn
-    (setq parinfer-extensions
-          '(defaults       ; should be included.
-             pretty-parens  ; different paren styles for different modes.
-             smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-             smart-yank))   ; Yank behavior depend on mode.
-    (add-hook 'clojure-mode-hook #'parinfer-mode)
-    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
-    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
-    (add-hook 'scheme-mode-hook #'parinfer-mode)
-    (add-hook 'lisp-mode-hook #'parinfer-mode)))
-
 (use-package magit
   :ensure t
   :bind (("C-x g" . magit-status)))
@@ -186,13 +186,12 @@
 
 (use-package racer
   :ensure t
+  :bind
+  ("TAB" . company-indent-or-complete-common)
   :config
-  (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
   (add-hook 'racer-mode-hook #'company-mode)
-  (setq company-tooltip-align-annotations t)
-  :bind
-  ("TAB" . company-indent-or-complete-common))
+  (setq company-tooltip-align-annotations t))
 
 (use-package cargo
   :ensure t
