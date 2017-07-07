@@ -85,11 +85,6 @@
   (setq doc-view-continuous t)
   (setq doc-view-resolution 500))
 
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (exec-path-from-shell-initialize))
-
 (use-package expand-region
   :ensure t
   :bind ("C-=" . er/expand-region))
@@ -110,11 +105,6 @@
         ido-use-filename-at-point nil)
   (ido-mode t)
   (ido-everywhere t))
-
-(use-package ido-ubiquitous
-  :ensure t
-  :config
-  (ido-ubiquitous-mode +1))
 
 (use-package ido-grid-mode
   :ensure t
