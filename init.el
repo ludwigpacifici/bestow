@@ -136,6 +136,11 @@
   ;; disable ido faces to see flx highlights
   (setq ido-use-faces nil))
 
+(use-package ido-completing-read+
+  :ensure t
+  :config
+  (ido-ubiquitous-mode 1))
+
 (use-package json-mode
   :ensure t)
 
