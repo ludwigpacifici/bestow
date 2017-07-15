@@ -6,8 +6,10 @@
 (setq gc-cons-threshold 50000000)
 
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
+  (add-to-list 'package-archives (cons "melpa" url) t))
 (package-initialize)
 
 (unless package-archive-contents
@@ -44,17 +46,6 @@
     (add-hook 'scheme-mode-hook #'parinfer-mode)
     (add-hook 'lisp-mode-hook #'parinfer-mode)))
 
-(use-package avy
-  :ensure t
-  :bind
-  ("C-'" . avy-goto-char-2))
-
-(use-package swiper
-  :ensure t
-  :config
-  (setq ivy-height 4)
-  :bind ("C-c s" . swiper))
-
 (use-package company
   :ensure t)
 
@@ -73,18 +64,12 @@
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
   (define-key c++-mode-map (kbd "C-M-<tab>") #'clang-format-region))
 
-(use-package rainbow-delimiters
-  :ensure t
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-
 (use-package cider
   :ensure t
   :config
   (add-hook 'cider-mode-hook #'eldoc-mode)
   (add-hook 'cider-repl-mode-hook #'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook #'paredit-mode)
-  (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
+  (add-hook 'cider-repl-mode-hook #'parinfer-mode))
 
 (use-package clang-format
   :ensure t)
@@ -93,8 +78,7 @@
   :ensure t
   :config
   (add-hook 'clojure-mode-hook #'company-mode)
-  (add-hook 'clojure-mode-hook #'paredit-mode)
-  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'clojure-mode-hook #'parinfer-mode)
   (add-hook 'clojure-mode-hook #'subword-mode))
 
 (use-package inf-clojure
@@ -117,36 +101,29 @@
 (use-package font-lock-studio
   :ensure t)
 
-(use-package ido
+(use-package avy
   :ensure t
-  :config
-  (setq ido-auto-merge-work-directories-length -1
-        ido-create-new-buffer 'always
-        ido-default-file-method 'selected-window
-        ido-enable-flex-matching t
-        ido-use-filename-at-point nil)
-  (ido-mode t)
-  (ido-everywhere t))
+  :bind
+  ("C-'" . avy-goto-char-2))
 
-(use-package ido-grid-mode
-  :ensure t
-  :config
-  (setq ido-grid-mode-first-line nil
-        ido-grid-mode-max-rows 3
-        ido-grid-mode-min-rows 3)
-  (ido-grid-mode +1))
+(use-package counsel
+  :ensure t)
 
-(use-package flx-ido
+(use-package swiper
   :ensure t
-  :config
-  (flx-ido-mode +1)
-  ;; disable ido faces to see flx highlights
-  (setq ido-use-faces nil))
+  :bind ("C-c s" . swiper))
 
-(use-package ido-completing-read+
+(use-package ivy
   :ensure t
+  :bind
+  ("M-x" . counsel-M-x)
+  ("C-x C-f" . counsel-find-file)
   :config
-  (ido-ubiquitous-mode 1))
+  (ivy-mode 1)
+  (setq-default ivy-use-virtual-buffers t
+                enable-recursive-minibuffers t
+                ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
 (use-package json-mode
   :ensure t)
@@ -155,7 +132,6 @@
   :config
   (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
   (add-hook 'emacs-lisp-mode-hook #'company-mode)
-  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
   (define-key emacs-lisp-mode-map (kbd "C-c C-c") #'eval-defun)
   (define-key emacs-lisp-mode-map (kbd "C-c C-b") #'eval-buffer)
   (add-hook 'lisp-interaction-mode-hook #'eldoc-mode)
@@ -179,15 +155,6 @@
               (auto-fill-mode 1)
               (if (eq window-system 'x)
                   (font-lock-mode 1)))))
-
-(use-package paredit
-  :ensure t
-  :config
-  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-  (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
-  (add-hook 'ielm-mode-hook #'paredit-mode)
-  (add-hook 'lisp-mode-hook #'paredit-mode)
-  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
 
 (use-package rust-mode
   :ensure t
@@ -217,20 +184,11 @@
 (use-package scss-mode
   :ensure t)
 
-(use-package smex
-  :ensure t
-  :bind ("M-x" . smex))
-
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
   (load-theme 'sanityinc-tomorrow-bright t)
   (set-face-foreground 'vertical-border (face-background 'default)))
-
-(use-package toml-mode
-  :ensure t
-  :config
-  (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 (use-package uniquify
   :config
@@ -238,6 +196,11 @@
   (setq uniquify-separator "/")
   (setq uniquify-after-kill-buffer-p t)
   (setq uniquify-ignore-buffers-re "^\\*"))
+
+(use-package toml-mode
+  :ensure t
+  :config
+  (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 (use-package yaml-mode
   :ensure t)
