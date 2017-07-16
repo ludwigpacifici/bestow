@@ -194,11 +194,17 @@
 (use-package scss-mode
   :ensure t)
 
-(use-package color-theme-sanityinc-tomorrow
+(use-package solarized-theme
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-day t)
+  (load-theme 'solarized-dark t)
   (set-face-foreground 'vertical-border (face-background 'default)))
+
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :ensure t
+;;   :config
+;;   (load-theme 'sanityinc-tomorrow-day t)
+;;   (set-face-foreground 'vertical-border (face-background 'default)))
 
 (use-package uniquify
   :config
@@ -235,6 +241,7 @@
 (menu-bar-mode 0)
 (savehist-mode t)
 (scroll-bar-mode -1)
+(set-cursor-color "#d54e53")
 (set-face-attribute 'default nil :family "DejaVu Sans Mono" :height 158)
 (setq indent-tabs-mode nil
       tab-width 2)
