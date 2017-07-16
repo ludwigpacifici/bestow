@@ -101,6 +101,9 @@
 (use-package font-lock-studio
   :ensure t)
 
+(use-package smex
+  :ensure t)
+
 (use-package avy
   :ensure t
   :bind
@@ -111,18 +114,25 @@
 
 (use-package swiper
   :ensure t
-  :bind ("C-c s" . swiper))
+  :bind ("C-c i s" . swiper))
 
 (use-package ivy
   :ensure t
   :bind
   ("M-x" . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
+  ("C-c i l" . counsel-locate)
+  ("C-c i r" . counsel-rg)
+  ("C-c i g" . counsel-git-grep)
   :config
   (ivy-mode 1)
-  (setq-default ivy-use-virtual-buffers t
-                enable-recursive-minibuffers t
-                ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+  (setq-default enable-recursive-minibuffers t
+                ivy-count-format ""
+                ivy-display-style nil
+                ivy-format-function (quote ivy-format-function-arrow)
+                ivy-initial-inputs-alist nil
+                ivy-re-builders-alist '((t . ivy--regex-fuzzy))
+                ivy-use-virtual-buffers t)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
 (use-package json-mode
@@ -187,7 +197,7 @@
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-bright t)
+  (load-theme 'sanityinc-tomorrow-day t)
   (set-face-foreground 'vertical-border (face-background 'default)))
 
 (use-package uniquify
@@ -217,11 +227,11 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
-(column-number-mode t)
+(column-number-mode 0)
 (delete-selection-mode t)
 (global-auto-revert-mode t)
 (global-hl-line-mode t)
-(line-number-mode t)
+(line-number-mode 0)
 (menu-bar-mode 0)
 (savehist-mode t)
 (scroll-bar-mode -1)
