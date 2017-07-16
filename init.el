@@ -240,6 +240,12 @@
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode)))
 
+(use-package prettier-js
+  :ensure t
+  :config
+  (add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'js2-mode-hook 'prettier-js-mode))
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
@@ -252,7 +258,7 @@
 (savehist-mode t)
 (scroll-bar-mode -1)
 (set-cursor-color "#d54e53")
-(set-face-attribute 'default nil :family "DejaVu Sans Mono" :height 158)
+(set-face-attribute 'default nil :family "Fira Code Medium" :height 158)
 (setq indent-tabs-mode nil
       tab-width 2)
 
@@ -326,12 +332,6 @@ With a prefix argument P, isearch for the symbol at point."
   (interactive)
   (message "%s" (current-time-string)))
 (global-set-key (kbd "C-c m t") 'lud/show-current-time)
-
-(defun lud/show-major-minor-modes ()
-  "Show the major/minor mode(s) in the minibuffer."
-  (interactive)
-  (message "%s" major-mode))
-(global-set-key (kbd "C-c m m") 'lud/show-major-minor-modes)
 
 (defun lud/show-modified-buffer ()
   "Show state of the current in the minibuffer."
