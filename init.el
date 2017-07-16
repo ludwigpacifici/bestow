@@ -230,6 +230,16 @@
               (unless (eq ibuffer-sorting-mode 'alphabetic)
                 (ibuffer-do-sort-by-alphabetic)))))
 
+(use-package js2-mode
+  :ensure t
+  :config
+  (setq-default js2-basic-offset 2
+                js2-bounce-indent-p nil
+                js2-mode-show-parse-errors nil
+                js2-mode-show-strict-warnings nil)
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode)))
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
