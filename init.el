@@ -110,7 +110,9 @@
   ("C-'" . avy-goto-char-2))
 
 (use-package counsel
-  :ensure t)
+  :ensure t
+  :config
+  (setq-default counsel-find-file-ignore-regexp "~$"))
 
 (use-package swiper
   :ensure t
