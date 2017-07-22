@@ -260,7 +260,7 @@
 (savehist-mode t)
 (scroll-bar-mode -1)
 (set-cursor-color "#d54e53")
-(set-face-attribute 'default nil :family "Fira Code Medium" :height 158)
+(set-face-attribute 'default nil :family "Iosevka" :height 151 :weight 'light :width 'normal :slant 'normal)
 (setq indent-tabs-mode nil
       tab-width 2)
 
