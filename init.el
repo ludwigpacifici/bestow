@@ -46,9 +46,6 @@
     (add-hook 'scheme-mode-hook #'parinfer-mode)
     (add-hook 'lisp-mode-hook #'parinfer-mode)))
 
-(use-package company
-  :ensure t)
-
 (use-package ggtags
   :ensure t
   :bind
@@ -77,7 +74,6 @@
 (use-package clojure-mode
   :ensure t
   :config
-  (add-hook 'clojure-mode-hook #'company-mode)
   (add-hook 'clojure-mode-hook #'parinfer-mode)
   (add-hook 'clojure-mode-hook #'subword-mode))
 
@@ -143,7 +139,6 @@
 (use-package lisp-mode
   :config
   (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
-  (add-hook 'emacs-lisp-mode-hook #'company-mode)
   (define-key emacs-lisp-mode-map (kbd "C-c C-c") #'eval-defun)
   (define-key emacs-lisp-mode-map (kbd "C-c C-b") #'eval-buffer)
   (add-hook 'lisp-interaction-mode-hook #'eldoc-mode)
@@ -176,13 +171,7 @@
   (add-hook 'rust-mode-hook #'racer-mode))
 
 (use-package racer
-  :ensure t
-  :bind
-  ("TAB" . company-indent-or-complete-common)
-  :config
-  (add-hook 'racer-mode-hook #'eldoc-mode)
-  (add-hook 'racer-mode-hook #'company-mode)
-  (setq company-tooltip-align-annotations t))
+  :ensure t)
 
 (use-package cargo
   :ensure t
@@ -201,12 +190,6 @@
   :config
   (load-theme 'solarized-dark t)
   (set-face-foreground 'vertical-border (face-background 'default)))
-
-;; (use-package color-theme-sanityinc-tomorrow
-;;   :ensure t
-;;   :config
-;;   (load-theme 'sanityinc-tomorrow-day t)
-;;   (set-face-foreground 'vertical-border (face-background 'default)))
 
 (use-package uniquify
   :config
