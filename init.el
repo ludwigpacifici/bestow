@@ -262,6 +262,7 @@
               require-final-newline 't
               ring-bell-function 'ignore
               scroll-preserve-screen-position t
+              shift-select-mode nil
               tramp-default-method "ssh"
               x-stretch-cursor t)
 (show-paren-mode t)
