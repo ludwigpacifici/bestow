@@ -231,6 +231,16 @@
   (add-hook 'web-mode-hook 'prettier-js-mode)
   (add-hook 'js2-mode-hook 'prettier-js-mode))
 
+(use-package org
+  :ensure t)
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-reload-all)
+  (add-hook 'rust-mode-hook #'yas-minor-mode)
+  (add-hook 'c++-mode-hook #'yas-minor-mode))
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
