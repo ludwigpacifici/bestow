@@ -241,6 +241,24 @@
   (add-hook 'rust-mode-hook #'yas-minor-mode)
   (add-hook 'c++-mode-hook #'yas-minor-mode))
 
+(use-package spaceline-config
+  :ensure spaceline
+  :config
+  (set-face-attribute 'mode-line nil :underline nil :box nil :overline nil)
+  (set-face-attribute 'mode-line-inactive nil :underline nil :box nil :overline nil)
+  (setq-default powerline-default-separator 'bar
+                powerline-height 30
+                spaceline-highlight-face-func 'spaceline-highlight-face-modified)
+  (spaceline-toggle-buffer-encoding-abbrev-off)
+  (spaceline-toggle-buffer-position-off)
+  (spaceline-toggle-buffer-size-off)
+  (spaceline-toggle-hud-off)
+  (spaceline-toggle-line-column-on)
+  (spaceline-toggle-major-mode-off)
+  (spaceline-toggle-minor-modes-off)
+  (spaceline-toggle-version-control-off)
+  (spaceline-emacs-theme))
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
@@ -267,7 +285,6 @@
               inhibit-splash-screen t
               initial-scratch-message ""
               load-prefer-newer t
-              mode-line-format nil
               mode-require-final-newline t
               require-final-newline 't
               ring-bell-function 'ignore
