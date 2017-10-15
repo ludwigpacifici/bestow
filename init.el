@@ -61,13 +61,6 @@
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
   (define-key c++-mode-map (kbd "C-M-<tab>") #'clang-format-region))
 
-(use-package cider
-  :ensure t
-  :config
-  (add-hook 'cider-mode-hook #'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook #'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook #'parinfer-mode))
-
 (use-package clang-format
   :ensure t)
 
@@ -188,7 +181,7 @@
 (use-package solarized-theme
   :ensure t
   :config
-  (load-theme 'solarized-light t)
+  (load-theme 'solarized-dark t)
   (set-face-foreground 'vertical-border (face-background 'default)))
 
 (use-package uniquify
@@ -330,45 +323,11 @@ With a prefix argument P, isearch for the symbol at point."
        #'isearch-forward))))
 (global-set-key [remap isearch-forward] #'endless/isearch-symbol-with-prefix)
 
-(defun lud/show-file-name ()
-  "Show the full path file name in the minibuffer."
-  (interactive)
-  (let ((filename (buffer-file-name))
-        (buffer-name (buffer-name)))
-    (if filename
-        (message "%s" filename)
-      (message "%s" buffer-name))))
-(global-set-key (kbd "C-c m f") 'lud/show-file-name)
-
 (defun lud/show-current-time ()
   "Show the full time in the minibuffer."
   (interactive)
   (message "%s" (current-time-string)))
 (global-set-key (kbd "C-c m t") 'lud/show-current-time)
-
-(defun lud/show-modified-buffer ()
-  "Show state of the current in the minibuffer."
-  (interactive)
-  (cond
-   (buffer-read-only (message "%s" "Read only"))
-   ((buffer-modified-p) (message "%s" "Modified"))
-   (t (message "%s" "Already saved"))))
-(global-set-key (kbd "C-c m s") 'lud/show-modified-buffer)
-
-(defun lud/current-git-branch ()
-  "Show the current Git branch in the minibuffer."
-  (interactive)
-  (let ((branch (car (vc-git-branches))))
-    (if branch
-        (message "%s" "On branch " branch)
-      (message "%s" "Not a Git branch"))))
-(global-set-key (kbd "C-c m b") 'lud/current-git-branch)
-
-(defun lud/current-encoding ()
-  "Show the current encoding in the minibuffer."
-  (interactive)
-  (message "%s" buffer-file-coding-system))
-(global-set-key (kbd "C-c m e") 'lud/current-encoding)
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 (global-set-key (kbd "C-c l") 'what-line)
