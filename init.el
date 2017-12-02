@@ -324,12 +324,6 @@ With a prefix argument P, isearch for the symbol at point."
        #'isearch-forward))))
 (global-set-key [remap isearch-forward] #'endless/isearch-symbol-with-prefix)
 
-(defun lud/show-current-time ()
-  "Show the full time in the minibuffer."
-  (interactive)
-  (message "%s" (current-time-string)))
-(global-set-key (kbd "C-c m t") 'lud/show-current-time)
-
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 (global-set-key (kbd "C-c l") 'what-line)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
