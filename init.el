@@ -123,6 +123,7 @@
                 ivy-format-function (quote ivy-format-function-arrow)
                 ivy-initial-inputs-alist nil
                 ivy-re-builders-alist '((t . ivy--regex-fuzzy))
+                ivy-use-selectable-prompt t
                 ivy-use-virtual-buffers t)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
@@ -239,7 +240,7 @@
   :config
   (set-face-attribute 'mode-line nil :underline nil :box nil :overline nil)
   (set-face-attribute 'mode-line-inactive nil :underline nil :box nil :overline nil)
-  (setq-default powerline-default-separator 'bar
+  (setq-default powerline-default-separator 'nil
                 powerline-height 30
                 spaceline-highlight-face-func 'spaceline-highlight-face-modified)
   (spaceline-toggle-buffer-encoding-abbrev-off)
