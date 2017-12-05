@@ -140,7 +140,8 @@
 
 (use-package magit
   :ensure t
-  :bind (("C-x g" . magit-status)))
+  :bind (("C-x g" . magit-status))
+  :config (setq magit-repository-directories '(("~" . 1))))
 
 (use-package markdown-mode
   :ensure t
