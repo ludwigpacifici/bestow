@@ -1,5 +1,5 @@
-# dotemacs
+# Bestow
 
-Personal configuration files for emacs. Feel free to use some part of it!
+Personal configuration files for dotfiles. Feel free to use some part of it!
 
-[Lud](http://lud.cc)
+[Lud](https://lud.cc)
