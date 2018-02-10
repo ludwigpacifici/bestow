@@ -229,12 +229,15 @@
 (use-package org
   :ensure t)
 
+(use-package yasnippet-snippets
+  :ensure t)
+
 (use-package yasnippet
   :ensure t
   :config
   (yas-reload-all)
-  (add-hook 'rust-mode-hook #'yas-minor-mode)
-  (add-hook 'c++-mode-hook #'yas-minor-mode))
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
+  (yas-global-mode 1))
 
 (use-package spaceline-config
   :ensure spaceline
