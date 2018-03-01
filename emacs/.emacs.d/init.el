@@ -244,7 +244,10 @@
   :config
   (set-face-attribute 'mode-line nil :underline nil :box nil :overline nil)
   (set-face-attribute 'mode-line-inactive nil :underline nil :box nil :overline nil)
-  (setq-default powerline-default-separator 'nil
+  (set-face-attribute 'spaceline-unmodified nil :background "#073642")
+  (set-face-attribute 'spaceline-modified nil :background "#6c71c4")
+  (set-face-attribute 'spaceline-read-only nil :background "#657b83")
+  (setq-default powerline-default-separator 'arrow-fade
                 powerline-height 30
                 spaceline-highlight-face-func 'spaceline-highlight-face-modified)
   (spaceline-toggle-buffer-encoding-abbrev-off)
