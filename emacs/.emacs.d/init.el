@@ -184,7 +184,21 @@
   :ensure t
   :config
   (load-theme 'solarized-dark t)
+  (let ((line (face-attribute 'mode-line :underline)))
+    (set-face-attribute 'mode-line-inactive nil :overline line)
+    (set-face-attribute 'mode-line nil :overline line)
+    (set-face-attribute 'mode-line nil :underline line)
+    (set-face-attribute 'mode-line nil :box nil)
+    (set-face-attribute 'mode-line-inactive nil :box nil)
+    (set-face-attribute 'mode-line-inactive nil :background "#073642"))
   (set-face-foreground 'vertical-border (face-background 'default)))
+
+(use-package moody
+  :ensure t
+  :config
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode))
 
 (use-package uniquify
   :config
@@ -239,35 +253,14 @@
   (add-hook 'prog-mode-hook #'yas-minor-mode)
   (yas-global-mode 1))
 
-(use-package spaceline-config
-  :ensure spaceline
-  :config
-  (set-face-attribute 'mode-line nil :underline nil :box nil :overline nil)
-  (set-face-attribute 'mode-line-inactive nil :underline nil :box nil :overline nil)
-  (set-face-attribute 'spaceline-unmodified nil :background "#073642")
-  (set-face-attribute 'spaceline-modified nil :background "#6c71c4")
-  (set-face-attribute 'spaceline-read-only nil :background "#657b83")
-  (setq-default powerline-default-separator 'arrow-fade
-                powerline-height 30
-                spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-  (spaceline-toggle-buffer-encoding-abbrev-off)
-  (spaceline-toggle-buffer-position-off)
-  (spaceline-toggle-buffer-size-off)
-  (spaceline-toggle-hud-off)
-  (spaceline-toggle-line-column-on)
-  (spaceline-toggle-major-mode-off)
-  (spaceline-toggle-minor-modes-off)
-  (spaceline-toggle-version-control-off)
-  (spaceline-emacs-theme))
-
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
-(column-number-mode 0)
+(column-number-mode 1)
 (delete-selection-mode t)
 (global-auto-revert-mode t)
 (global-hl-line-mode t)
-(line-number-mode 0)
+(line-number-mode 1)
 (menu-bar-mode 0)
 (savehist-mode t)
 (scroll-bar-mode -1)
