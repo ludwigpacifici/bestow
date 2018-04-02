@@ -10,7 +10,6 @@
                     (not (gnutls-available-p))))
        (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
   (add-to-list 'package-archives (cons "melpa" url) t))
-(package-initialize)
 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -46,23 +45,16 @@
     (add-hook 'scheme-mode-hook #'parinfer-mode)
     (add-hook 'lisp-mode-hook #'parinfer-mode)))
 
-(use-package ggtags
-  :ensure t
-  :bind
-  ("M-," . pop-tag-mark))
+(use-package clang-format
+  :ensure t)
 
 (use-package cc-mode
   :ensure t
   :config
-  (add-hook 'c-mode-hook #'ggtags-mode)
-  (add-hook 'c++-mode-hook #'ggtags-mode)
   (setq-default c-basic-offset 2)
   (setq c-default-style "linux")
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
   (define-key c++-mode-map (kbd "C-M-<tab>") #'clang-format-region))
-
-(use-package clang-format
-  :ensure t)
 
 (use-package clojure-mode
   :ensure t
