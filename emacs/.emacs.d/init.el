@@ -153,17 +153,17 @@
 (use-package rust-mode
   :ensure t
   :config
-  (setq racer-rust-src-path "~/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src")
-  (add-hook 'rust-mode-hook #'rust-enable-format-on-save)
-  (add-hook 'rust-mode-hook #'racer-mode))
+  (setq racer-rust-src-path "~/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"))
 
 (use-package racer
-  :ensure t)
+  :ensure t
+  :hook ((rust-mode . racer-mode)
+         (rust-mode . eldoc-mode)
+         (rust-mode . rust-enable-format-on-save)))
 
 (use-package cargo
   :ensure t
-  :config
-  (add-hook 'rust-mode-hook 'cargo-minor-mode))
+  :hook (rust-mode . cargo-minor-mode))
 
 (use-package saveplace
   :config
