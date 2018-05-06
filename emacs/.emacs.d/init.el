@@ -245,6 +245,11 @@
   (add-hook 'prog-mode-hook #'yas-minor-mode)
   (yas-global-mode 1))
 
+(use-package fsharp-mode
+  :ensure t
+  :config
+  (setq-default fsharp-indent-offset 2))
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
