@@ -1,0 +1,23 @@
+{
+    "editor.codeLens": false,
+    "editor.cursorBlinking": "solid",
+    "editor.cursorStyle": "block",
+    "editor.folding": false,
+    "editor.fontFamily": "Iosevka",
+    "editor.fontLigatures": false,
+    "editor.fontSize": 20,
+    "editor.lineNumbers": "off",
+    "editor.matchBrackets": false,
+    "editor.minimap.enabled": false,
+    "editor.occurrencesHighlight": false,
+    "editor.renderIndentGuides": false,
+    "editor.renderLineHighlight": "line",
+    "editor.selectionHighlight": false,
+    "search.location": "panel",
+    "window.menuBarVisibility": "toggle",
+    "workbench.activityBar.visible": false,
+    "workbench.colorTheme": "Solarized Dark",
+    "workbench.editor.showTabs": false
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.statusBar.visible": false,
+}
