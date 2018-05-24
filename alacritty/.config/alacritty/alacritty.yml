@@ -31,7 +31,7 @@ window:
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  decorations: true
+  decorations: false
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 8
@@ -61,21 +61,21 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: "Iosevka" # should be "Menlo" or something on macOS.
+    family: "Iosevka Term" # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
-    # style: Regular
+    style: Regular
 
   # The bold font face
   bold:
-    family: "Iosevka" # should be "Menlo" or something on macOS.
+    family: "Iosevka Term" # should be"Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
-    # style: Bold
+    style: Bold
 
   # The italic font face
   italic:
-    family: "Iosevka" # should be "Menlo" or something on macOS.
+    family: "Iosevka Term" # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
-    # style: Italic
+    style: Italic
 
   # Point size of the font
   size: 15.0
@@ -103,7 +103,7 @@ render_timer: false
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
-custom_cursor_colors: false
+custom_cursor_colors: true
 
 # Colors (Dracula)
 colors:
@@ -111,6 +111,10 @@ colors:
   primary:
     background: '0x282a36'
     foreground: '0xf8f8f2'
+
+  cursor:
+    text:   '0xd54e53'
+    cursor: '0xd54e53'
 
   # Normal colors
   normal:
