@@ -235,20 +235,40 @@
 (use-package org
   :ensure t)
 
-(use-package yasnippet-snippets
-  :ensure t)
-
-(use-package yasnippet
-  :ensure t
-  :config
-  (yas-reload-all)
-  (add-hook 'prog-mode-hook #'yas-minor-mode)
-  (yas-global-mode 1))
-
 (use-package fsharp-mode
   :ensure t
   :config
   (setq-default fsharp-indent-offset 2))
+
+(use-package tuareg
+  :ensure t
+  :config
+  (load-file "/home/lud/.opam/4.07.0/share/emacs/site-lisp/ocp-indent.el")
+  ;; (add-hook 'before-save-hook 'ocp-indent-buffer)
+  :mode (("\\.ml\\'" . tuareg-mode)
+         ("\\.mli\\'" . tuareg-mode)
+         ("\\.mly\\'" . tuareg-mode)
+         ("\\.mll\\'" . tuareg-mode)
+         ("\\.mlp\\'" . tuareg-mode)))
+
+(use-package merlin
+  :ensure t
+  :config
+  (add-hook 'tuareg-mode-hook 'merlin-mode)
+  (add-hook 'caml-mode-hook 'merlin-mode))
+
+(use-package merlin-eldoc
+  :after merlin
+  :ensure t
+  :config
+  (setq merlin-eldoc-occurrences nil)
+  :hook ((reason-mode tuareg-mode caml-mode) . merlin-eldoc-setup))
+
+(use-package utop
+  :ensure t
+  :config
+  (setq utop-command "opam config exec -- utop -emacs")
+  (add-hook 'tuareg-mode-hook 'utop-minor-mode))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
