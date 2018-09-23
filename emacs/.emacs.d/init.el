@@ -200,9 +200,7 @@
   (setq uniquify-ignore-buffers-re "^\\*"))
 
 (use-package toml-mode
-  :ensure t
-  :config
-  (add-hook 'rust-mode-hook 'cargo-minor-mode))
+  :ensure t)
 
 (use-package yaml-mode
   :ensure t)
