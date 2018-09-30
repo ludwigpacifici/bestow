@@ -26,8 +26,8 @@ window:
   # Units are physical pixels; this is not DPI aware.
   # (change requires restart)
   padding:
-    x: 2
-    y: 2
+    x: 1
+    y: 1
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
@@ -63,7 +63,7 @@ font:
   normal:
     family: "Iosevka Term" # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
-    style: Regular
+    style: Light
 
   # The bold font face
   bold:
@@ -109,7 +109,7 @@ custom_cursor_colors: true
 colors:
   # Default colors
   primary:
-    background: '0x282a36'
+    background: '0x000000'
     foreground: '0xf8f8f2'
 
   cursor:
@@ -183,7 +183,7 @@ background_opacity: 1.0
 # - PasteSelection
 # - Copy (TODO)
 mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
+  - { mouse: Middle, action: Paste }
 
 mouse:
   # Click settings
@@ -227,8 +227,8 @@ live_config_reload: true
 # You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
 # Entries in shell.args are passed unmodified as arguments to the shell.
 #
-# shell:
-#   program: /bin/bash
+shell:
+  program: /bin/tmux
 #   args:
 #     - --login
 
