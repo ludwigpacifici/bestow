@@ -239,34 +239,33 @@
   (setq-default fsharp-indent-offset 2))
 
 (use-package tuareg
-  :ensure t
-  :config
-  (load-file "/home/lud/.opam/4.07.0/share/emacs/site-lisp/ocp-indent.el")
-  ;; (add-hook 'before-save-hook 'ocp-indent-buffer)
-  :mode (("\\.ml\\'" . tuareg-mode)
-         ("\\.mli\\'" . tuareg-mode)
-         ("\\.mly\\'" . tuareg-mode)
-         ("\\.mll\\'" . tuareg-mode)
-         ("\\.mlp\\'" . tuareg-mode)))
+  :ensure t)
+
+(use-package ocamlformat
+  :after tuareg
+  :load-path (lambda () (concat
+                         (substring (shell-command-to-string "opam config var share") 0 -1)
+                         "/emacs/site-lisp"))
+  :config (add-hook 'before-save-hook 'ocamlformat-before-save))
 
 (use-package merlin
+  :after tuareg
   :ensure t
-  :config
-  (add-hook 'tuareg-mode-hook 'merlin-mode)
-  (add-hook 'caml-mode-hook 'merlin-mode))
+  :hook (tuareg-mode . merlin-mode))
 
-(use-package merlin-eldoc
-  :after merlin
+(use-package company
   :ensure t
   :config
-  (setq merlin-eldoc-occurrences nil)
-  :hook ((reason-mode tuareg-mode caml-mode) . merlin-eldoc-setup))
+  (add-to-list 'company-backends 'merlin-company-backend)
+  :bind ("C-c o" . company-complete)
+  :hook (merlin-mode . company-mode))
 
 (use-package utop
+  :after tuareg
   :ensure t
   :config
   (setq utop-command "opam config exec -- utop -emacs")
-  (add-hook 'tuareg-mode-hook 'utop-minor-mode))
+  :hook (tuareg-mode . utop-minor-mode))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
