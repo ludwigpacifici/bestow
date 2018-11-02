@@ -241,13 +241,6 @@
 (use-package tuareg
   :ensure t)
 
-(use-package ocamlformat
-  :after tuareg
-  :load-path (lambda () (concat
-                         (substring (shell-command-to-string "opam config var share") 0 -1)
-                         "/emacs/site-lisp"))
-  :config (add-hook 'before-save-hook 'ocamlformat-before-save))
-
 (use-package merlin
   :after tuareg
   :ensure t
@@ -266,6 +259,16 @@
   :config
   (setq utop-command "opam config exec -- utop -emacs")
   :hook (tuareg-mode . utop-minor-mode))
+
+(eval-when-compile
+  (setq opam-share
+        (substring
+         (shell-command-to-string "opam config var share 2> /dev/null")
+         0 -1))
+  (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
+  (require 'dune)
+  (require 'ocamlformat)
+  (add-hook 'before-save-hook 'ocamlformat-before-save))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
