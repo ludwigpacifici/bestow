@@ -6,11 +6,8 @@
 (setq gc-cons-threshold 50000000)
 
 (require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
-  (add-to-list 'package-archives (cons "melpa" url) t))
-
+(add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
+(package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 
