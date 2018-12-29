@@ -232,25 +232,14 @@
 (use-package org
   :ensure t)
 
-(use-package fsharp-mode
-  :ensure t
-  :config
-  (setq-default fsharp-indent-offset 2))
-
 (use-package tuareg
   :ensure t)
 
 (use-package merlin
   :after tuareg
   :ensure t
+  :bind ("C-M-i" . completion-at-point)
   :hook (tuareg-mode . merlin-mode))
-
-(use-package company
-  :ensure t
-  :config
-  (add-to-list 'company-backends 'merlin-company-backend)
-  :bind ("C-c o" . company-complete)
-  :hook (merlin-mode . company-mode))
 
 (use-package utop
   :after tuareg
