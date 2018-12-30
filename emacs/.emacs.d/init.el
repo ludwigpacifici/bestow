@@ -96,14 +96,15 @@
   :ensure t
   :bind ("C-c i s" . swiper))
 
+(use-package rg
+  :ensure t
+  :bind ("C-c g" . rg))
+
 (use-package ivy
   :ensure t
   :bind
   ("M-x" . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
-  ("C-c i l" . counsel-locate)
-  ("C-c i r" . counsel-rg)
-  ("C-c i g" . counsel-git-grep)
   :config
   (ivy-mode 1)
   (setq-default enable-recursive-minibuffers t
