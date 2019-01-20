@@ -192,6 +192,10 @@
   (moody-replace-mode-line-buffer-identification)
   (moody-replace-vc-mode))
 
+(use-package minions
+  :ensure t
+  :config (minions-mode 1))
+
 (use-package uniquify
   :config
   (setq uniquify-buffer-name-style 'forward)
