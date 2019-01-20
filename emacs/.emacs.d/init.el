@@ -85,7 +85,7 @@
 (use-package avy
   :ensure t
   :bind
-  ("C-'" . avy-goto-char-2))
+  ("C-;" . avy-goto-char-2))
 
 (use-package counsel
   :ensure t
@@ -110,7 +110,6 @@
   (setq-default enable-recursive-minibuffers t
                 ivy-count-format ""
                 ivy-display-style nil
-                ivy-format-function (quote ivy-format-function-arrow)
                 ivy-initial-inputs-alist nil
                 ivy-re-builders-alist '((t . ivy--regex-fuzzy))
                 ivy-use-selectable-prompt t
