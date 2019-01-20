@@ -257,6 +257,7 @@
   (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
   (require 'dune)
   (require 'ocamlformat)
+  (setq-default ocamlformat-show-errors 'disable)
   (add-hook 'before-save-hook 'ocamlformat-before-save))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
