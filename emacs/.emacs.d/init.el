@@ -310,7 +310,6 @@ With a prefix argument P, isearch for the symbol at point."
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key "\C-cc" 'compile)
 (global-set-key "\C-cr" 'recompile)
-(global-set-key "\C-cg" 'rgrep)
 (global-set-key [f11] 'toggle-frame-fullscreen)
 (global-unset-key (kbd "C-z"))
 
