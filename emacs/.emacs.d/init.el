@@ -178,6 +178,10 @@
   :ensure t
   :config (minions-mode 1))
 
+(use-package which-key
+  :ensure t
+  :init (which-key-mode))
+
 (use-package uniquify
   :config
   (setq uniquify-buffer-name-style 'forward)
