@@ -7,7 +7,6 @@
 
 (require 'package)
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
-(package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -31,7 +30,6 @@
   :ensure t)
 
 (use-package cc-mode
-  :ensure t
   :config
   (setq-default c-basic-offset 2)
   (setq c-default-style "linux")
@@ -201,22 +199,6 @@
               (ibuffer-vc-set-filter-groups-by-vc-root)
               (unless (eq ibuffer-sorting-mode 'alphabetic)
                 (ibuffer-do-sort-by-alphabetic)))))
-
-(use-package js2-mode
-  :ensure t
-  :config
-  (setq-default js2-basic-offset 2
-                js2-bounce-indent-p nil
-                js2-mode-show-parse-errors nil
-                js2-mode-show-strict-warnings nil)
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode)))
-
-(use-package prettier-js
-  :ensure t
-  :config
-  (add-hook 'web-mode-hook 'prettier-js-mode)
-  (add-hook 'js2-mode-hook 'prettier-js-mode))
 
 (use-package org
   :ensure t)
