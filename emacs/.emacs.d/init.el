@@ -56,9 +56,6 @@
   :ensure t
   :bind ("C-=" . er/expand-region))
 
-(use-package faceup
-  :ensure t)
-
 (use-package font-lock-studio
   :ensure t)
 
@@ -194,15 +191,6 @@
 
 (use-package yaml-mode
   :ensure t)
-
-(use-package ibuffer-vc
-  :ensure t
-  :config
-  (add-hook 'ibuffer-hook
-            (lambda ()
-              (ibuffer-vc-set-filter-groups-by-vc-root)
-              (unless (eq ibuffer-sorting-mode 'alphabetic)
-                (ibuffer-do-sort-by-alphabetic)))))
 
 (use-package org
   :ensure t)
