@@ -160,8 +160,7 @@
     (set-face-attribute 'mode-line nil :overline line)
     (set-face-attribute 'mode-line nil :underline line)
     (set-face-attribute 'mode-line nil :box nil)
-    (set-face-attribute 'mode-line-inactive nil :box nil)
-    (set-face-attribute 'mode-line-inactive nil :background "#073642"))
+    (set-face-attribute 'mode-line-inactive nil :box nil))
   (set-face-foreground 'vertical-border (face-background 'default)))
 
 (use-package moody
@@ -234,7 +233,7 @@
 (savehist-mode t)
 (scroll-bar-mode -1)
 (set-cursor-color "#d54e53")
-(set-face-attribute 'default nil :family "Iosevka" :height 151 :weight 'light :width 'normal :slant 'normal)
+(set-face-attribute 'default nil :family "Iosevka Thin" :height 180 :weight 'normal :width 'normal :slant 'normal)
 (setq indent-tabs-mode nil
       tab-width 2)
 
