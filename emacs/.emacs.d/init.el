@@ -258,7 +258,6 @@
 (size-indication-mode 0)
 (tool-bar-mode 0)
 (transient-mark-mode t)
-(toggle-frame-fullscreen)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
