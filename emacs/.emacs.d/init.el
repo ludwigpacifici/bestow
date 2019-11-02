@@ -132,7 +132,7 @@
 (use-package rust-mode
   :ensure t
   :config
-  (setq racer-rust-src-path "~/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"))
+  (setq racer-rust-src-path (concat (substring (shell-command-to-string "rustc --print sysroot") 0 -1) "/lib/rustlib/src/rust/src")))
 
 (use-package racer
   :ensure t
