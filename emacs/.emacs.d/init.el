@@ -185,6 +185,9 @@
   (setq uniquify-after-kill-buffer-p t)
   (setq uniquify-ignore-buffers-re "^\\*"))
 
+(use-package lua-mode
+  :ensure t)
+
 (use-package toml-mode
   :ensure t)
 
