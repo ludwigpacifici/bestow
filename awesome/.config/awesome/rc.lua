@@ -161,7 +161,7 @@ awful.screen.connect_for_each_screen(function(s)
       set_wallpaper(s)
 
       -- Each screen has its own tag table.
-      awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[9])
+      awful.tag({ "α", "β", "γ", "δ", "ε", "ζ", "η", "θ", "ι" }, s, awful.layout.layouts[9])
 
       -- Create a promptbox for each screen
       s.mypromptbox = awful.widget.prompt()
@@ -508,30 +508,11 @@ end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
-                         -- buttons for the titlebar
-                         local buttons = gears.table.join(
-                            awful.button({ }, 1, function()
-                                  c:emit_signal("request::activate", "titlebar", {raise = true})
-                                  awful.mouse.client.move(c)
-                            end),
-                            awful.button({ }, 3, function()
-                                  c:emit_signal("request::activate", "titlebar", {raise = true})
-                                  awful.mouse.client.resize(c)
-                            end)
-                         )
-
                          awful.titlebar(c) : setup {
                             { -- Left
-                               awful.titlebar.widget.iconwidget(c),
-                               buttons = buttons,
-                               layout  = wibox.layout.fixed.horizontal
-                            },
-                            { -- Middle
                                { -- Title
-                                  align  = "center",
                                   widget = awful.titlebar.widget.titlewidget(c)
                                },
-                               buttons = buttons,
                                layout  = wibox.layout.flex.horizontal
                             },
                             layout = wibox.layout.align.horizontal
