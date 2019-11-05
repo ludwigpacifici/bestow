@@ -261,6 +261,7 @@
 (size-indication-mode 0)
 (tool-bar-mode 0)
 (transient-mark-mode t)
+(setq frame-resize-pixelwise t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Character encoding ;;
