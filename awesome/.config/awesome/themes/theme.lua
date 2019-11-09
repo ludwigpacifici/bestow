@@ -28,7 +28,7 @@ theme.colors.green   = "#859900ff"
 -- {{{ Styles
 theme.font      = "Hack Bold 10"
 local gears = require("gears")
-gears.wallpaper.set(theme.colors.base3)
+gears.wallpaper.set(theme.colors.base2)
 
 -- {{{ Colors
 theme.fg_normal  = theme.colors.base02
@@ -45,7 +45,7 @@ theme.bg_systray = theme.bg_normal
 theme.border_normal = theme.bg_normal
 theme.border_focus  = theme.bg_focus
 theme.border_marked = theme.bg_urgent
-theme.useless_gap   = "0"
+theme.useless_gap   = "5"
 theme.border_width  = "2"
 -- }}}
 
