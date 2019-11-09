@@ -45,7 +45,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init( awful.util.getdir("config") .. "/themes/awesome-solarized/dark/theme.lua" )
+beautiful.init( awful.util.getdir("config") .. "/themes/theme.lua" )
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -147,19 +147,7 @@ local tasklist_buttons = gears.table.join(
          awful.client.focus.byidx(-1)
 end))
 
-local function set_wallpaper(s)
-   if beautiful.wallpaper then
-      gears.wallpaper.maximized("/home/lud/Pictures/wallhaven-ym9rv7.jpg", s)
-   end
-end
-
--- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
-
 awful.screen.connect_for_each_screen(function(s)
-      -- Wallpaper
-      set_wallpaper(s)
-
       -- Each screen has its own tag table.
       awful.tag({ "α", "β", "γ", "δ", "ε", "ζ", "η", "θ", "ι" }, s, awful.layout.layouts[9])
 
