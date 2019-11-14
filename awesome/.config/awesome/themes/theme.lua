@@ -42,8 +42,8 @@ theme.bg_systray = theme.bg_normal
 -- }}}
 
 -- {{{ Borders
-theme.border_normal = theme.bg_normal
-theme.border_focus  = theme.bg_focus
+theme.border_normal = theme.colors.base3
+theme.border_focus  = theme.colors.yellow
 theme.border_marked = theme.bg_urgent
 theme.useless_gap   = "5"
 theme.border_width  = "2"
@@ -70,7 +70,7 @@ theme.taglist_squares_unsel = theme.default_themes_path.."/zenburn/taglist/squar
 -- }}}
 
 -- {{{ Misc
-theme.awesome_icon           = theme.default_themes_path.."/zenburn/awesome-icon.png"
+theme.awesome_icon           = theme.default_themes_path.."/sky/awesome-icon.png"
 theme.menu_submenu_icon      = theme.default_themes_path.."/default/submenu.png"
 -- }}}
 
