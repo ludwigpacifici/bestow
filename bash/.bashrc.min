@@ -1,0 +1,20 @@
+# Require bash-completion
+
+set -o emacs
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+export HISTCONTROL=ignoreboth
+
+shopt -s histappend
+shopt -s checkwinsize
+
+complete -c man which
+
+alias e='emacs -Q -nw'
+alias ls='ls --color=auto'
+alias rmt='rm *~'
+alias rmth='rm .*~'
+
+PS1='\[\e[1;31m\]\u\[\e[m\] @ \[\e[1;37m\]\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'

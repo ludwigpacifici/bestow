@@ -31,7 +31,7 @@ local gears = require("gears")
 gears.wallpaper.set(theme.colors.base2)
 
 -- {{{ Colors
-theme.fg_normal  = theme.colors.base02
+theme.fg_normal  = theme.colors.base01
 theme.fg_focus   = theme.colors.base03
 theme.fg_urgent  = theme.colors.base3
 
