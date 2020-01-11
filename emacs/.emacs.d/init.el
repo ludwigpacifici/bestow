@@ -64,8 +64,10 @@
 
 (use-package avy
   :ensure t
+  :config
+  (setq-default avy-keys '(?a ?r ?s ?t ?n ?e ?i ?o ?h))
   :bind
-  ("C-;" . avy-goto-char-2))
+  ("C-;" . avy-goto-char))
 
 (use-package counsel
   :ensure t
@@ -74,7 +76,7 @@
 
 (use-package swiper
   :ensure t
-  :bind ("C-c i s" . swiper))
+  :bind ("C-c s" . swiper))
 
 (use-package rg
   :ensure t
