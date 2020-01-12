@@ -3,7 +3,6 @@
 --     By Gwenhael Le Moine    --
 ---------------------------------
 
--- {{{ Main
 theme = {}
 theme.default_themes_path = "/usr/share/awesome/themes"
 theme.colors = {}
@@ -23,14 +22,11 @@ theme.colors.violet  = "#6c71c4ff"
 theme.colors.blue    = "#268bd2ff"
 theme.colors.cyan    = "#2aa198ff"
 theme.colors.green   = "#859900ff"
--- }}}
 
--- {{{ Styles
-theme.font      = "Hack Bold 10"
+theme.font = "Iosevka Bold 10"
 local gears = require("gears")
 gears.wallpaper.set(theme.colors.base2)
 
--- {{{ Colors
 theme.fg_normal  = theme.colors.base01
 theme.fg_focus   = theme.colors.base03
 theme.fg_urgent  = theme.colors.base3
@@ -39,42 +35,29 @@ theme.bg_normal  = theme.colors.base3
 theme.bg_focus   = theme.colors.base1
 theme.bg_urgent  = theme.colors.red
 theme.bg_systray = theme.bg_normal
--- }}}
 
--- {{{ Borders
 theme.border_normal = theme.colors.base3
 theme.border_focus  = theme.colors.yellow
 theme.border_marked = theme.bg_urgent
-theme.useless_gap   = "5"
-theme.border_width  = "2"
--- }}}
+theme.useless_gap   = "0"
+theme.border_width  = "4"
 
--- {{{ Titlebars
 theme.titlebar_bg_focus  = theme.bg_focus
 theme.titlebar_bg_normal = theme.bg_normal
--- }}}
 
--- {{{ Menu
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_height = "15"
 theme.menu_width  = "100"
--- }}}
 
--- {{{ Icons
--- {{{ Taglist
 theme.taglist_squares_sel   = theme.default_themes_path.."/zenburn/taglist/squarefz.png"
 theme.taglist_squares_unsel = theme.default_themes_path.."/zenburn/taglist/squarez.png"
 --theme.taglist_squares_resize = "false"
--- }}}
 
--- {{{ Misc
 theme.awesome_icon           = theme.default_themes_path.."/sky/awesome-icon.png"
 theme.menu_submenu_icon      = theme.default_themes_path.."/default/submenu.png"
--- }}}
 
--- {{{ Layout
 theme.layout_tile       = theme.default_themes_path.."/zenburn/layouts/tile.png"
 theme.layout_tileleft   = theme.default_themes_path.."/zenburn/layouts/tileleft.png"
 theme.layout_tilebottom = theme.default_themes_path.."/zenburn/layouts/tilebottom.png"
@@ -87,9 +70,7 @@ theme.layout_max        = theme.default_themes_path.."/zenburn/layouts/max.png"
 theme.layout_fullscreen = theme.default_themes_path.."/zenburn/layouts/fullscreen.png"
 theme.layout_magnifier  = theme.default_themes_path.."/zenburn/layouts/magnifier.png"
 theme.layout_floating   = theme.default_themes_path.."/zenburn/layouts/floating.png"
--- }}}
 
--- {{{ Titlebar
 theme.titlebar_close_button_focus  = theme.default_themes_path.."/zenburn/titlebar/close_focus.png"
 theme.titlebar_close_button_normal = theme.default_themes_path.."/zenburn/titlebar/close_normal.png"
 
@@ -112,7 +93,5 @@ theme.titlebar_maximized_button_focus_active  = theme.default_themes_path.."/zen
 theme.titlebar_maximized_button_normal_active = theme.default_themes_path.."/zenburn/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_inactive  = theme.default_themes_path.."/zenburn/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.default_themes_path.."/zenburn/titlebar/maximized_normal_inactive.png"
--- }}}
--- }}}
 
 return theme

@@ -6,11 +6,8 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
--- Widget and layout library
 local wibox = require("wibox")
--- Theme handling library
 local beautiful = require("beautiful")
--- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
@@ -18,7 +15,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -41,9 +37,7 @@ do
                              in_error = false
    end)
 end
--- }}}
 
--- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init( awful.util.getdir("config") .. "/themes/theme.lua" )
 
@@ -75,9 +69,7 @@ awful.layout.layouts = {
    awful.layout.suit.magnifier,
    awful.layout.suit.corner.nw,
 }
--- }}}
 
--- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
@@ -97,15 +89,13 @@ mylauncher = awful.widget.launcher({
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
 
--- {{{ Wibar
 -- Create a textclock widget
 date_clock = wibox.widget.textclock("%A %e %B %Y")
 
 time_clock = wibox.widget.textclock("%H:%M")
 
-separator_default = wibox.widget.textbox(" • ")
+separator_default = wibox.widget.textbox(" ░ ")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -197,17 +187,13 @@ awful.screen.connect_for_each_screen(function(s)
          },
       }
 end)
--- }}}
 
--- {{{ Mouse bindings
 root.buttons(gears.table.join(
                 awful.button({ }, 3, function () mymainmenu:toggle() end),
                 awful.button({ }, 4, awful.tag.viewnext),
                 awful.button({ }, 5, awful.tag.viewprev)
 ))
--- }}}
 
--- {{{ Key bindings
 globalkeys = gears.table.join(
    -- Media Controls
    awful.key({}, "XF86AudioLowerVolume", function ()
@@ -331,13 +317,6 @@ clientkeys = gears.table.join(
       {description = "move to screen", group = "client"}),
    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
       {description = "toggle keep on top", group = "client"}),
-   awful.key({ modkey,           }, "n",
-      function (c)
-         -- The client currently has the input focus, so it cannot be
-         -- minimized, since minimized clients can't have the focus.
-         c.minimized = true
-      end ,
-      {description = "minimize", group = "client"}),
    awful.key({ modkey,           }, "m",
       function (c)
          c.maximized = not c.maximized
@@ -424,9 +403,7 @@ clientbuttons = gears.table.join(
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
 
--- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
    -- All clients will match this rule.
@@ -478,9 +455,7 @@ awful.rules.rules = {
                 }, properties = { titlebars_enabled = false }
    },
 }
--- }}}
 
--- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
                          -- Set the windows at the slave,
@@ -510,4 +485,3 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
