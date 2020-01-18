@@ -23,7 +23,8 @@ theme.colors.blue    = "#268bd2ff"
 theme.colors.cyan    = "#2aa198ff"
 theme.colors.green   = "#859900ff"
 
-theme.font = "Iosevka Bold 10"
+theme.font = "Iosevka Bold 12"
+
 local gears = require("gears")
 gears.wallpaper.set(theme.colors.base2)
 
@@ -36,7 +37,7 @@ theme.bg_focus   = theme.colors.base1
 theme.bg_urgent  = theme.colors.red
 theme.bg_systray = theme.bg_normal
 
-theme.border_normal = theme.colors.base3
+theme.border_normal = theme.colors.base2
 theme.border_focus  = theme.colors.yellow
 theme.border_marked = theme.bg_urgent
 theme.useless_gap   = "0"
@@ -55,7 +56,7 @@ theme.taglist_squares_sel   = theme.default_themes_path.."/zenburn/taglist/squar
 theme.taglist_squares_unsel = theme.default_themes_path.."/zenburn/taglist/squarez.png"
 --theme.taglist_squares_resize = "false"
 
-theme.awesome_icon           = theme.default_themes_path.."/sky/awesome-icon.png"
+theme.awesome_icon           = theme.default_themes_path.."/default/awesome-icon.png"
 theme.menu_submenu_icon      = theme.default_themes_path.."/default/submenu.png"
 
 theme.layout_tile       = theme.default_themes_path.."/zenburn/layouts/tile.png"
