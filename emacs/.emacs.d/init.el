@@ -26,20 +26,9 @@
     (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 
-(use-package clang-format
-  :ensure t)
-
-(use-package cc-mode
-  :config
-  (setq-default c-basic-offset 2)
-  (setq c-default-style "linux")
-  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-  (define-key c++-mode-map (kbd "C-M-<tab>") #'clang-format-region))
-
 (use-package clojure-mode
   :ensure t
   :config
-  (add-hook 'clojure-mode-hook #'parinfer-mode)
   (add-hook 'clojure-mode-hook #'subword-mode))
 
 (use-package inf-clojure
@@ -56,11 +45,9 @@
   :ensure t
   :bind ("C-=" . er/expand-region))
 
-(use-package font-lock-studio
-  :ensure t)
-
-(use-package smex
-  :ensure t)
+(use-package rg
+  :ensure t
+  :bind ("C-c g" . rg))
 
 (use-package avy
   :ensure t
@@ -76,17 +63,14 @@
 
 (use-package swiper
   :ensure t
-  :bind ("C-c s" . swiper))
-
-(use-package rg
-  :ensure t
-  :bind ("C-c g" . rg))
+  :bind ("C-s" . swiper-isearch))
 
 (use-package ivy
   :ensure t
   :bind
   ("M-x" . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
+  ("C-x b" . ivy-switch-buffer)
   :config
   (ivy-mode 1)
   (setq-default enable-recursive-minibuffers t
@@ -120,16 +104,6 @@
   :ensure t
   :config
   (setq markdown-command "/sbin/pandoc"))
-
-(use-package octave-mode
-  :mode "\\.m\\'"  :config
-  (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
-  (add-hook 'octave-mode-hook
-            (lambda ()
-              (abbrev-mode 1)
-              (auto-fill-mode 1)
-              (if (eq window-system 'x)
-                  (font-lock-mode 1)))))
 
 (use-package rust-mode
   :ensure t
@@ -176,10 +150,6 @@
   :ensure t
   :config (minions-mode 1))
 
-(use-package which-key
-  :ensure t
-  :init (which-key-mode))
-
 (use-package uniquify
   :config
   (setq uniquify-buffer-name-style 'forward)
@@ -194,9 +164,6 @@
   :ensure t)
 
 (use-package yaml-mode
-  :ensure t)
-
-(use-package org
   :ensure t)
 
 (use-package tuareg
@@ -226,6 +193,10 @@
   (setq-default ocamlformat-show-errors 'disable)
   (add-hook 'before-save-hook 'ocamlformat-before-save))
 
+(use-package which-key
+  :ensure t
+  :config (which-key-mode))
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
@@ -238,7 +209,7 @@
 (savehist-mode t)
 (scroll-bar-mode -1)
 (set-cursor-color "#d54e53")
-(set-face-attribute 'default nil :family "Iosevka Thin" :height 180 :weight 'normal :width 'normal :slant 'normal)
+(set-face-attribute 'default nil :family "Iosevka Thin" :height 150 :weight 'normal :width 'normal :slant 'normal)
 (setq indent-tabs-mode nil
       tab-width 2)
 
