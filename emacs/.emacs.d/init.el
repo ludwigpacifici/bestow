@@ -105,8 +105,23 @@
   :config
   (setq markdown-command "/sbin/pandoc"))
 
+(use-package company
+  :ensure t
+  :hook (prog-mode . company-mode)
+  :config (setq company-tooltip-align-annotations t)
+  (setq company-minimum-prefix-length 1))
+
+(use-package lsp-mode
+  :ensure t
+  :commands lsp
+  :config (require 'lsp-clients))
+
+(use-package lsp-ui
+  :ensure t)
+
 (use-package rust-mode
   :ensure t
+  :hook (rust-mode . lsp)
   :config
   (setq racer-rust-src-path (concat (substring (shell-command-to-string "rustc --print sysroot") 0 -1) "/lib/rustlib/src/rust/src")))
 
