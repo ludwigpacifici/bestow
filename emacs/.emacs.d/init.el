@@ -62,8 +62,10 @@
   (setq-default counsel-find-file-ignore-regexp "~$"))
 
 (use-package swiper
-  :ensure t
-  :bind ("C-s" . swiper-isearch))
+  :ensure t)
+
+;; Ensure first M-x commands are from history
+(use-package smex :ensure t)
 
 (use-package ivy
   :ensure t
