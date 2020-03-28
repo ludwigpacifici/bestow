@@ -2,8 +2,8 @@
 
 ;;; Code:
 
-;; Garbage collector kicks in when 100Mb is used
-(setq gc-cons-threshold 50000000)
+;; Garbage collector kicks later
+(setq gc-cons-threshold 100000000)
 
 (require 'package)
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
@@ -110,16 +110,26 @@
 (use-package company
   :ensure t
   :hook (prog-mode . company-mode)
-  :config (setq company-tooltip-align-annotations t)
+  :config
   (setq company-minimum-prefix-length 1))
+
+;; Increase the amount of data which Emacs reads from the
+;; process. Again the emacs default is too low 4k considering that the
+;; some of the language server responses are in 800k - 3M range.
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
 
 (use-package lsp-mode
   :ensure t
   :commands lsp
-  :config (require 'lsp-clients))
+  :hook (lsp-mode . lsp-enable-which-key-integration)
+  :config
+  (require 'lsp-clients)
+  (setq lsp-signature-auto-activate nil
+        lsp-eldoc-render-all nil))
 
-(use-package lsp-ui
-  :ensure t)
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp)
 
 (use-package rust-mode
   :ensure t
