@@ -84,9 +84,6 @@
                 ivy-use-virtual-buffers t)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
-(use-package json-mode
-  :ensure t)
-
 (use-package lisp-mode
   :config
   (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
@@ -111,12 +108,12 @@
   :ensure t
   :hook (prog-mode . company-mode)
   :config
-  (setq company-minimum-prefix-length 1))
+  (setq company-tooltip-align-annotations t))
 
 ;; Increase the amount of data which Emacs reads from the
 ;; process. Again the emacs default is too low 4k considering that the
 ;; some of the language server responses are in 800k - 3M range.
-(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq read-process-output-max (* 1024 1024 * 8)) ;; 8mb
 
 (use-package lsp-mode
   :ensure t
@@ -140,12 +137,14 @@
 (use-package racer
   :ensure t
   :hook ((rust-mode . racer-mode)
+         (racer-mode . company-mode)
          (rust-mode . eldoc-mode)
          (rust-mode . rust-enable-format-on-save)))
 
 (use-package cargo
   :ensure t
-  :hook (rust-mode . cargo-minor-mode))
+  :hook ((rust-mode . cargo-minor-mode)
+         (toml-mode . cargo-minor-mode)))
 
 (use-package saveplace
   :config
@@ -184,6 +183,9 @@
   (setq uniquify-after-kill-buffer-p t)
   (setq uniquify-ignore-buffers-re "^\\*"))
 
+(use-package json-mode
+  :ensure t)
+
 (use-package lua-mode
   :ensure t)
 
@@ -200,7 +202,9 @@
   :after tuareg
   :ensure t
   :bind ("C-M-i" . completion-at-point)
-  :hook (tuareg-mode . merlin-mode))
+  :hook
+  ((tuareg-mode . merlin-mode)
+   (tuareg-mode . lsp)))
 
 (use-package utop
   :after tuareg
