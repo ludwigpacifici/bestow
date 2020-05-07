@@ -120,7 +120,10 @@
   :ensure t
   :hook (prog-mode . company-mode)
   :config
-  (setq company-tooltip-align-annotations t))
+  (setq company-minimum-prefix-length 3
+        company-tooltip-align-annotations t
+        company-tooltip-limit 8
+        company-dabbrev-ignore-case t))
 
 ;; Increase the amount of data which Emacs reads from the
 ;; process. Again the emacs default is too low 4k considering that the
@@ -155,8 +158,7 @@
 
 (use-package cargo
   :ensure t
-  :hook ((rust-mode . cargo-minor-mode)
-         (toml-mode . cargo-minor-mode)))
+  :hook (rust-mode . cargo-minor-mode))
 
 (use-package saveplace
   :config
@@ -169,9 +171,11 @@
   :ensure t
   :config
   (load-theme 'solarized-dark t)
-  (set-face-attribute 'mode-line-inactive nil :underline nil :overline nil :box nil)
-  (set-face-attribute 'mode-line nil :underline nil :overline nil :box nil)
+
   (set-face-foreground 'vertical-border (face-background 'default))
+  :custom-face
+  (mode-line ((t (         :box (:line-width (1 . 8) :color "#073642") :overline nil :underline nil :slant italic))))
+  (mode-line-inactive ((t (:box (:line-width (1 . 8) :color "#002b36") :overline nil :underline nil :slant italic))))
   )
 
 (use-package minions
@@ -198,7 +202,8 @@
   :ensure t)
 
 (use-package tuareg
-  :ensure t)
+  :ensure t
+  :config (setq tuareg-prettify-symbols-full t))
 
 (use-package merlin
   :after tuareg
@@ -206,7 +211,8 @@
   :bind ("C-M-i" . completion-at-point)
   :hook
   ((tuareg-mode . merlin-mode)
-   (tuareg-mode . lsp)))
+   (tuareg-mode . lsp))
+  :config (setq merlin-completion-with-doc t))
 
 (use-package utop
   :after tuareg
