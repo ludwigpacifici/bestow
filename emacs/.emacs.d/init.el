@@ -65,7 +65,8 @@
   :ensure t)
 
 ;; Ensure first M-x commands are from history
-(use-package smex :ensure t)
+(use-package smex
+  :ensure t)
 
 (use-package ivy
   :ensure t
@@ -75,14 +76,25 @@
   ("C-x b" . ivy-switch-buffer)
   :config
   (ivy-mode 1)
-  (setq-default enable-recursive-minibuffers t
+  (setq-default ivy-height 16
+                ivy-fixed-height-minibuffer t
+                enable-recursive-minibuffers t
                 ivy-count-format ""
-                ivy-display-style nil
+                ivy-display-style 'fancy
                 ivy-initial-inputs-alist nil
                 ivy-re-builders-alist '((t . ivy--regex-fuzzy))
                 ivy-use-selectable-prompt t
                 ivy-use-virtual-buffers t)
-  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
+  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+  (setf (alist-get 't ivy-format-functions-alist) #'ivy-format-function-line)
+  :custom-face
+  (ivy-current-match ((t (:extend t :underline nil :weight normal)))))
+
+(use-package ivy-rich
+  :after ivy
+  :ensure t
+  :config
+  (ivy-rich-mode 1))
 
 (use-package lisp-mode
   :config
@@ -113,7 +125,7 @@
 ;; Increase the amount of data which Emacs reads from the
 ;; process. Again the emacs default is too low 4k considering that the
 ;; some of the language server responses are in 800k - 3M range.
-(setq read-process-output-max (* 1024 1024 * 8)) ;; 8mb
+(setq read-process-output-max (* 1024 1024 8)) ;; 8mb
 
 (use-package lsp-mode
   :ensure t
@@ -157,20 +169,10 @@
   :ensure t
   :config
   (load-theme 'solarized-dark t)
-  (let ((line (face-attribute 'mode-line :underline)))
-    (set-face-attribute 'mode-line nil :overline line)
-    (set-face-attribute 'mode-line-inactive nil :overline line)
-    (set-face-attribute 'mode-line-inactive nil :underline line)
-    (set-face-attribute 'mode-line nil :box nil)
-    (set-face-attribute 'mode-line-inactive nil :box nil))
-  (set-face-foreground 'vertical-border (face-background 'default)))
-
-(use-package moody
-  :ensure t
-  :config
-  (setq x-underline-at-descent-line t)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode))
+  (set-face-attribute 'mode-line-inactive nil :underline nil :overline nil :box nil)
+  (set-face-attribute 'mode-line nil :underline nil :overline nil :box nil)
+  (set-face-foreground 'vertical-border (face-background 'default))
+  )
 
 (use-package minions
   :ensure t
