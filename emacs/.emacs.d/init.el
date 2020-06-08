@@ -54,7 +54,7 @@
   :config
   (setq-default avy-keys '(?a ?r ?s ?t ?n ?e ?i ?o ?h))
   :bind
-  ("C-;" . avy-goto-char))
+  ("C-;" . avy-goto-char-timer))
 
 (use-package counsel
   :ensure t
@@ -76,7 +76,7 @@
   ("C-x b" . ivy-switch-buffer)
   :config
   (ivy-mode 1)
-  (setq-default ivy-height 16
+  (setq-default ivy-height 10
                 ivy-fixed-height-minibuffer t
                 enable-recursive-minibuffers t
                 ivy-count-format ""
@@ -137,7 +137,8 @@
   :config
   (require 'lsp-clients)
   (setq lsp-signature-auto-activate nil
-        lsp-eldoc-render-all nil))
+        lsp-eldoc-render-all nil
+        lsp-rust-server 'rust-analyzer))
 
 (use-package company-lsp
   :ensure t
@@ -317,6 +318,6 @@ With a prefix argument P, isearch for the symbol at point."
 
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta))
-(setq x-super-keysym 'meta)
+(setq x-super-keysym nil)
 
 ;; init.el ends here
