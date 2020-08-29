@@ -176,8 +176,7 @@
   (set-face-foreground 'vertical-border (face-background 'default))
   :custom-face
   (mode-line ((t (         :box (:line-width (1 . 8) :color "#073642") :overline nil :underline nil :slant italic))))
-  (mode-line-inactive ((t (:box (:line-width (1 . 8) :color "#002b36") :overline nil :underline nil :slant italic))))
-  )
+  (mode-line-inactive ((t (:box (:line-width (1 . 8) :color "#002b36") :overline nil :underline nil :slant italic)))))
 
 (use-package minions
   :ensure t
@@ -314,6 +313,10 @@ With a prefix argument P, isearch for the symbol at point."
 (global-set-key "\C-cc" 'compile)
 (global-set-key "\C-cr" 'recompile)
 (global-set-key [f11] 'toggle-frame-fullscreen)
+(global-set-key (kbd "M-<up>") 'windmove-up)
+(global-set-key (kbd "M-<down>") 'windmove-down)
+(global-set-key (kbd "M-<left>") 'windmove-left)
+(global-set-key (kbd "M-<right>") 'windmove-right)
 (global-unset-key (kbd "C-z"))
 
 (when (eq system-type 'darwin)
