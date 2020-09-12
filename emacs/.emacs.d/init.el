@@ -86,9 +86,7 @@
                 ivy-use-selectable-prompt t
                 ivy-use-virtual-buffers t)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-  (setf (alist-get 't ivy-format-functions-alist) #'ivy-format-function-line)
-  :custom-face
-  (ivy-current-match ((t (:extend t :underline nil :weight normal)))))
+  (setf (alist-get 't ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package ivy-rich
   :after ivy
@@ -168,16 +166,6 @@
 (use-package scss-mode
   :ensure t)
 
-(use-package solarized-theme
-  :ensure t
-  :config
-  (load-theme 'solarized-dark t)
-
-  (set-face-foreground 'vertical-border (face-background 'default))
-  :custom-face
-  (mode-line ((t (         :box (:line-width (1 . 8) :color "#073642") :overline nil :underline nil :slant italic))))
-  (mode-line-inactive ((t (:box (:line-width (1 . 8) :color "#002b36") :overline nil :underline nil :slant italic)))))
-
 (use-package minions
   :ensure t
   :config (minions-mode 1))
@@ -209,9 +197,7 @@
   :after tuareg
   :ensure t
   :bind ("C-M-i" . completion-at-point)
-  :hook
-  ((tuareg-mode . merlin-mode)
-   (tuareg-mode . lsp))
+  :hook (tuareg-mode . merlin-mode)
   :config (setq merlin-completion-with-doc t))
 
 (use-package utop
@@ -235,6 +221,16 @@
 (use-package which-key
   :ensure t
   :config (which-key-mode))
+
+(use-package modus-vivendi-theme :ensure t)
+(use-package modus-operandi-theme :ensure t)
+
+(setq modus-vivendi-theme-slanted-constructs t
+      modus-vivendi-theme-bold-constructst t
+      modus-operandi-theme-slanted-constructs t
+      modus-operandi-theme-bold-constructst t)
+
+(load-theme 'modus-vivendi t)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
