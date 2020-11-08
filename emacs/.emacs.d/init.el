@@ -128,32 +128,9 @@
 ;; some of the language server responses are in 800k - 3M range.
 (setq read-process-output-max (* 1024 1024 8)) ;; 8mb
 
-(use-package lsp-mode
-  :ensure t
-  :commands lsp
-  :hook (lsp-mode . lsp-enable-which-key-integration)
-  :config
-  (require 'lsp-clients)
-  (setq lsp-signature-auto-activate nil
-        lsp-eldoc-render-all nil
-        lsp-rust-server 'rust-analyzer))
-
-(use-package company-lsp
-  :ensure t
-  :commands company-lsp)
-
 (use-package rust-mode
   :ensure t
-  :hook (rust-mode . lsp)
-  :config
-  (setq racer-rust-src-path (concat (substring (shell-command-to-string "rustc --print sysroot") 0 -1) "/lib/rustlib/src/rust/src")))
-
-(use-package racer
-  :ensure t
-  :hook ((rust-mode . racer-mode)
-         (racer-mode . company-mode)
-         (rust-mode . eldoc-mode)
-         (rust-mode . rust-enable-format-on-save)))
+  :hook (rust-mode . rust-enable-format-on-save))
 
 (use-package cargo
   :ensure t
@@ -221,6 +198,23 @@
 (use-package which-key
   :ensure t
   :config (which-key-mode))
+
+(use-package lsp-mode
+  :ensure t
+  :commands lsp
+  :hook ((rust-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :config
+  (setq lsp-rust-server 'rust-analyzer
+        lsp-signature-auto-activate nil
+        lsp-eldoc-render-all nil
+        lsp-enable-snippet nil))
+
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp)
 
 (use-package modus-vivendi-theme :ensure t)
 (use-package modus-operandi-theme :ensure t)

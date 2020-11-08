@@ -1,7 +1,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PAGER="/usr/bin/most -s" # require 'most'
 
