@@ -5,6 +5,11 @@
 ;; Garbage collector kicks later
 (setq gc-cons-threshold 100000000)
 
+;; Increase the amount of data which Emacs reads from the
+;; process. Again the emacs default is too low 4k considering that the
+;; some of the language server responses are in 800k - 3M range.
+(setq read-process-output-max (* 1024 1024 8)) ;; 8mb
+
 (require 'package)
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
 (unless package-archive-contents
@@ -123,14 +128,12 @@
         company-tooltip-limit 8
         company-dabbrev-ignore-case t))
 
-;; Increase the amount of data which Emacs reads from the
-;; process. Again the emacs default is too low 4k considering that the
-;; some of the language server responses are in 800k - 3M range.
-(setq read-process-output-max (* 1024 1024 8)) ;; 8mb
-
 (use-package rust-mode
   :ensure t
-  :hook (rust-mode . rust-enable-format-on-save))
+  :hook (rust-mode . rust-enable-format-on-save)
+  :config
+  (setq rust-format-show-buffer nil
+        rust-format-goto-problem nil))
 
 (use-package cargo
   :ensure t
@@ -205,16 +208,12 @@
   :hook ((rust-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :config
-  (setq lsp-rust-server 'rust-analyzer
-        lsp-signature-auto-activate nil
+  (setq lsp-completion-enable nil
         lsp-eldoc-render-all nil
-        lsp-enable-snippet nil))
-
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-
-(use-package company-lsp
-  :ensure t
-  :commands company-lsp)
+        lsp-enable-snippet nil
+        lsp-headerline-breadcrumb-enable nil
+        lsp-rust-server 'rust-analyzer
+        lsp-signature-auto-activate nil))
 
 (use-package modus-vivendi-theme :ensure t)
 (use-package modus-operandi-theme :ensure t)
@@ -303,10 +302,6 @@ With a prefix argument P, isearch for the symbol at point."
 (global-set-key "\C-cc" 'compile)
 (global-set-key "\C-cr" 'recompile)
 (global-set-key [f11] 'toggle-frame-fullscreen)
-(global-set-key (kbd "M-<up>") 'windmove-up)
-(global-set-key (kbd "M-<down>") 'windmove-down)
-(global-set-key (kbd "M-<left>") 'windmove-left)
-(global-set-key (kbd "M-<right>") 'windmove-right)
 (global-unset-key (kbd "C-z"))
 
 (when (eq system-type 'darwin)
