@@ -1,0 +1,5 @@
+ZDOTDIR=$HOME
+PS1=' %F{190}ϝ%f '
+ZGEN_DIR="$ZDOTDIR/.zgen"
+ZGEN_SOURCE="$ZGEN_DIR/zgen.zsh"
+HISTFILE="$ZDOTDIR/.zhistory"
