@@ -215,15 +215,15 @@
         lsp-rust-server 'rust-analyzer
         lsp-signature-auto-activate nil))
 
-(use-package modus-vivendi-theme :ensure t)
-(use-package modus-operandi-theme :ensure t)
-
-(setq modus-vivendi-theme-slanted-constructs t
-      modus-vivendi-theme-bold-constructst t
-      modus-operandi-theme-slanted-constructs t
-      modus-operandi-theme-bold-constructst t)
-
-(load-theme 'modus-vivendi t)
+(use-package solarized-theme
+  :ensure t
+  :config
+  (load-theme 'solarized-dark t)
+  (set-face-foreground 'vertical-border (face-background 'default))
+  :custom-face
+  (ivy-current-match ((t (:extend t :underline nil :weight normal))))
+  (mode-line ((t (         :box (:line-width (1 . 8) :color "#073642") :overline nil :underline nil :slant italic))))
+  (mode-line-inactive ((t (:box (:line-width (1 . 8) :color "#002b36") :overline nil :underline nil :slant italic)))))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
