@@ -34,5 +34,8 @@ compinit
 # Treat these characters as part of a word.
 WORDCHARS=''
 
-# Hush now, quiet now.
-unsetopt BEEP
+setopt interactivecomments # Activate the bash-style comments
+unsetopt BEEP # Quiet
+
+# opam configuration
+test -r /home/lud/.opam/opam-init/init.zsh && . /home/lud/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
