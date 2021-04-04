@@ -34,8 +34,10 @@ compinit
 # Treat these characters as part of a word.
 WORDCHARS=''
 
-setopt interactivecomments # Activate the bash-style comments
+setopt INTERACTIVECOMMENTS # Activate the bash-style comments
 unsetopt BEEP # Quiet
 
 # opam configuration
 test -r /home/lud/.opam/opam-init/init.zsh && . /home/lud/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+alias n='$EDITOR'
