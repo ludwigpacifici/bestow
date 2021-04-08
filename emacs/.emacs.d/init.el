@@ -49,11 +49,19 @@
 
 (use-package counsel
   :ensure t
+  :bind
+  ("M-x" . counsel-M-x)
+  ("C-c g" . counsel-rg)
+  ("C-c f" . counsel-fzf)
+  ("C-c l" . counsel-locate)
+  ("C-x C-f" . counsel-find-file)
   :config
   (setq-default counsel-find-file-ignore-regexp "~$"))
 
 (use-package swiper
-  :ensure t)
+  :ensure t
+  :bind
+  ("C-c s" . swiper-isearch))
 
 ;; Ensure first M-x commands are from history
 (use-package smex
@@ -62,12 +70,11 @@
 (use-package ivy
   :ensure t
   :bind
-  ("M-x" . counsel-M-x)
-  ("C-x C-f" . counsel-find-file)
   ("C-x b" . ivy-switch-buffer)
+  ("C-c s" . swiper-isearch)
   :config
   (ivy-mode 1)
-  (setq-default ivy-height 10
+  (setq-default ivy-height 8
                 ivy-fixed-height-minibuffer t
                 enable-recursive-minibuffers t
                 ivy-count-format ""
