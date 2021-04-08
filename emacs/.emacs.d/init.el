@@ -31,16 +31,6 @@
     (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 
-(use-package clojure-mode
-  :ensure t
-  :config
-  (add-hook 'clojure-mode-hook #'subword-mode))
-
-(use-package inf-clojure
-  :ensure t
-  :config
-  (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode))
-
 (use-package doc-view
   :config
   (setq doc-view-continuous t)
@@ -49,10 +39,6 @@
 (use-package expand-region
   :ensure t
   :bind ("C-=" . er/expand-region))
-
-(use-package rg
-  :ensure t
-  :bind ("C-c g" . rg))
 
 (use-package avy
   :ensure t
@@ -92,12 +78,6 @@
                 ivy-use-virtual-buffers t)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
   (setf (alist-get 't ivy-format-functions-alist) #'ivy-format-function-line))
-
-(use-package ivy-rich
-  :after ivy
-  :ensure t
-  :config
-  (ivy-rich-mode 1))
 
 (use-package lisp-mode
   :config
@@ -142,9 +122,6 @@
 (use-package saveplace
   :config
   (setq-default save-place t))
-
-(use-package scss-mode
-  :ensure t)
 
 (use-package minions
   :ensure t
