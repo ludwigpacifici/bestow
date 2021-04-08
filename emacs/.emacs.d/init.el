@@ -134,17 +134,13 @@
   (setq uniquify-after-kill-buffer-p t)
   (setq uniquify-ignore-buffers-re "^\\*"))
 
-(use-package json-mode
-  :ensure t)
+(use-package json-mode :ensure t)
 
-(use-package lua-mode
-  :ensure t)
+(use-package lua-mode :ensure t)
 
-(use-package toml-mode
-  :ensure t)
+(use-package toml-mode :ensure t)
 
-(use-package yaml-mode
-  :ensure t)
+(use-package yaml-mode :ensure t)
 
 (use-package tuareg
   :ensure t
@@ -185,7 +181,7 @@
   :hook ((rust-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :config
-  (setq lsp-completion-enable nil
+  (setq lsp-completion-enable t
         lsp-eldoc-render-all nil
         lsp-enable-snippet nil
         lsp-headerline-breadcrumb-enable nil
@@ -216,7 +212,7 @@
 (set-cursor-color "#d54e53")
 (set-face-attribute 'default nil :family "Iosevka Thin" :height 150 :weight 'normal :width 'normal :slant 'normal)
 (setq indent-tabs-mode nil
-      tab-width 2)
+      tab-width 4)
 
 (setq-default auto-save-timeout 60
               current-language-environment "English"
@@ -236,22 +232,13 @@
               tramp-default-method "ssh"
               x-stretch-cursor t)
 (show-paren-mode t)
-(size-indication-mode 0)
+(size-indication-mode 1)
 (tool-bar-mode 0)
 (transient-mark-mode t)
 (setq frame-resize-pixelwise t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;
-;; Character encoding ;;
-;;;;;;;;;;;;;;;;;;;;;;;;
-(setq locale-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-input-method nil) ;; No funky input for normal editing
-(set-keyboard-coding-system 'utf-8)
-(set-language-environment "UTF-8") ;; prefer utf-8 for language settings
-(set-selection-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
 
 (defun dont-kill-emacs ()
   (interactive)
@@ -278,7 +265,6 @@ With a prefix argument P, isearch for the symbol at point."
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key "\C-cc" 'compile)
 (global-set-key "\C-cr" 'recompile)
-(global-set-key [f11] 'toggle-frame-fullscreen)
 (global-unset-key (kbd "C-z"))
 
 (when (eq system-type 'darwin)
