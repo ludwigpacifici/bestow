@@ -3,23 +3,18 @@
 ;;; Code:
 
 ;; Garbage collector kicks later
-(setq gc-cons-threshold 100000000)
+(setq gc-cons-threshold (* 100 1000 1000))
 
 ;; Increase the amount of data which Emacs reads from the
 ;; process. Again the emacs default is too low 4k considering that the
 ;; some of the language server responses are in 800k - 3M range.
-(setq read-process-output-max (* 1024 1024 8)) ;; 8mb
+(setq read-process-output-max (* 1024 1024 16)) ;; 16mb
 
 (require 'package)
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
-(unless package-archive-contents
-  (package-refresh-contents))
-
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
-
 (require 'use-package)
-(setq use-package-verbose t)
 
 (setq user-mail-address "ludwig@lud.cc"
       user-full-name "Ludwig PACIFICI")
@@ -63,9 +58,7 @@
   :bind
   ("C-c s" . swiper-isearch))
 
-;; Ensure first M-x commands are from history
-(use-package smex
-  :ensure t)
+(use-package smex :ensure t)
 
 (use-package ivy
   :ensure t
@@ -97,19 +90,19 @@
 (use-package magit
   :ensure t
   :bind (("C-x g" . magit-status))
-  :config
+  :init
   (setq magit-repository-directories '(("~" . 1))
         magit-section-visibility-indicator nil))
 
 (use-package markdown-mode
   :ensure t
-  :config
+  :init
   (setq markdown-command "/sbin/pandoc"))
 
 (use-package company
   :ensure t
   :hook (prog-mode . company-mode)
-  :config
+  :init
   (setq company-minimum-prefix-length 3
         company-tooltip-align-annotations t
         company-tooltip-limit 8
@@ -118,7 +111,7 @@
 (use-package rust-mode
   :ensure t
   :hook (rust-mode . rust-enable-format-on-save)
-  :config
+  :init
   (setq rust-format-show-buffer nil
         rust-format-goto-problem nil))
 
@@ -151,14 +144,14 @@
 
 (use-package tuareg
   :ensure t
-  :config (setq tuareg-prettify-symbols-full t))
+  :init (setq tuareg-prettify-symbols-full t))
 
 (use-package merlin
   :after tuareg
   :ensure t
   :bind ("C-M-i" . completion-at-point)
   :hook (tuareg-mode . merlin-mode)
-  :config (setq merlin-completion-with-doc t))
+  :init (setq merlin-completion-with-doc t))
 
 (use-package utop
   :after tuareg
@@ -187,7 +180,7 @@
   :commands lsp
   :hook ((rust-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
-  :config
+  :init
   (setq lsp-completion-enable t
         lsp-eldoc-render-all nil
         lsp-enable-snippet nil
@@ -268,7 +261,6 @@ With a prefix argument P, isearch for the symbol at point."
 (global-set-key [remap isearch-forward] #'endless/isearch-symbol-with-prefix)
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
-(global-set-key (kbd "C-c l") 'what-line)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key "\C-cc" 'compile)
 (global-set-key "\C-cr" 'recompile)
@@ -278,4 +270,12 @@ With a prefix argument P, isearch for the symbol at point."
   (setq mac-command-modifier 'meta))
 (setq x-super-keysym nil)
 
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "Emacs ready in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
+(message "%s" (emacs-init-time))
 ;; init.el ends here
