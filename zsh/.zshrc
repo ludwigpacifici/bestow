@@ -34,6 +34,7 @@ compinit
 # Treat these characters as part of a word.
 WORDCHARS=''
 
+setopt AUTO_CD
 setopt INTERACTIVECOMMENTS # Activate the bash-style comments
 unsetopt BEEP # Quiet
 
