@@ -53,3 +53,8 @@ let g:solarized_bold=1
 let g:solarized_underline=0
 let g:solarized_italic=1
 colorscheme solarized
+
+"Rust
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
