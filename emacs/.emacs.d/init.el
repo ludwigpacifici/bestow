@@ -99,15 +99,6 @@
   :init
   (setq markdown-command "/sbin/pandoc"))
 
-(use-package company
-  :ensure t
-  :hook (prog-mode . company-mode)
-  :init
-  (setq company-minimum-prefix-length 3
-        company-tooltip-align-annotations t
-        company-tooltip-limit 8
-        company-dabbrev-ignore-case t))
-
 (use-package rust-mode
   :ensure t
   :hook (rust-mode . rust-enable-format-on-save)
@@ -182,6 +173,9 @@
          (lsp-mode . lsp-enable-which-key-integration))
   :init
   (setq lsp-completion-enable t
+        lsp-modeline-workspace-status-enable nil
+        lsp-modeline-code-actions-enable nil
+        lsp-modeline-diagnostics-enable nil
         lsp-eldoc-render-all nil
         lsp-enable-snippet nil
         lsp-headerline-breadcrumb-enable nil
