@@ -1,11 +1,3 @@
-[ -d "$ZGEN_DIR" ] || git clone https://github.com/tarjoilija/zgen "$ZGEN_DIR"
-source $ZGEN_SOURCE
-# if the init script doesn't exist
-if ! zgen saved; then
-    zgen load junegunn/fzf shell
-    zgen save
-fi
-
 source $ZDOTDIR/.zkeybinds.zsh
 source $ZDOTDIR/.zcompletions.zsh
 

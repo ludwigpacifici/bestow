@@ -4,7 +4,8 @@ XDG_CONFIG_HOME="$HOME/.config"
 XDG_DATA_HOME="$HOME/.local/share"
 XDG_BIN_HOME="$HOME/.local/bin"
 PS1='%B%(?.%F{39}.%F{190})░%f%b '
-ZGEN_DIR="$ZDOTDIR/.zgen"
-ZGEN_SOURCE="$ZGEN_DIR/zgen.zsh"
 HISTFILE="$ZDOTDIR/.zhistory"
-EDITOR="nvim"
+EDITOR="emacs"
+
+# Load Rust ecosystem
+. "$HOME/.cargo/env"
