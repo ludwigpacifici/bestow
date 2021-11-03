@@ -42,13 +42,6 @@
   :bind
   ("C-;" . avy-goto-char-timer))
 
-(use-package avy
-  :ensure t
-  :config
-  (setq-default avy-keys '(?a ?r ?s ?t ?n ?e ?i ?o ?h))
-  :bind
-  ("C-;" . avy-goto-char-timer))
-
 (use-package ace-window
   :ensure t
   :bind
@@ -65,7 +58,11 @@
   :ensure t
   :bind
   ("C-x b" . ivy-switch-buffer)
-  ("C-c s" . swiper-isearch)
+  ("C-x C-f" . counsel-find-file)
+  ("M-x" . counsel-M-x)
+  ("C-c f" . counsel-rg)
+  ("C-c g" . counsel-git-grep)
+  ("C-c l" . counsel-locate)
   :config
   (ivy-mode 1)
   (setq-default ivy-height 8
@@ -197,15 +194,24 @@
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
-(use-package solarized-theme
+
+(use-package modus-themes
   :ensure t
+  :init
+  (setq modus-themes-italic-constructs t
+        modus-themes-bold-constructs t
+        modus-themes-success-deuteranopia t
+        modus-themes-fringes nil
+        modus-themes-mode-line 'borderless
+        modus-themes-paren-match '(bold intense)
+        modus-themes-diffs 'deuteranopia)
+  ;; Load the theme files before enabling a theme
+  (modus-themes-load-themes)
   :config
-  (load-theme 'solarized-dark t)
+  (modus-themes-load-vivendi)
   (set-face-foreground 'vertical-border (face-background 'default))
-  :custom-face
-  (ivy-current-match ((t (:extend t :underline nil :weight normal))))
-  (mode-line ((t (         :box (:line-width (1 . 8) :color "#073642") :overline nil :underline nil :slant italic))))
-  (mode-line-inactive ((t (:box (:line-width (1 . 8) :color "#002b36") :overline nil :underline nil :slant italic)))))
+  :bind
+  ("<f5>" . modus-themes-toggle))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
