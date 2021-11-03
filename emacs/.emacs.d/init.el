@@ -42,16 +42,17 @@
   :bind
   ("C-;" . avy-goto-char-timer))
 
-(use-package counsel
+(use-package avy
+  :ensure t
+  :config
+  (setq-default avy-keys '(?a ?r ?s ?t ?n ?e ?i ?o ?h))
+  :bind
+  ("C-;" . avy-goto-char-timer))
+
+(use-package ace-window
   :ensure t
   :bind
-  ("M-x" . counsel-M-x)
-  ("C-c g" . counsel-rg)
-  ("C-c f" . counsel-fzf)
-  ("C-c l" . counsel-locate)
-  ("C-x C-f" . counsel-find-file)
-  :config
-  (setq-default counsel-find-file-ignore-regexp "~$"))
+  ("M-o" . ace-window))
 
 (use-package swiper
   :ensure t
