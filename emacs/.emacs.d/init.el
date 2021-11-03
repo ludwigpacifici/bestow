@@ -106,9 +106,7 @@
   (setq rust-format-show-buffer nil
         rust-format-goto-problem nil))
 
-(use-package cargo
-  :ensure t
-  :hook (rust-mode . cargo-minor-mode))
+(use-package cargo :ensure t)
 
 (use-package saveplace
   :config
@@ -164,8 +162,18 @@
 
 (use-package which-key
   :ensure t
-  :init (setq which-key-idle-delay 0.1)
   :config (which-key-mode))
+
+(use-package company
+  :ensure t
+  :custom
+  (company-begin-commands nil) ;; uncomment to disable popup
+  :bind
+  (:map company-mode-map
+        ("<tab>". company-indent-or-complete-common)
+        ("TAB". company-indent-or-complete-common)))
+
+(use-package flycheck :ensure t)
 
 (use-package lsp-mode
   :ensure t
@@ -174,14 +182,19 @@
          (lsp-mode . lsp-enable-which-key-integration))
   :init
   (setq lsp-completion-enable t
-        lsp-modeline-workspace-status-enable nil
-        lsp-modeline-code-actions-enable nil
-        lsp-modeline-diagnostics-enable nil
+        lsp-eldoc-enable-hover nil
         lsp-eldoc-render-all nil
         lsp-enable-snippet nil
         lsp-headerline-breadcrumb-enable nil
+        lsp-lens-enable nil
+        lsp-modeline-code-actions-enable nil
+        lsp-modeline-diagnostics-enable nil
+        lsp-modeline-workspace-status-enable nil
         lsp-rust-server 'rust-analyzer
         lsp-signature-auto-activate nil))
+
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 (use-package solarized-theme
   :ensure t
@@ -205,7 +218,7 @@
 (savehist-mode t)
 (scroll-bar-mode -1)
 (set-cursor-color "#d54e53")
-(set-face-attribute 'default nil :family "Iosevka Thin" :height 150 :weight 'normal :width 'normal :slant 'normal)
+(set-face-attribute 'default nil :family "Iosevka" :height 150 :weight 'normal :width 'normal :slant 'normal)
 (setq indent-tabs-mode nil
       tab-width 4)
 
@@ -257,8 +270,6 @@ With a prefix argument P, isearch for the symbol at point."
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key "\C-cc" 'compile)
-(global-set-key "\C-cr" 'recompile)
 (global-unset-key (kbd "C-z"))
 
 (when (eq system-type 'darwin)
