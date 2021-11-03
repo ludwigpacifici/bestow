@@ -104,7 +104,10 @@
   (setq rust-format-show-buffer nil
         rust-format-goto-problem nil))
 
-(use-package cargo :ensure t)
+(use-package cargo
+  :ensure t
+  :config
+  (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 (use-package saveplace
   :config
