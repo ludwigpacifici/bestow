@@ -54,15 +54,17 @@
 
 (use-package smex :ensure t)
 
+(use-package counsel :ensure t)
+
 (use-package ivy
   :ensure t
   :bind
   ("C-x b" . ivy-switch-buffer)
   ("C-x C-f" . counsel-find-file)
+  ("C-x l" . counsel-locate)
   ("M-x" . counsel-M-x)
   ("C-c f" . counsel-rg)
   ("C-c g" . counsel-git-grep)
-  ("C-c l" . counsel-locate)
   :config
   (ivy-mode 1)
   (setq-default ivy-height 8
@@ -171,6 +173,7 @@
   (company-begin-commands nil) ;; uncomment to disable popup
   :bind
   (:map company-mode-map
+        ("C-M-i". company-indent-or-complete-common)
         ("<tab>". company-indent-or-complete-common)
         ("TAB". company-indent-or-complete-common)))
 
@@ -203,6 +206,7 @@
   :init
   (setq modus-themes-italic-constructs t
         modus-themes-bold-constructs t
+        modus-themes-subtle-line-numbers t
         modus-themes-success-deuteranopia t
         modus-themes-fringes nil
         modus-themes-mode-line 'borderless
