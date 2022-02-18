@@ -182,7 +182,6 @@
         modus-themes-subtle-line-numbers t
         modus-themes-success-deuteranopia t
         modus-themes-fringes nil
-        modus-themes-mode-line 'borderless
         modus-themes-paren-match '(bold intense)
         modus-themes-diffs 'deuteranopia)
   ;; Load the theme files before enabling a theme
