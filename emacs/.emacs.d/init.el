@@ -185,6 +185,7 @@
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
+(use-package fish-mode :ensure t)
 
 (use-package modus-themes
   :ensure t
@@ -236,6 +237,7 @@
               scroll-preserve-screen-position t
               shift-select-mode nil
               tramp-default-method "ssh"
+              use-dialog-box nil
               x-stretch-cursor t)
 (show-paren-mode t)
 (size-indication-mode 1)
