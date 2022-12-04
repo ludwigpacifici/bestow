@@ -26,18 +26,6 @@
     (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 
-(use-package org-roam
-  :ensure t
-  :custom
-  (org-roam-directory (file-truename "~/org-roam"))
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n g" . org-roam-graph)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n c" . org-roam-capture))
-  :config
-  (org-roam-db-autosync-mode))
-
 (use-package doc-view
   :config
   (setq doc-view-continuous t)
@@ -113,12 +101,12 @@
 
 (use-package rust-mode
   :ensure t
-  :hook (rust-mode . rust-enable-format-on-save)
   :init
   (setq rust-format-show-buffer nil
         rust-format-goto-problem nil
         lsp-rust-analyzer-inlay-hints-mode t
-        lsp-rust-analyzer-server-display-inlay-hints t))
+        lsp-rust-analyzer-server-display-inlay-hints t
+        rust-format-on-save t))
 
 (use-package cargo
   :ensure t
@@ -204,6 +192,13 @@
   (set-face-foreground 'vertical-border (face-background 'default))
   :bind
   ("<f5>" . modus-themes-toggle))
+
+(use-package denote
+  :ensure t
+  :config
+  (setq denote-directory (expand-file-name "~/notes-pour-trop-tard")
+        denote-infer-keywords t
+        denote-sort-keywords t))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
