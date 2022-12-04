@@ -104,7 +104,9 @@
   :hook (rust-mode . rust-enable-format-on-save)
   :init
   (setq rust-format-show-buffer nil
-        rust-format-goto-problem nil))
+        rust-format-goto-problem nil
+        lsp-rust-analyzer-inlay-hints-mode t
+        lsp-rust-analyzer-server-display-inlay-hints t))
 
 (use-package cargo
   :ensure t
@@ -133,35 +135,6 @@
 (use-package toml-mode :ensure t)
 
 (use-package yaml-mode :ensure t)
-
-(use-package tuareg
-  :ensure t
-  :init (setq tuareg-prettify-symbols-full t))
-
-(use-package merlin
-  :after tuareg
-  :ensure t
-  :bind ("C-M-i" . completion-at-point)
-  :hook (tuareg-mode . merlin-mode)
-  :init (setq merlin-completion-with-doc t))
-
-(use-package utop
-  :after tuareg
-  :ensure t
-  :config
-  (setq utop-command "opam config exec -- utop -emacs")
-  :hook (tuareg-mode . utop-minor-mode))
-
-(eval-when-compile
-  (setq opam-share
-        (substring
-         (shell-command-to-string "opam config var share 2> /dev/null")
-         0 -1))
-  (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
-  (require 'dune)
-  (require 'ocamlformat)
-  (setq-default ocamlformat-show-errors 'disable)
-  (add-hook 'before-save-hook 'ocamlformat-before-save))
 
 (use-package which-key
   :ensure t
@@ -298,4 +271,5 @@ With a prefix argument P, isearch for the symbol at point."
                               (time-subtract after-init-time before-init-time)))
                      gcs-done)))
 (message "%s" (emacs-init-time))
+
 ;; init.el ends here
