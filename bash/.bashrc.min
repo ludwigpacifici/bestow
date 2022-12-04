@@ -16,14 +16,5 @@ shopt -s cmdhist
 complete -c man which
 
 alias e='emacs -Q -nw'
-alias ls='ls --color=auto'
-alias ll='ls -alh'
-alias la='ls -A'
-alias rmt='rm *~'
-alias rmth='rm .*~'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
 
 PS1='\[\e[1;31m\]\u\[\e[m\] @ \[\e[1;37m\]\h\[\e[m\] \[\e[1;34m\]\W\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'

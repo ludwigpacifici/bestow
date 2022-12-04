@@ -31,7 +31,6 @@ font:
   glyph_offset:
     x: 0
     y: 0
-  use_thin_strokes: true
 
 bell:
   animation: EaseOutExpo
@@ -56,7 +55,7 @@ cursor:
 live_config_reload: true
 
 shell:
-  program: /usr/bin/fish
+  program: /bin/bash
 
 key_bindings:
   - { key: V,        mods: Control|Shift,    action: Paste               }
