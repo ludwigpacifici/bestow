@@ -35,6 +35,23 @@
   :ensure t
   :bind ("C-=" . er/expand-region))
 
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode))
+
+(use-package orderless
+  :ensure t
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
+
+(use-package marginalia
+  :ensure t
+  :init
+  (marginalia-mode))
+
 (use-package avy
   :ensure t
   :config
@@ -46,38 +63,6 @@
   :ensure t
   :bind
   ("M-o" . ace-window))
-
-(use-package swiper
-  :ensure t
-  :bind
-  ("C-c s" . swiper-isearch))
-
-(use-package smex :ensure t)
-
-(use-package counsel :ensure t)
-
-(use-package ivy
-  :ensure t
-  :bind
-  ("C-x b" . ivy-switch-buffer)
-  ("C-x C-f" . counsel-find-file)
-  ("C-x l" . counsel-locate)
-  ("M-x" . counsel-M-x)
-  ("C-c f" . counsel-rg)
-  ("C-c g" . counsel-git-grep)
-  :config
-  (ivy-mode 1)
-  (setq-default ivy-height 8
-                ivy-fixed-height-minibuffer t
-                enable-recursive-minibuffers t
-                ivy-count-format ""
-                ivy-display-style 'fancy
-                ivy-initial-inputs-alist nil
-                ivy-re-builders-alist '((t . ivy--regex-fuzzy))
-                ivy-use-selectable-prompt t
-                ivy-use-virtual-buffers t)
-  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-  (setf (alist-get 't ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package lisp-mode
   :config
@@ -170,11 +155,6 @@
         lsp-rust-server 'rust-analyzer
         lsp-signature-auto-activate nil))
 
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
-
-(use-package fish-mode :ensure t)
-
 (use-package modus-themes
   :ensure t
   :init
@@ -233,7 +213,8 @@
               shift-select-mode nil
               tramp-default-method "ssh"
               use-dialog-box nil
-              x-stretch-cursor t)
+              x-stretch-cursor t
+              enable-recursive-minibuffers t)
 (show-paren-mode t)
 (size-indication-mode 1)
 (tool-bar-mode 0)
