@@ -38,7 +38,7 @@
 (use-package vertico
   :ensure t
   :init
-  (vertico-mode))
+  (vertico-indexed-mode))
 
 (use-package orderless
   :ensure t
