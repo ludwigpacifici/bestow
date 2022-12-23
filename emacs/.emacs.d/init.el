@@ -56,7 +56,6 @@
          ("C-c s" . consult-ripgrep)
          ("C-x b" . consult-buffer)
          ("M-g M-g" . consult-goto-line)
-         ("M-g f" . consult-flymake)
          ("M-g g" . consult-goto-line)
          ("M-y" . consult-yank-pop)
          ))
@@ -65,6 +64,23 @@
   :ensure t
   :init
   (marginalia-mode))
+
+(use-package corfu
+  :ensure t
+  :bind (:map corfu-map
+              ("<tab>" . corfu-complete)
+              ("C-M-i" . corfu-complete)
+              ("M-m" . corfu-move-to-minibuffer)
+              ("TAB" . corfu-complete)
+              )
+  :init
+  (defun corfu-move-to-minibuffer ()
+    (interactive)
+    (let ((completion-extra-properties corfu--extra)
+          completion-cycle-threshold completion-cycling)
+      (apply #'consult-completion-in-region completion-in-region--data)))
+
+  (global-corfu-mode))
 
 (use-package avy
   :ensure t
@@ -96,7 +112,7 @@
 (use-package markdown-mode
   :ensure t
   :init
-  (setq markdown-command "/sbin/pandoc"))
+  (setq markdown-command "/usr/bin/pandoc"))
 
 (use-package rust-mode
   :ensure t
@@ -139,24 +155,20 @@
   :ensure t
   :config (which-key-mode))
 
-(use-package company
-  :ensure t
-  :custom
-  (company-begin-commands nil) ;; uncomment to disable popup
-  :bind
-  (:map company-mode-map
-        ("C-M-i". company-indent-or-complete-common)
-        ("<tab>". company-indent-or-complete-common)
-        ("TAB". company-indent-or-complete-common)))
-
 (use-package flycheck :ensure t)
 
 (use-package lsp-mode
   :ensure t
+  :custom
+  (lsp-completion-provider :none)
   :commands lsp
-  :hook ((rust-mode . lsp)
+  :hook ((lsp-completion-mode . my/lsp-mode-setup-completion)
+         (rust-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :init
+  (defun my/lsp-mode-setup-completion ()
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+          '(flex))) ;; Configure flex
   (setq lsp-completion-enable t
         lsp-eldoc-enable-hover nil
         lsp-eldoc-render-all nil
@@ -208,7 +220,8 @@
 (set-cursor-color "#d54e53")
 (set-face-attribute 'default nil :family "Iosevka" :height 150 :weight 'normal :width 'normal :slant 'normal)
 (setq indent-tabs-mode nil
-      tab-width 4)
+      tab-width 4
+      tab-always-indent 'complete)
 
 (setq-default auto-save-timeout 60
               current-language-environment "English"
