@@ -38,6 +38,7 @@
 (use-package vertico
   :ensure t
   :init
+  (vertico-mode)
   (vertico-indexed-mode))
 
 (use-package orderless
@@ -46,6 +47,19 @@
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
+
+(use-package consult
+  :ensure t
+  :bind (
+         ("C-c g" . consult-git-grep)
+         ("C-c l" . consult-locate)
+         ("C-c s" . consult-ripgrep)
+         ("C-x b" . consult-buffer)
+         ("M-g M-g" . consult-goto-line)
+         ("M-g f" . consult-flymake)
+         ("M-g g" . consult-goto-line)
+         ("M-y" . consult-yank-pop)
+         ))
 
 (use-package marginalia
   :ensure t
