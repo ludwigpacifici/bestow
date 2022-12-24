@@ -218,6 +218,7 @@
 (savehist-mode t)
 (scroll-bar-mode -1)
 (set-cursor-color "#d54e53")
+(set-face-background 'hl-line "#002b36")
 (set-face-attribute 'default nil :family "Iosevka" :height 150 :weight 'normal :width 'normal :slant 'normal)
 (setq indent-tabs-mode nil
       tab-width 4
