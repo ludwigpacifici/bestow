@@ -191,13 +191,11 @@
         modus-themes-fringes nil
         modus-themes-paren-match '(bold intense)
         modus-themes-diffs 'deuteranopia)
-  ;; Load the theme files before enabling a theme
-  (modus-themes-load-themes)
+  (load-theme 'modus-vivendi :no-confim)
   :config
-  (modus-themes-load-vivendi)
   (set-face-foreground 'vertical-border (face-background 'default))
-  :bind
-  ("<f5>" . modus-themes-toggle))
+  :bind ("<f5>" . modus-themes-toggle))
+
 
 (use-package denote
   :ensure t
