@@ -3,7 +3,7 @@ function fish_prompt --description 'Write out the prompt'
     set -lx __fish_last_status $status # Export for __fish_print_pipestatus.
     set -l normal (set_color normal)
     set -q fish_color_status
-    or set -g fish_color_status --background=red white
+    or set -g fish_color_status red
 
     # Color the prompt differently when we're root
     set -l color_cwd $fish_color_cwd
@@ -16,7 +16,7 @@ function fish_prompt --description 'Write out the prompt'
     end
 
     # Write pipestatus
-    # If the status was carried over (e.g. after `set`), don't bold it.
+    # If the status was carried over (if no command is issued or if `set` leaves the status untouched), don't bold it.
     set -l bold_flag --bold
     set -q __fish_prompt_status_generation; or set -g __fish_prompt_status_generation $status_generation
     if test $__fish_prompt_status_generation = $status_generation

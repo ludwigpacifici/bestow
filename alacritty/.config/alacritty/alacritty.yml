@@ -55,7 +55,7 @@ cursor:
 live_config_reload: true
 
 shell:
-  program: /bin/bash
+  program: /usr/bin/fish
 
 key_bindings:
   - { key: V,        mods: Control|Shift,    action: Paste               }
