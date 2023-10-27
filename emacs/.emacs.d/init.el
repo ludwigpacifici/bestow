@@ -198,7 +198,6 @@
   (set-face-foreground 'vertical-border (face-background 'default))
   :bind ("<f5>" . modus-themes-toggle))
 
-
 (use-package denote
   :ensure t
   :config
