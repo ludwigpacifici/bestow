@@ -1,12 +1,13 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Iosevka, Roboto, Helvetica, Arial, sans-serif;
+    font-family: otf-font-awesome, Iosevka, Roboto, Helvetica, Arial, sans-serif;
     font-size: 14px;
+    font-weight: bold;
 }
 
 window#waybar {
-    background-color: #586e75;
-    border-bottom: 3px solid #93a1a1;
+    background-color: #073642;
+    border-bottom: 3px solid #586e75;
     color: #fdf6e3;
     transition-property: background-color;
     transition-duration: .5s;
