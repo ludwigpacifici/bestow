@@ -2,6 +2,7 @@
 /awesome/.config/awesome/themes/awesome-solarized/
 /emacs/.emacs.d/auto-save-list
 /emacs/.emacs.d/elpa/
+/emacs/.emacs.d/elpy/
 /emacs/.emacs.d/eshell/
 /emacs/.emacs.d/history
 /emacs/.emacs.d/ido.last

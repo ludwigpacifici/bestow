@@ -26,6 +26,8 @@
     (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 
+(use-package eglot :ensure t)
+
 (use-package doc-view
   :config
   (setq doc-view-continuous t)
@@ -119,8 +121,6 @@
   :init
   (setq rust-format-show-buffer nil
         rust-format-goto-problem nil
-        lsp-rust-analyzer-inlay-hints-mode t
-        lsp-rust-analyzer-server-display-inlay-hints t
         rust-format-on-save t))
 
 (use-package cargo
@@ -159,29 +159,14 @@
 
 (use-package flycheck :ensure t)
 
-(use-package lsp-mode
+(use-package elpy
   :ensure t
-  :custom
-  (lsp-completion-provider :none)
-  :commands lsp
-  :hook ((lsp-completion-mode . my/lsp-mode-setup-completion)
-         (rust-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration))
   :init
-  (defun my/lsp-mode-setup-completion ()
-    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-          '(flex))) ;; Configure flex
-  (setq lsp-completion-enable t
-        lsp-eldoc-enable-hover nil
-        lsp-eldoc-render-all nil
-        lsp-enable-snippet nil
-        lsp-headerline-breadcrumb-enable nil
-        lsp-lens-enable nil
-        lsp-modeline-code-actions-enable nil
-        lsp-modeline-diagnostics-enable nil
-        lsp-modeline-workspace-status-enable nil
-        lsp-rust-server 'rust-analyzer
-        lsp-signature-auto-activate nil))
+  (setq elpy-formatter 'black)
+  (add-hook 'elpy-mode-hook (lambda ()
+                            (add-hook 'before-save-hook
+                                      'elpy-black-fix-code nil t)))
+  (elpy-enable))
 
 (use-package modus-themes
   :ensure t
