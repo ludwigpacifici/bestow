@@ -197,6 +197,7 @@
 (delete-selection-mode t)
 (global-auto-revert-mode t)
 (global-hl-line-mode t)
+(global-subword-mode)
 (line-number-mode 1)
 (menu-bar-mode 0)
 (savehist-mode t)
@@ -258,6 +259,8 @@ With a prefix argument P, isearch for the symbol at point."
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-c c") 'compile)
+(global-set-key (kbd "C-c r") 'recompile)
 (global-unset-key (kbd "C-z"))
 
 (when (eq system-type 'darwin)
