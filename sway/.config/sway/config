@@ -6,6 +6,7 @@ set $menu wofi --show=drun --lines=5 --prompt=""
 bindsym $mod+r exec $menu
 
 Output * bg ~/wallpapers/1.jpg fill
+# Solid color background:
 # Output * bg #002b36 solid_color
 
 client.focused          #4c7899 #285577 #ffffff #2e9ef4   #b58900
@@ -36,8 +37,6 @@ bindsym $mod+Return exec $term
 # Kill focused window
 bindsym $mod+Shift+q kill
 
-
-
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
 # Despite the name, also works for non-floating windows.
@@ -49,7 +48,8 @@ floating_modifier $mod normal
 bindsym $mod+Shift+c reload
 
 # Exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you want to shutdown?' -B 'Shutdown' 'shutdown -h now'
+
 #
 # Moving around:
 #
