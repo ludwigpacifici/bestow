@@ -26,7 +26,29 @@
     (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 
-(use-package eglot :ensure t)
+(use-package lsp-mode
+  :ensure t
+  :custom
+  (lsp-completion-provider :none)
+  :commands lsp
+  :hook ((lsp-completion-mode . my/lsp-mode-setup-completion)
+         (rust-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :init
+  (defun my/lsp-mode-setup-completion ()
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+          '(flex))) ;; Configure flex
+  (setq lsp-completion-enable t
+        lsp-eldoc-enable-hover nil
+        lsp-eldoc-render-all nil
+        lsp-enable-snippet nil
+        lsp-headerline-breadcrumb-enable nil
+        lsp-lens-enable nil
+        lsp-modeline-code-actions-enable nil
+        lsp-modeline-diagnostics-enable nil
+        lsp-modeline-workspace-status-enable nil
+        lsp-rust-server 'rust-analyzer
+        lsp-signature-auto-activate nil))
 
 (use-package doc-view
   :config
@@ -83,6 +105,16 @@
       (apply #'consult-completion-in-region completion-in-region--data)))
 
   (global-corfu-mode))
+
+(use-package dabbrev
+  ;; Swap M-/ and C-M-/
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand))
+  :config
+  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
+  ;; Since 29.1, use `dabbrev-ignored-buffer-regexps' on older.
+  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode))
 
 (use-package avy
   :ensure t
