@@ -148,6 +148,26 @@
   :init
   (setq markdown-command "/usr/bin/pandoc"))
 
+(use-package cc-mode
+  :ensure nil
+  :init (setq-default c-basic-offset 4))
+
+(use-package clang-format
+  :ensure t
+  :config
+  (defun clang-format-save-hook-for-this-buffer ()
+    "Create a buffer local save hook."
+    (add-hook 'before-save-hook
+              (lambda ()
+                (when (locate-dominating-file "." ".clang-format")
+                  (clang-format-buffer))
+                ;; Continue to save.
+                nil)
+              nil
+              ;; Buffer local hook.
+              t))
+  (add-hook 'c++-mode-hook (lambda () (clang-format-save-hook-for-this-buffer))))
+
 (use-package rust-mode
   :ensure t
   :init
@@ -260,6 +280,7 @@
               use-dialog-box nil
               x-stretch-cursor t
               enable-recursive-minibuffers t)
+
 (show-paren-mode t)
 (size-indication-mode 1)
 (tool-bar-mode 0)
