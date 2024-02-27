@@ -26,29 +26,14 @@
     (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 
-(use-package lsp-mode
+(use-package eglot
   :ensure t
-  :custom
-  (lsp-completion-provider :none)
-  :commands lsp
-  :hook ((lsp-completion-mode . my/lsp-mode-setup-completion)
-         (rust-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :init
-  (defun my/lsp-mode-setup-completion ()
-    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-          '(flex))) ;; Configure flex
-  (setq lsp-completion-enable t
-        lsp-eldoc-enable-hover nil
-        lsp-eldoc-render-all nil
-        lsp-enable-snippet nil
-        lsp-headerline-breadcrumb-enable nil
-        lsp-lens-enable nil
-        lsp-modeline-code-actions-enable nil
-        lsp-modeline-diagnostics-enable nil
-        lsp-modeline-workspace-status-enable nil
-        lsp-rust-server 'rust-analyzer
-        lsp-signature-auto-activate nil))
+  :hook ((rust-mode c++-mode) . eglot-ensure)
+  :bind (:map eglot-mode-map
+              ("s-l r" . eglot-rename)
+              ("s-l a" . eglot-code-actions))
+  :config
+  (setq eglot-ignored-server-capabilities '(:inlayHintProvider)))
 
 (use-package doc-view
   :config
@@ -103,7 +88,6 @@
     (let ((completion-extra-properties corfu--extra)
           completion-cycle-threshold completion-cycling)
       (apply #'consult-completion-in-region completion-in-region--data)))
-
   (global-corfu-mode))
 
 (use-package dabbrev
@@ -209,7 +193,7 @@
   :ensure t
   :config (which-key-mode))
 
-(use-package flycheck :ensure t)
+(use-package flymake :ensure t)
 
 (use-package elpy
   :ensure t
@@ -246,16 +230,15 @@
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
 (column-number-mode 1)
-(delete-selection-mode t)
-(global-auto-revert-mode t)
-(global-hl-line-mode t)
+(delete-selection-mode 1)
+(global-auto-revert-mode 1)
+(global-hl-line-mode 1)
 (global-subword-mode)
 (line-number-mode 1)
 (menu-bar-mode 0)
-(savehist-mode t)
+(savehist-mode 1)
+(recentf-mode 1)
 (scroll-bar-mode -1)
-(set-cursor-color "#d54e53")
-(set-face-background 'hl-line "#002b36")
 (set-face-attribute 'default nil :family "Iosevka" :height 150 :weight 'normal :width 'normal :slant 'normal)
 (setq indent-tabs-mode nil
       tab-width 4
@@ -289,6 +272,9 @@
 
 (prefer-coding-system 'utf-8)
 (setq locale-coding-system 'utf-8)
+
+(remove-hook 'xref-after-return-hook 'xref-pulse-momentarily)
+(remove-hook 'xref-after-jump-hook 'xref-pulse-momentarily)
 
 (defun dont-kill-emacs ()
   (interactive)
