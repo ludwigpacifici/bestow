@@ -60,14 +60,15 @@
 (use-package consult
   :ensure t
   :bind (
+         ("C-c e" . consult-compile-error)
+         ("C-c f" . consult-flymake)
          ("C-c g" . consult-git-grep)
          ("C-c l" . consult-locate)
-         ("C-c s" . consult-ripgrep)
+         ("C-c s" . consult-grep)
          ("C-x b" . consult-buffer)
          ("M-g M-g" . consult-goto-line)
          ("M-g g" . consult-goto-line)
-         ("M-y" . consult-yank-pop)
-         ))
+         ("M-y" . consult-yank-pop)))
 
 (use-package marginalia
   :ensure t
@@ -79,16 +80,8 @@
   :bind (:map corfu-map
               ("<tab>" . corfu-complete)
               ("C-M-i" . corfu-complete)
-              ("M-m" . corfu-move-to-minibuffer)
-              ("TAB" . corfu-complete)
-              )
-  :init
-  (defun corfu-move-to-minibuffer ()
-    (interactive)
-    (let ((completion-extra-properties corfu--extra)
-          completion-cycle-threshold completion-cycling)
-      (apply #'consult-completion-in-region completion-in-region--data)))
-  (global-corfu-mode))
+              ("TAB" . corfu-complete))
+  :init (global-corfu-mode))
 
 (use-package dabbrev
   ;; Swap M-/ and C-M-/
