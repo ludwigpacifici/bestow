@@ -28,12 +28,26 @@
 
 (use-package eglot
   :ensure t
-  :hook ((rust-mode c++-mode) . eglot-ensure)
+  :preface
+  (defun bestow/eglot-organize-imports ()
+    (interactive)
+    (if (and (eglot-managed-p)
+             (eglot--server-capable :OrganizeImports))
+        (eglot-code-actions nil nil "source.organizeImports" t)))
+  (defun bestow/eglot-format-on-save ()
+    (interactive)
+    (if (eglot-managed-p)
+        (eglot-format-buffer)))
+  :hook (((rust-ts-mode c++-ts-mode) . eglot-ensure)
+         (before-save . bestow/eglot-organize-imports)
+         (before-save . bestow/eglot-format-on-save))
   :bind (:map eglot-mode-map
+              ("s-l a" . eglot-code-actions)
               ("s-l r" . eglot-rename)
-              ("s-l a" . eglot-code-actions))
+              ("s-l t" . eglot-find-typeDefinition))
   :config
-  (setq eglot-ignored-server-capabilities '(:inlayHintProvider)))
+  (setq eglot-ignored-server-capabilities '(:inlayHintProvider)
+        eglot-extend-to-xref t))
 
 (use-package doc-view
   :config
@@ -129,33 +143,29 @@
   :ensure nil
   :init (setq-default c-basic-offset 4))
 
-(use-package clang-format
-  :ensure t
-  :config
-  (defun clang-format-save-hook-for-this-buffer ()
-    "Create a buffer local save hook."
-    (add-hook 'before-save-hook
-              (lambda ()
-                (when (locate-dominating-file "." ".clang-format")
-                  (clang-format-buffer))
-                ;; Continue to save.
-                nil)
-              nil
-              ;; Buffer local hook.
-              t))
-  (add-hook 'c++-mode-hook (lambda () (clang-format-save-hook-for-this-buffer))))
+(use-package c++-ts-mode
+  :defer t
+  :mode "\\.cpp\\'")
 
 (use-package rust-mode
   :ensure t
   :init
-  (setq rust-format-show-buffer nil
-        rust-format-goto-problem nil
-        rust-format-on-save t))
+  (setq rust-mode-treesitter-derive t
+        rust-format-on-save t
+        rust-format-show-buffer nil
+        rust-format-goto-problem nil))
+
+(use-package rust-ts-mode
+  :ensure t
+  :bind (("C-c C-d" . rust-dbg-wrap-or-unwrap)))
+
 
 (use-package cargo
   :ensure t
+  :hook (rust-ts-mode . cargo-minor-mode)
   :config
-  (add-hook 'rust-mode-hook 'cargo-minor-mode))
+  (setq compilation-scroll-output t
+        compilation-ask-about-save nil))
 
 (use-package saveplace
   :config
@@ -186,7 +196,10 @@
   :ensure t
   :config (which-key-mode))
 
-(use-package flymake :ensure t)
+(use-package flymake
+  :ensure t
+  :config
+  (setq flymake-fringe-indicator-position nil))
 
 (use-package elpy
   :ensure t
@@ -238,6 +251,7 @@
       tab-always-indent 'complete)
 
 (setq-default auto-save-timeout 60
+              comp-async-report-warnings-errors nil
               current-language-environment "English"
               cursor-in-non-selected-windows t
               cursor-type 'box
