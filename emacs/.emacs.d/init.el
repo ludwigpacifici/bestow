@@ -38,7 +38,7 @@
     (interactive)
     (if (eglot-managed-p)
         (eglot-format-buffer)))
-  :hook (((rust-ts-mode c++-ts-mode) . eglot-ensure)
+  :hook (((rust-ts-mode c++-ts-mode python-mode) . eglot-ensure)
          (before-save . bestow/eglot-organize-imports)
          (before-save . bestow/eglot-format-on-save))
   :bind (:map eglot-mode-map
