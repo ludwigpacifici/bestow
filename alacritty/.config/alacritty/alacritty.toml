@@ -100,7 +100,7 @@ program = "/usr/bin/fish"
 [window]
 decorations = "none"
 dynamic_title = true
-opacity = 0.9
+opacity = 1
 startup_mode = "Windowed"
 
 [window.dimensions]

@@ -5,7 +5,7 @@ set $term alacritty
 set $menu wofi --show=drun --lines=5 --prompt=""
 bindsym $mod+r exec $menu
 
-Output * bg ~/wallpapers/1.jpg fill
+Output * bg ~/wallpapers/5.jpg fill
 # Solid color background:
 # Output * bg #002b36 solid_color
 
