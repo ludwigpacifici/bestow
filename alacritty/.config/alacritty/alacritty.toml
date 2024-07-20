@@ -101,7 +101,7 @@ program = "/usr/bin/fish"
 decorations = "none"
 dynamic_title = true
 opacity = 1
-startup_mode = "Windowed"
+startup_mode = "Maximized"
 
 [window.dimensions]
 columns = 0
