@@ -283,6 +283,12 @@
 (remove-hook 'xref-after-return-hook 'xref-pulse-momentarily)
 (remove-hook 'xref-after-jump-hook 'xref-pulse-momentarily)
 
+(setq treesit-language-source-alist
+      '((c "https://github.com/tree-sitter/tree-sitter-c")
+        (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+        (python "https://github.com/tree-sitter/tree-sitter-python")
+        (rust "https://github.com/tree-sitter/tree-sitter-rust")))
+
 (defun dont-kill-emacs ()
   (interactive)
   (error (substitute-command-keys "To exit emacs: \\[kill-emacs]")))
@@ -303,7 +309,7 @@ With a prefix argument P, isearch for the symbol at point."
        #'isearch-forward))))
 (global-set-key [remap isearch-forward] #'endless/isearch-symbol-with-prefix)
 
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
+(global-set-key (kbd "C-x k") 'kill-current-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-c c") 'compile)
 (global-set-key (kbd "C-c r") 'recompile)
