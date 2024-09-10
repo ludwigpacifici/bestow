@@ -19,10 +19,10 @@ unfocused_hollow = true
 TERM = "alacritty"
 
 [font]
-size = 14.0
+size = 15.0
 
 [font.bold]
-family = "Iosevka Term"
+family = "Iosevka Fixed Slab"
 style = "Bold"
 
 [font.glyph_offset]
@@ -30,11 +30,11 @@ x = 0
 y = 0
 
 [font.italic]
-family = "Iosevka Term"
+family = "Iosevka Fixed Slab"
 style = "Italic"
 
 [font.normal]
-family = "Iosevka Term"
+family = "Iosevka Fixed Slab"
 style = "Light"
 
 [font.offset]

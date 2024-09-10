@@ -245,7 +245,7 @@
 (savehist-mode 1)
 (recentf-mode 1)
 (scroll-bar-mode -1)
-(set-face-attribute 'default nil :family "Iosevka Term" :height 150 :weight 'normal :width 'normal :slant 'normal)
+(set-face-attribute 'default nil :family "Iosevka Fixed Slab" :height 150 :weight 'normal :width 'normal :slant 'normal)
 (setq indent-tabs-mode nil
       tab-width 4
       tab-always-indent 'complete)
