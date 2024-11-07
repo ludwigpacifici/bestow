@@ -26,29 +26,6 @@
     (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 
-(use-package eglot
-  :ensure t
-  :preface
-  (defun bestow/eglot-organize-imports ()
-    (interactive)
-    (if (and (eglot-managed-p)
-             (eglot--server-capable :OrganizeImports))
-        (eglot-code-actions nil nil "source.organizeImports" t)))
-  (defun bestow/eglot-format-on-save ()
-    (interactive)
-    (if (eglot-managed-p)
-        (eglot-format-buffer)))
-  :hook (((rust-ts-mode c++-ts-mode python-mode) . eglot-ensure)
-         (before-save . bestow/eglot-organize-imports)
-         (before-save . bestow/eglot-format-on-save))
-  :bind (:map eglot-mode-map
-              ("s-l a" . eglot-code-actions)
-              ("s-l r" . eglot-rename)
-              ("s-l t" . eglot-find-typeDefinition))
-  :config
-  (setq eglot-ignored-server-capabilities '(:inlayHintProvider)
-        eglot-extend-to-xref t))
-
 (use-package doc-view
   :config
   (setq doc-view-continuous t)
@@ -75,10 +52,9 @@
   :ensure t
   :bind (
          ("C-c e" . consult-compile-error)
-         ("C-c f" . consult-flymake)
+         ("C-c f" . consult-find)
          ("C-c g" . consult-git-grep)
-         ("C-c l" . consult-locate)
-         ("C-c s" . consult-grep)
+         ("C-c s" . consult-ripgrep)
          ("C-x b" . consult-buffer)
          ("M-g M-g" . consult-goto-line)
          ("M-g g" . consult-goto-line)
@@ -143,9 +119,27 @@
   :ensure nil
   :init (setq-default c-basic-offset 4))
 
-(use-package c++-ts-mode
-  :defer t
-  :mode "\\.cpp\\'")
+(use-package lsp-mode
+  :ensure t
+  :hook ((rust-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration)
+         (lsp-mode . lsp-inlay-hints-mode))
+  :commands lsp
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  ; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+  (setq lsp-enable-symbol-highlighting nil
+        lsp-ui-doc-enable nil
+        lsp-headerline-breadcrumb-enable nil
+        lsp-lens-enable nil
+        lsp-ui-sideline-enable nil
+        lsp-ui-sideline-enable nil
+        lsp-modeline-code-actions-enable nil
+        lsp-diagnostics-provider :none
+        lsp-ui-sideline-enable nil
+        lsp-modeline-diagnostics-enable nil
+        lsp-inlay-hint-enable t))
 
 (use-package rust-mode
   :ensure t
@@ -155,14 +149,9 @@
         rust-format-show-buffer nil
         rust-format-goto-problem nil))
 
-(use-package rust-ts-mode
-  :ensure t
-  :bind (("C-c C-d" . rust-dbg-wrap-or-unwrap)))
-
-
 (use-package cargo
   :ensure t
-  :hook (rust-ts-mode . cargo-minor-mode)
+  :hook (rust-mode . cargo-minor-mode)
   :config
   (setq compilation-scroll-output t
         compilation-ask-about-save nil))
@@ -195,11 +184,6 @@
 (use-package which-key
   :ensure t
   :config (which-key-mode))
-
-(use-package flymake
-  :ensure t
-  :config
-  (setq flymake-fringe-indicator-position nil))
 
 (use-package elpy
   :ensure t
