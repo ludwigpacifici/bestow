@@ -225,10 +225,9 @@
 (global-hl-line-mode 1)
 (global-subword-mode)
 (line-number-mode 1)
-(menu-bar-mode 0)
 (savehist-mode 1)
 (recentf-mode 1)
-(scroll-bar-mode -1)
+
 (set-face-attribute 'default nil :family "Iosevka Fixed Slab" :height 150 :weight 'normal :width 'normal :slant 'normal)
 (setq indent-tabs-mode nil
       tab-width 4
@@ -243,11 +242,9 @@
               grep-scroll-output t
               indent-tabs-mode nil
               inhibit-splash-screen t
-              initial-scratch-message ""
               load-prefer-newer t
               mode-require-final-newline t
               require-final-newline 't
-              ring-bell-function 'ignore
               scroll-preserve-screen-position t
               shift-select-mode nil
               tramp-default-method "ssh"
@@ -257,7 +254,7 @@
 
 (show-paren-mode t)
 (size-indication-mode 1)
-(tool-bar-mode 0)
+
 (transient-mark-mode t)
 (setq frame-resize-pixelwise t)
 
@@ -313,3 +310,16 @@ With a prefix argument P, isearch for the symbol at point."
 (message "%s" (emacs-init-time))
 
 ;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages nil)
+ '(warning-suppress-types '((native-compiler))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
