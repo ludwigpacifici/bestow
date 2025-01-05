@@ -11,10 +11,8 @@
 (setq read-process-output-max (* 1024 1024 16)) ;; 16mb
 
 (require 'package)
+(package-initialize)
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-(require 'use-package)
 
 (setq user-mail-address "ludwig@lud.cc"
       user-full-name "Ludwig PACIFICI")
@@ -37,9 +35,13 @@
 
 (use-package vertico
   :ensure t
+  :hook (after-init . vertico-mode)
   :init
-  (vertico-mode)
   (vertico-indexed-mode))
+
+(use-package marginalia
+  :ensure t
+  :hook (after-init . marginalia-mode))
 
 (use-package orderless
   :ensure t
@@ -60,18 +62,13 @@
          ("M-g g" . consult-goto-line)
          ("M-y" . consult-yank-pop)))
 
-(use-package marginalia
-  :ensure t
-  :init
-  (marginalia-mode))
-
-(use-package corfu
-  :ensure t
-  :bind (:map corfu-map
-              ("<tab>" . corfu-complete)
-              ("C-M-i" . corfu-complete)
-              ("TAB" . corfu-complete))
-  :init (global-corfu-mode))
+;; (use-package corfu
+;;   :ensure t
+;;   :bind (:map corfu-map
+;;               ("<tab>" . corfu-complete)
+;;               ("C-M-i" . corfu-complete)
+;;               ("TAB" . corfu-complete))
+;;   :hook (after-init . global-corfu-mode))
 
 (use-package dabbrev
   ;; Swap M-/ and C-M-/
@@ -128,18 +125,41 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
-  ; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
-  (setq lsp-enable-symbol-highlighting nil
-        lsp-ui-doc-enable nil
+  ;; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+  (setq lsp-diagnostics-provider :none
+        lsp-enable-symbol-highlighting nil
         lsp-headerline-breadcrumb-enable nil
+        lsp-inlay-hint-enable t
         lsp-lens-enable nil
-        lsp-ui-sideline-enable nil
-        lsp-ui-sideline-enable nil
         lsp-modeline-code-actions-enable nil
-        lsp-diagnostics-provider :none
-        lsp-ui-sideline-enable nil
         lsp-modeline-diagnostics-enable nil
-        lsp-inlay-hint-enable t))
+        lsp-ui-doc-enable nil
+        lsp-ui-sideline-enable nil
+        lsp-ui-sideline-enable nil
+        lsp-ui-sideline-enable nil))
+
+(use-package yasnippet-snippets
+  :ensure t)
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-reload-all)
+  (yas-global-mode t)
+  :hook (after-init . yas-minor-mode))
+
+(use-package company
+  :after lsp-mode
+  :ensure t
+  :config
+  (setq company-format-margin-function nil
+        company-idle-delay 3)
+  :bind
+  (:map company-mode-map
+        ("C-M-i". company-indent-or-complete-common)
+        ("<tab>". company-indent-or-complete-common)
+        ("TAB". company-indent-or-complete-common))
+  :hook (after-init . global-company-mode))
 
 (use-package rust-mode
   :ensure t
@@ -155,6 +175,14 @@
   :config
   (setq compilation-scroll-output t
         compilation-ask-about-save nil))
+
+(use-package dired
+  :ensure nil
+  :commands (dired)
+  :config
+  (setq dired-recursive-copies 'always)
+  (setq dired-recursive-deletes 'always)
+  (setq delete-by-moving-to-trash t))
 
 (use-package saveplace
   :config
@@ -204,7 +232,7 @@
         modus-themes-fringes nil
         modus-themes-paren-match '(bold intense)
         modus-themes-diffs 'deuteranopia)
-  (load-theme 'modus-vivendi :no-confim)
+  (load-theme 'modus-vivendi :no-confim-loading)
   :config
   (set-face-foreground 'vertical-border (face-background 'default))
   :bind ("<f5>" . modus-themes-toggle))
@@ -228,7 +256,20 @@
 (savehist-mode 1)
 (recentf-mode 1)
 
-(set-face-attribute 'default nil :family "Iosevka Fixed Slab" :height 150 :weight 'normal :width 'normal :slant 'normal)
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file :no-error-if-file-is-missing)
+
+(add-to-list 'display-buffer-alist
+             '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+               (display-buffer-no-window)
+               (allow-no-window . t)))
+
+(let ((mono-spaced-font "Iosevka Fixed Slab")
+      (proportionately-spaced-font "Atkinson Hyperlegible"))
+  (set-face-attribute 'default nil :family "Iosevka Fixed Slab" :height 150 :weight 'medium :width 'normal :slant 'normal)
+  (set-face-attribute 'fixed-pitch nil :family "Iosevka Fixed Slab" :height 1.0)
+  (set-face-attribute 'variable-pitch nil :family "Atkinson Hyperlegible" :height 1.0))
+
 (setq indent-tabs-mode nil
       tab-width 4
       tab-always-indent 'complete)
@@ -310,16 +351,3 @@ With a prefix argument P, isearch for the symbol at point."
 (message "%s" (emacs-init-time))
 
 ;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages nil)
- '(warning-suppress-types '((native-compiler))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
