@@ -1,0 +1,5 @@
+command = /usr/bin/fish
+font-family = ""
+font-family = "Iosevka Fixed Slab"
+font-size = 16
+theme = light:"Builtin Solarized Light",dark:"Builtin Solarized Dark"
