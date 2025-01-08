@@ -244,6 +244,10 @@
         denote-infer-keywords t
         denote-sort-keywords t))
 
+(use-package rg
+  :ensure t
+    :bind ("C-c r" . rg))
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
@@ -334,7 +338,6 @@ With a prefix argument P, isearch for the symbol at point."
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-c c") 'compile)
-(global-set-key (kbd "C-c r") 'recompile)
 (global-unset-key (kbd "C-z"))
 
 (when (eq system-type 'darwin)
