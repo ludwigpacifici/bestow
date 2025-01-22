@@ -62,13 +62,13 @@
          ("M-g g" . consult-goto-line)
          ("M-y" . consult-yank-pop)))
 
-;; (use-package corfu
-;;   :ensure t
-;;   :bind (:map corfu-map
-;;               ("<tab>" . corfu-complete)
-;;               ("C-M-i" . corfu-complete)
-;;               ("TAB" . corfu-complete))
-;;   :hook (after-init . global-corfu-mode))
+(use-package corfu
+  :ensure t
+  :bind (:map corfu-map
+              ("<tab>" . corfu-complete)
+              ("C-M-i" . corfu-complete)
+              ("TAB" . corfu-complete))
+  :hook (after-init . global-corfu-mode))
 
 (use-package dabbrev
   ;; Swap M-/ and C-M-/
@@ -147,19 +147,6 @@
   (yas-reload-all)
   (yas-global-mode t)
   :hook (after-init . yas-minor-mode))
-
-(use-package company
-  :after lsp-mode
-  :ensure t
-  :config
-  (setq company-format-margin-function nil
-        company-idle-delay 3)
-  :bind
-  (:map company-mode-map
-        ("C-M-i". company-indent-or-complete-common)
-        ("<tab>". company-indent-or-complete-common)
-        ("TAB". company-indent-or-complete-common))
-  :hook (after-init . global-company-mode))
 
 (use-package rust-mode
   :ensure t
@@ -313,7 +300,8 @@
       '((c "https://github.com/tree-sitter/tree-sitter-c")
         (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
         (python "https://github.com/tree-sitter/tree-sitter-python")
-        (rust "https://github.com/tree-sitter/tree-sitter-rust")))
+        (rust "https://github.com/tree-sitter/tree-sitter-rust")
+        (typst "https://github.com/uben0/tree-sitter-typst")))
 
 (defun dont-kill-emacs ()
   (interactive)
