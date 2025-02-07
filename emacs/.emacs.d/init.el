@@ -209,20 +209,17 @@
                                       'elpy-black-fix-code nil t)))
   (elpy-enable))
 
-(use-package modus-themes
+(use-package doom-themes
   :ensure t
-  :init
-  (setq modus-themes-italic-constructs t
-        modus-themes-bold-constructs t
-        modus-themes-subtle-line-numbers t
-        modus-themes-success-deuteranopia t
-        modus-themes-fringes nil
-        modus-themes-paren-match '(bold intense)
-        modus-themes-diffs 'deuteranopia)
-  (load-theme 'modus-vivendi :no-confim-loading)
   :config
-  (set-face-foreground 'vertical-border (face-background 'default))
-  :bind ("<f5>" . modus-themes-toggle))
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one t)
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 
 (use-package denote
   :ensure t
