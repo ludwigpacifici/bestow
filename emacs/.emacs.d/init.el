@@ -116,28 +116,6 @@
   :ensure nil
   :init (setq-default c-basic-offset 4))
 
-(use-package lsp-mode
-  :ensure t
-  :hook ((rust-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration)
-         (lsp-mode . lsp-inlay-hints-mode))
-  :commands lsp
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :config
-  ;; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
-  (setq lsp-diagnostics-provider :none
-        lsp-enable-symbol-highlighting nil
-        lsp-headerline-breadcrumb-enable nil
-        lsp-inlay-hint-enable t
-        lsp-lens-enable nil
-        lsp-modeline-code-actions-enable nil
-        lsp-modeline-diagnostics-enable nil
-        lsp-ui-doc-enable nil
-        lsp-ui-sideline-enable nil
-        lsp-ui-sideline-enable nil
-        lsp-ui-sideline-enable nil))
-
 (use-package yasnippet-snippets
   :ensure t)
 
@@ -221,6 +199,10 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode))
+
 (use-package denote
   :ensure t
   :config
@@ -231,6 +213,25 @@
 (use-package rg
   :ensure t
     :bind ("C-c r" . rg))
+
+(use-package lsp-mode
+  :ensure t
+  :hook ((rust-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration)
+         (lsp-mode . lsp-inlay-hints-mode))
+  :commands lsp
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  ;; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+  (setq lsp-enable-symbol-highlighting nil
+        lsp-headerline-breadcrumb-enable nil
+        lsp-inlay-hint-enable t
+        lsp-lens-enable nil
+        lsp-modeline-code-actions-enable nil
+        lsp-modeline-diagnostics-enable nil
+        lsp-signature-render-documentation nil
+        lsp-diagnostics-provider :none))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
