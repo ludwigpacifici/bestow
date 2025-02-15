@@ -62,13 +62,18 @@
          ("M-g g" . consult-goto-line)
          ("M-y" . consult-yank-pop)))
 
-(use-package corfu
+(use-package company
+  :after lsp-mode
   :ensure t
-  :bind (:map corfu-map
-              ("<tab>" . corfu-complete)
-              ("C-M-i" . corfu-complete)
-              ("TAB" . corfu-complete))
-  :hook (after-init . global-corfu-mode))
+  :config
+  (setq company-format-margin-function nil
+        company-idle-delay 16)
+  :bind
+  (:map company-mode-map
+        ("C-M-i". company-indent-or-complete-common)
+        ("<tab>". company-indent-or-complete-common)
+        ("TAB". company-indent-or-complete-common))
+  :hook (after-init . global-company-mode))
 
 (use-package dabbrev
   ;; Swap M-/ and C-M-/
@@ -216,6 +221,7 @@
          (lsp-mode . lsp-enable-which-key-integration)
          (lsp-mode . lsp-inlay-hints-mode))
   :commands lsp
+  :bind (("C-c d" . lsp-rust-analyzer-open-external-docs))
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
@@ -240,6 +246,7 @@
 (line-number-mode 1)
 (savehist-mode 1)
 (recentf-mode 1)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file :no-error-if-file-is-missing)
