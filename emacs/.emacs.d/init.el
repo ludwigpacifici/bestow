@@ -31,7 +31,7 @@
 
 (use-package expand-region
   :ensure t
-  :bind ("C-=" . er/expand-region))
+  :bind ("M-SPC" . er/expand-region))
 
 (use-package vertico
   :ensure t
@@ -179,6 +179,8 @@
 
 (use-package fish-mode :ensure t)
 
+(use-package just-mode :ensure t)
+
 (use-package which-key
   :ensure t
   :config (which-key-mode))
@@ -191,6 +193,16 @@
                             (add-hook 'before-save-hook
                                       'elpy-black-fix-code nil t)))
   (elpy-enable))
+
+(use-package elfeed
+  :ensure t
+  :bind ("C-c w" . elfeed))
+
+(use-package dimmer
+  :disabled t
+  :config
+  (setq dimmer-fraction 0.3)
+  (dimmer-mode t))
 
 (use-package doom-themes
   :ensure t
@@ -258,9 +270,9 @@
 
 (let ((mono-spaced-font "Iosevka Fixed Slab")
       (proportionately-spaced-font "Atkinson Hyperlegible"))
-  (set-face-attribute 'default nil :family "Iosevka Fixed Slab" :height 150 :weight 'medium :width 'normal :slant 'normal)
-  (set-face-attribute 'fixed-pitch nil :family "Iosevka Fixed Slab" :height 1.0)
-  (set-face-attribute 'variable-pitch nil :family "Atkinson Hyperlegible" :height 1.0))
+  (set-face-attribute 'default nil :family mono-spaced-font :height 150 :weight 'medium :width 'normal :slant 'normal)
+  (set-face-attribute 'fixed-pitch nil :family mono-spaced-font :height 1.0)
+  (set-face-attribute 'variable-pitch nil :family proportionately-spaced-font :height 1.0))
 
 (setq indent-tabs-mode nil
       tab-width 4
