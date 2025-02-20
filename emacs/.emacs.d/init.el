@@ -92,11 +92,6 @@
   :bind
   ("C-;" . avy-goto-char-timer))
 
-(use-package ace-window
-  :ensure t
-  :bind
-  ("M-o" . ace-window))
-
 (use-package lisp-mode
   :config
   (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
@@ -198,11 +193,10 @@
   :ensure t
   :bind ("C-c w" . elfeed))
 
-(use-package dimmer
-  :disabled t
+(use-package solaire-mode
+  :ensure t
   :config
-  (setq dimmer-fraction 0.3)
-  (dimmer-mode t))
+  (solaire-global-mode +1))
 
 (use-package doom-themes
   :ensure t
@@ -339,6 +333,7 @@ With a prefix argument P, isearch for the symbol at point."
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-c c") 'compile)
+(global-set-key (kbd "M-o") 'other-window)
 (global-unset-key (kbd "C-z"))
 
 (when (eq system-type 'darwin)
