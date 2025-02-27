@@ -12,7 +12,8 @@
 
 (require 'package)
 (package-initialize)
-(add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/"))
 
 (setq user-mail-address "ludwig@lud.cc"
       user-full-name "Ludwig PACIFICI")
@@ -111,6 +112,9 @@
   :ensure t
   :init
   (setq markdown-command "/usr/bin/pandoc"))
+
+(use-package typst-ts-mode
+  :ensure t)
 
 (use-package cc-mode
   :ensure nil
