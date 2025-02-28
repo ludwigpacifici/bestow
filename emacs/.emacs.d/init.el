@@ -91,7 +91,7 @@
   :config
   (setq-default avy-keys '(?a ?r ?s ?t ?n ?e ?i ?o ?h))
   :bind
-  ("C-;" . avy-goto-char-timer))
+  ("C-;" . avy-goto-char-2))
 
 (use-package lisp-mode
   :config
