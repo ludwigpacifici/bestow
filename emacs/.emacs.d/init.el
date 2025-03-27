@@ -184,15 +184,6 @@
   :ensure t
   :config (which-key-mode))
 
-(use-package elpy
-  :ensure t
-  :init
-  (setq elpy-formatter 'black)
-  (add-hook 'elpy-mode-hook (lambda ()
-                            (add-hook 'before-save-hook
-                                      'elpy-black-fix-code nil t)))
-  (elpy-enable))
-
 (use-package elfeed
   :ensure t
   :bind ("C-c w" . elfeed))
@@ -228,6 +219,7 @@
 (use-package lsp-mode
   :ensure t
   :hook ((rust-mode . lsp)
+         (c-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration)
          (lsp-mode . lsp-inlay-hints-mode))
   :commands lsp
