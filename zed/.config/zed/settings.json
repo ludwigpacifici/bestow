@@ -1,20 +1,20 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "base_keymap": "JetBrains",
+  "terminal": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
   "ui_font_size": 20,
   "buffer_font_size": 20,
   "theme": {
     "mode": "light",
-    "light": "NeoSolarized Light",
+    "light": "Gruvbox Light Soft",
     "dark": "Gruvbox Dark Soft"
   },
+  "base_keymap": "Emacs",
+  "cursor_shape": "block",
+  "cursor_blink": false,
   "buffer_font_family": "Iosevka Slab",
   "ui_font_family": "Atkinson Hyperlegible",
   "soft_wrap": "editor_width",
