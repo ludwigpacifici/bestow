@@ -25,6 +25,17 @@
     (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 
+(use-package emacs
+  :custom
+  (enable-recursive-minibuffers t)
+  (read-extended-command-predicate #'command-completion-default-include-p)
+  (minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt)))
+
+(use-package savehist
+  :init
+  (savehist-mode))
+
 (use-package doc-view
   :config
   (setq doc-view-continuous t)
@@ -36,13 +47,14 @@
 
 (use-package vertico
   :ensure t
-  :hook (after-init . vertico-mode)
   :init
+  (vertico-mode)
   (vertico-indexed-mode))
 
 (use-package marginalia
   :ensure t
-  :hook (after-init . marginalia-mode))
+  :init
+  (marginalia-mode))
 
 (use-package orderless
   :ensure t
@@ -58,6 +70,8 @@
          ("C-c f" . consult-find)
          ("C-c g" . consult-git-grep)
          ("C-c s" . consult-ripgrep)
+         ("C-c o" . consult-outline)
+         ("M-s" . consult-line)
          ("C-x b" . consult-buffer)
          ("M-g M-g" . consult-goto-line)
          ("M-g g" . consult-goto-line)
@@ -93,6 +107,13 @@
   :bind
   ("C-;" . avy-goto-char-2))
 
+(use-package ace-window
+  :ensure t
+  :config
+  (setq-default aw-keys '(?a ?r ?s ?t ?n ?e ?i ?o ?h))
+  :bind
+  ("M-O" . ace-window))
+
 (use-package lisp-mode
   :config
   (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
@@ -106,7 +127,8 @@
   :bind (("C-x g" . magit-status))
   :init
   (setq magit-repository-directories '(("~" . 1))
-        magit-section-visibility-indicator nil))
+        magit-section-visibility-indicator nil
+        magit-save-repository-buffers 'dontask))
 
 (use-package markdown-mode
   :ensure t
@@ -142,16 +164,35 @@
   :ensure t
   :hook (rust-mode . cargo-minor-mode)
   :config
-  (setq compilation-scroll-output t
+  (setq compilation-scroll-output nil
         compilation-ask-about-save nil))
+
+(use-package clang-format
+  :ensure t
+  :config
+  (defun clang-format-save-hook-for-this-buffer ()
+    "Create a buffer local save hook."
+    (add-hook 'before-save-hook
+              (lambda ()
+                (when (locate-dominating-file "." ".clang-format")
+                  (clang-format-buffer))
+                ;; Continue to save.
+                nil)
+              nil
+              ;; Buffer local hook.
+              t))
+  (add-hook 'c-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
+  (add-hook 'c++-mode-hook (lambda () (clang-format-save-hook-for-this-buffer))))
 
 (use-package dired
   :ensure nil
   :commands (dired)
   :config
-  (setq dired-recursive-copies 'always)
-  (setq dired-recursive-deletes 'always)
-  (setq delete-by-moving-to-trash t))
+  (setq dired-listing-switches "-alFh"
+        dired-recursive-copies 'always
+        dired-recursive-deletes 'always
+        dired-dwim-target t
+        delete-by-moving-to-trash t))
 
 (use-package saveplace
   :config
@@ -178,32 +219,44 @@
 
 (use-package fish-mode :ensure t)
 
-(use-package just-mode :ensure t)
-
 (use-package which-key
   :ensure t
   :config (which-key-mode))
 
 (use-package elfeed
   :ensure t
-  :bind ("C-c w" . elfeed))
+  :bind ("C-c w" . elfeed)
+  :config
+  (setq-default elfeed-search-filter "@6-months-ago"))
 
-(use-package solaire-mode
+(use-package spacious-padding
   :ensure t
   :config
-  (solaire-global-mode +1))
+  ;; These are the default values, but I keep them here for visibility.
+  (setq spacious-padding-widths
+        '( :internal-border-width 15
+           :header-line-width 4
+           :mode-line-width 6
+           :tab-width 4
+           :right-divider-width 30
+           :scroll-bar-width 8
+           :fringe-width 8))
 
-(use-package doom-themes
+  ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
+  ;; is very flexible and provides several examples.
+  (setq spacious-padding-subtle-mode-line
+        `( :mode-line-active 'default
+           :mode-line-inactive vertical-border))
+  (spacious-padding-mode 1))
+
+(use-package modus-themes
   :ensure t
   :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (load-theme 'doom-one t)
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+  (setq modsu-themes-italic-constructs t
+        modus-themes-bold-constructs t
+        modus-themes-to-toggle '(modus-operandi-deuteranopia modus-vivendi-deuteranopia))
+  (load-theme 'modus-vivendi-deuteranopia :no-confirm)
+  (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
 (use-package denote
   :ensure t
@@ -214,12 +267,12 @@
 
 (use-package rg
   :ensure t
-    :bind ("C-c r" . rg))
+  :bind ("C-c r" . rg))
 
 (use-package lsp-mode
   :ensure t
   :hook ((rust-mode . lsp)
-         (c-mode . lsp)
+         (c++-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration)
          (lsp-mode . lsp-inlay-hints-mode))
   :commands lsp
@@ -237,16 +290,18 @@
         lsp-signature-render-documentation nil
         lsp-diagnostics-provider :none))
 
+(use-package jinx :ensure t)
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (blink-cursor-mode -1)
 (column-number-mode 1)
 (delete-selection-mode 1)
 (global-auto-revert-mode 1)
+(setq global-hl-line-sticky-flag nil)
 (global-hl-line-mode 1)
 (global-subword-mode)
 (line-number-mode 1)
-(savehist-mode 1)
 (recentf-mode 1)
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -284,8 +339,8 @@
               shift-select-mode nil
               tramp-default-method "ssh"
               use-dialog-box nil
-              x-stretch-cursor t
-              enable-recursive-minibuffers t)
+              x-stretch-cursor t)
+
 
 (show-paren-mode t)
 (size-indication-mode 1)
@@ -332,8 +387,7 @@ With a prefix argument P, isearch for the symbol at point."
 (global-set-key (kbd "M-o") 'other-window)
 (global-unset-key (kbd "C-z"))
 
-(when (eq system-type 'darwin)
-  (setq mac-command-modifier 'meta))
+(setq mac-command-modifier 'control)
 (setq x-super-keysym nil)
 
 (add-hook 'emacs-startup-hook
