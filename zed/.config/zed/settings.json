@@ -1,31 +1,43 @@
 {
-  "terminal": {
-    "dock": "right"
-  },
-  "git_panel": {
-    "dock": "right"
-  },
-  "ui_font_size": 20,
-  "buffer_font_size": 20,
+  "autosave": "on_focus_change",
+  "ui_font_size": 20.0,
+  "buffer_font_size": 20.0,
   "theme": {
-    "mode": "light",
-    "light": "Gruvbox Light Soft",
-    "dark": "Gruvbox Dark Soft"
+    "mode": "dark",
+    "light": "Monosami Light",
+    "dark": "Monosami Dark",
   },
-  "base_keymap": "Emacs",
-  "cursor_shape": "block",
   "cursor_blink": false,
   "buffer_font_family": "Iosevka Slab",
-  "ui_font_family": "Atkinson Hyperlegible",
-  "soft_wrap": "editor_width",
+  "ui_font_family": "Iosevka Slab",
   "gutter": {
-    "line_numbers": false
+    "line_numbers": false,
+    "folds": false,
   },
+  "scrollbar": {
+    "show": "never",
+  },
+  "minimap": { "show": "never" },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "indent_guides": {
-    "enabled": false
-  }
+    "enabled": false,
+  },
+  "buffer_font_features": {
+    "calt": false,
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false,
+    },
+  },
+  "colorize_brackets": false,
+  "rounded_selection": false,
+  "title_bar": {
+    "show_sign_in": false,
+    "show_onboarding_banner": false,
+  },
+  "vim_mode": true,
 }
