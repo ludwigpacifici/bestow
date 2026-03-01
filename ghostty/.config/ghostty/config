@@ -1,6 +1,6 @@
 command = /usr/bin/fish
 font-family = ""
-font-family = "Iosevka Fixed Slab"
+font-family = "Iosevka Slab"
 font-size = 16
 theme = light:"Belafonte Day",dark:"Belafonte Night"
 font-style = "Medium"
