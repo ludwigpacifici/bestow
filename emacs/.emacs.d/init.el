@@ -351,6 +351,7 @@
   (error (substitute-command-keys "To suspend emacs: \\[suspend-frame]")))
 (global-set-key "\C-x\C-z" 'dont-suspend-emacs)
 
+;; https://endlessparentheses.com/quickly-search-for-occurrences-of-the-symbol-at-point.html
 (defun endless/isearch-symbol-with-prefix (p)
   "Like isearch, unless prefix argument is provided.
 With a prefix argument P, isearch for the symbol at point."
