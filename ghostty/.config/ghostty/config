@@ -2,5 +2,5 @@ command = /usr/bin/fish
 font-family = ""
 font-family = "Iosevka Term Slab"
 font-size = 16
-theme = light:"Belafonte Day",dark:"Belafonte Night"
+theme = light:"Modus Operandi",dark:"Modus Vivendi"
 font-style = "Medium"
