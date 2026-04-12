@@ -163,6 +163,7 @@ vim.pack.add({
 	-- telescope and its dependencies
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/nvim-telescope/telescope-fzf-native.nvim",
+	"https://github.com/nvim-telescope/telescope-ui-select.nvim",
 	"https://github.com/nvim-telescope/telescope.nvim",
 })
 
@@ -230,6 +231,7 @@ telescope.setup({
 		},
 	},
 	extensions = {
+		["ui-select"] = { require("telescope.themes").get_dropdown() },
 		fzf = {
 			fuzzy = true,
 			override_generic_sorter = true,
@@ -239,6 +241,7 @@ telescope.setup({
 	},
 })
 telescope.load_extension("fzf")
+telescope.load_extension("ui-select")
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
