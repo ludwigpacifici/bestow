@@ -1,19 +1,14 @@
--- Set leader first
+require("vim._core.ui2").enable()
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
--- Relative line number with current line number
+vim.opt.termguicolors = true
 vim.opt.relativenumber = true
 vim.opt.number = true
-
--- Ignore case unless uppercase is present
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
-
--- New content shows on the right/bottom
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
@@ -62,7 +57,6 @@ vim.opt.wrap = true
 vim.opt.smartindent = true
 
 -- 24-bit RGB color in the terminal
-vim.opt.termguicolors = true
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
@@ -90,19 +84,17 @@ vim.g.have_nerd_font = true
 
 vim.g.netrw_keepdir = 0
 
--- Strips trailing whitespace from every line in the current buffer.
-function strip_trailing_whitespace()
-	local line = vim.fn.line(".")
-	local column = vim.fn.col(".")
-	vim.cmd([[%s/\s\+$//e]])
-	-- Put the cursor back where it was.
-	-- Without this, the `%s` command
-	-- will put the cursor after the last
-	-- trailing whitespace match.
-	vim.fn.cursor(line, column)
-end
 vim.api.nvim_create_autocmd("BufWritePre", {
-	callback = strip_trailing_whitespace,
+	callback = function()
+		local line = vim.fn.line(".")
+		local column = vim.fn.col(".")
+		vim.cmd([[%s/\s\+$//e]])
+		-- Put the cursor back where it was.
+		-- Without this, the `%s` command
+		-- will put the cursor after the last
+		-- trailing whitespace match.
+		vim.fn.cursor(line, column)
+	end,
 })
 
 -- Force reload of files that change on disk outside of vim.
@@ -154,7 +146,7 @@ vim.cmd("packadd nvim.difftool")
 vim.cmd("packadd nvim.undotree")
 
 vim.pack.add({
-	"https://github.com/miikanissi/modus-themes.nvim",
+	"https://github.com/folke/tokyonight.nvim",
 	"https://github.com/folke/which-key.nvim",
 	"https://github.com/nvim-lualine/lualine.nvim",
 	"https://github.com/m4xshen/hardtime.nvim",
@@ -165,32 +157,18 @@ vim.pack.add({
 	"https://github.com/nvim-telescope/telescope-fzf-native.nvim",
 	"https://github.com/nvim-telescope/telescope-ui-select.nvim",
 	"https://github.com/nvim-telescope/telescope.nvim",
-})
-
--- Set colorscheme
-require("modus-themes").setup({
-	style = "modus_vivendi", -- Always use modus_operandi regardless of `vim.opt.background`
-	variants = {
-		modus_vivendi = "deuteranopi", -- Use deuteranopia variant for `modus_operandi`
-		modus_operandi = "deuteranopia", -- Use deuteranopia variant for `modus_operandi`
+	{
+		src = "https://github.com/saghen/blink.cmp",
+		version = vim.version.range("^1"),
 	},
-	dim_inactive = false,
 })
-vim.cmd([[colorscheme modus]])
--- Once colorscheme set, dim gutters
-local function tweak_colorscheme()
-	vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#595959", italic = true })
-	vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#595959", italic = true })
-	vim.api.nvim_set_hl(0, "SignColumn", { fg = "#595959" })
-end
-tweak_colorscheme()
-vim.api.nvim_create_autocmd("ColorScheme", { callback = tweak_colorscheme })
+vim.cmd([[colorscheme tokyonight-night]])
 
 require("which-key")
 
 require("lualine").setup({
 	options = {
-		theme = "modus-vivendi",
+		theme = "tokyonight",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 	},
@@ -249,7 +227,41 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live gr
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
 
-local neogit = require("neogit").setup({ disable_hint = true, graph_style = "kitty" })
+require("neogit").setup({ disable_hint = true, graph_style = "kitty" })
 vim.keymap.set("n", "<space>gg", function()
 	require("neogit").open({ kind = "split_below_all" })
 end, { desc = "Neogit" })
+
+require("blink.cmp").setup({
+	completion = {
+		keyword = { range = "prefix" },
+		list = { selection = { preselect = false, auto_insert = false } },
+		documentation = { auto_show = true, auto_show_delay_ms = 500 },
+		ghost_text = { enabled = false },
+	},
+})
+
+vim.lsp.enable({
+	"lua_ls",
+	"rust-analyzer",
+})
+vim.diagnostic.config({ virtual_text = true })
+
+vim.lsp.config["lua_ls"] = {
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim" },
+			},
+		},
+	},
+	cmd = { "lua-language-server" },
+	filetypes = { "lua" },
+	root_markers = { ".luarc.json", ".git" },
+}
+
+vim.lsp.config["rust-analyzer"] = {
+	cmd = { "rust-analyzer" },
+	filetypes = { "rust" },
+	root_markers = { "Cargo.toml" },
+}
