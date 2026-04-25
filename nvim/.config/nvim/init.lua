@@ -143,13 +143,17 @@ vim.api.nvim_create_autocmd("PackChanged", {
 })
 
 vim.cmd("packadd nvim.difftool")
-vim.cmd("packadd nvim.undotree")
+
+vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Save file" })
+vim.keymap.set("n", "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
+vim.keymap.set("i", "<C-s>", "<esc><cmd>write<cr>gui", { desc = "Save file" })
+
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Save file" })
 
 vim.pack.add({
 	"https://github.com/folke/tokyonight.nvim",
 	"https://github.com/folke/which-key.nvim",
 	"https://github.com/nvim-lualine/lualine.nvim",
-	"https://github.com/m4xshen/hardtime.nvim",
 	"https://github.com/stevearc/conform.nvim",
 	"https://github.com/NeogitOrg/neogit",
 	-- telescope and its dependencies
@@ -157,29 +161,33 @@ vim.pack.add({
 	"https://github.com/nvim-telescope/telescope-fzf-native.nvim",
 	"https://github.com/nvim-telescope/telescope-ui-select.nvim",
 	"https://github.com/nvim-telescope/telescope.nvim",
-	{
-		src = "https://github.com/saghen/blink.cmp",
-		version = vim.version.range("^1"),
-	},
+	"https://github.com/saghen/blink.lib",
+	"https://github.com/saghen/blink.cmp",
+	"https://github.com/folke/snacks.nvim",
 })
 vim.cmd([[colorscheme tokyonight-night]])
 
 require("which-key")
+
+local cmp = require("blink.cmp")
+cmp.build():wait(30000)
+cmp.setup()
+require("blink.cmp").setup({
+	completion = {
+		keymap = { preset = "default" },
+		sources = { default = { "lsp", "path", "snippets", "buffer" } },
+		fuzzy = { implementation = "rust" },
+		keyword = { range = "prefix" },
+		documentation = { auto_show = true, auto_show_delay_ms = 500 },
+		ghost_text = { enabled = false },
+	},
+})
 
 require("lualine").setup({
 	options = {
 		theme = "tokyonight",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
-	},
-})
-
-require("hardtime").setup({
-	disabled_keys = {
-		["<Up>"] = false,
-		["<Down>"] = false,
-		["<Left>"] = false,
-		["<Right>"] = false,
 	},
 })
 
@@ -232,15 +240,6 @@ vim.keymap.set("n", "<space>gg", function()
 	require("neogit").open({ kind = "split_below_all" })
 end, { desc = "Neogit" })
 
-require("blink.cmp").setup({
-	completion = {
-		keyword = { range = "prefix" },
-		list = { selection = { preselect = false, auto_insert = false } },
-		documentation = { auto_show = true, auto_show_delay_ms = 500 },
-		ghost_text = { enabled = false },
-	},
-})
-
 vim.lsp.enable({
 	"lua_ls",
 	"rust-analyzer",
@@ -265,3 +264,16 @@ vim.lsp.config["rust-analyzer"] = {
 	filetypes = { "rust" },
 	root_markers = { "Cargo.toml" },
 }
+
+require("snacks").setup({
+	opts = {
+		git = true,
+		gitbrowse = true,
+	},
+})
+vim.keymap.set("n", "<leader>gh", function()
+	require("snacks").gitbrowse()
+end, { desc = "Git browse" })
+vim.keymap.set("n", "<leader>gB", function()
+	require("snacks").git.blame_line()
+end, { desc = "Git blame line" })
