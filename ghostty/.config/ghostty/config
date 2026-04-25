@@ -1,6 +1,15 @@
-command = /usr/bin/fish
+clipboard-trim-trailing-spaces = true
+copy-on-select = clipboard
+cursor-style = block
+cursor-style-blink = false
 font-family = ""
 font-family = "Iosevka Term Slab"
+font-feature = "-calt, -liga, -dlig"
 font-size = 16
-theme = light:"Modus Operandi",dark:"Modus Vivendi"
 font-style = "Medium"
+keybind = "alt+o=goto_split:next"
+keybind = ctrl+x>2=new_split:down
+keybind = ctrl+x>3=new_split:right
+mouse-hide-while-typing = true
+shell-integration-features = no-cursor
+theme = light:"Modus Operandi",dark:"Modus Vivendi"
