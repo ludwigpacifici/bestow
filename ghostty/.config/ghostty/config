@@ -12,4 +12,4 @@ keybind = ctrl+x>2=new_split:down
 keybind = ctrl+x>3=new_split:right
 mouse-hide-while-typing = true
 shell-integration-features = no-cursor
-theme = light:"Modus Operandi",dark:"Modus Vivendi"
+theme = light:"TokyoNight Day",dark:"TokyoNight Storm"
