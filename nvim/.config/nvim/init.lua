@@ -103,6 +103,7 @@ require("which-key")
 
 require("fzf-lua").setup({
 	"ivy",
+	grep = { hidden = true },
 })
 vim.keymap.set("n", "<leader>ff", function()
 	require("fzf-lua").files()
@@ -122,6 +123,12 @@ end, { desc = "Fzf document Diagnostics" })
 vim.keymap.set("n", "<leader>fD", function()
 	require("fzf-lua").diagnostics_workspace()
 end, { desc = "Fzf workspace Diagnostics" })
+vim.keymap.set("n", "<leader>fg", function()
+	require("fzf-lua").grep_curbuf()
+end, { desc = "Fzf document Grep" })
+vim.keymap.set("n", "<leader>fG", function()
+	require("fzf-lua").grep()
+end, { desc = "Fzf workspace Grep" })
 
 local cmp = require("blink.cmp")
 cmp.build():wait(30000)
