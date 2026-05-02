@@ -2,6 +2,7 @@ require("vim._core.ui2").enable()
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
 vim.opt.termguicolors = true
 vim.opt.relativenumber = true
 vim.opt.number = true
@@ -105,10 +106,22 @@ require("fzf-lua").setup({
 })
 vim.keymap.set("n", "<leader>ff", function()
 	require("fzf-lua").files()
-end, { desc = "fzf files" })
+end, { desc = "Fzf files" })
 vim.keymap.set("n", "<leader>fb", function()
 	require("fzf-lua").buffers()
-end, { desc = "fzf buffer" })
+end, { desc = "Fzf buffer" })
+vim.keymap.set("n", "<leader>fs", function()
+	require("fzf-lua").lsp_document_symbols()
+end, { desc = "Fzf document Symbols" })
+vim.keymap.set("n", "<leader>fS", function()
+	require("fzf-lua").lsp_worksapce_symbols()
+end, { desc = "Fzf workspace Symbols" })
+vim.keymap.set("n", "<leader>fd", function()
+	require("fzf-lua").diagnostics_document()
+end, { desc = "Fzf document Diagnostics" })
+vim.keymap.set("n", "<leader>fD", function()
+	require("fzf-lua").diagnostics_workspace()
+end, { desc = "Fzf workspace Diagnostics" })
 
 local cmp = require("blink.cmp")
 cmp.build():wait(30000)
@@ -185,6 +198,7 @@ vim.lsp.config.bashls = {
 
 require("snacks").setup({
 	opts = {
+		bigfile = true,
 		git = true,
 		gitbrowse = true,
 		scratch = true,
