@@ -33,13 +33,13 @@ vim.opt.confirm = true
 vim.opt.hidden = true
 vim.opt.autoread = true
 
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
-end)
+-- Sync clipboard between OS and Neovim because it can increase startup-time.
+vim.api.nvim_create_autocmd("UIEnter", {
+	once = true,
+	callback = function()
+		vim.opt.clipboard = "unnamedplus"
+	end,
+})
 
 vim.g.have_nerd_font = true
 vim.g.netrw_keepdir = 0
@@ -81,9 +81,9 @@ vim.cmd("packadd nvim.difftool")
 
 vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Save file" })
 vim.keymap.set("n", "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
-vim.keymap.set("i", "<C-s>", "<esc><cmd>write<cr>gui", { desc = "Save file" })
+vim.keymap.set("i", "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
 
-vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Save file" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
 
 vim.pack.add({
 	"https://github.com/folke/tokyonight.nvim",
@@ -99,49 +99,77 @@ vim.pack.add({
 })
 vim.cmd.colorscheme("tokyonight-night")
 
-require("which-key")
+require("which-key").setup({})
 
-require("fzf-lua").setup({
+local fzf = require("fzf-lua")
+fzf.setup({
 	"ivy",
 	grep = { hidden = true },
 })
 vim.keymap.set("n", "<leader>ff", function()
-	require("fzf-lua").files()
+	fzf.files()
 end, { desc = "Fzf files" })
 vim.keymap.set("n", "<leader>fb", function()
-	require("fzf-lua").buffers()
+	fzf.buffers()
 end, { desc = "Fzf buffer" })
-vim.keymap.set("n", "<leader>fs", function()
-	require("fzf-lua").lsp_document_symbols()
-end, { desc = "Fzf document Symbols" })
-vim.keymap.set("n", "<leader>fS", function()
-	require("fzf-lua").lsp_worksapce_symbols()
-end, { desc = "Fzf workspace Symbols" })
-vim.keymap.set("n", "<leader>fd", function()
-	require("fzf-lua").diagnostics_document()
-end, { desc = "Fzf document Diagnostics" })
-vim.keymap.set("n", "<leader>fD", function()
-	require("fzf-lua").diagnostics_workspace()
-end, { desc = "Fzf workspace Diagnostics" })
 vim.keymap.set("n", "<leader>fg", function()
-	require("fzf-lua").grep_curbuf()
+	fzf.grep_curbuf()
 end, { desc = "Fzf document Grep" })
 vim.keymap.set("n", "<leader>fG", function()
-	require("fzf-lua").grep()
+	fzf.grep()
 end, { desc = "Fzf workspace Grep" })
 
+vim.keymap.set("n", "<leader>lDi", function()
+	fzf.lsp_workspace_diagnostics()
+end, { desc = "Fzf lsp workspace diagnostics" })
+vim.keymap.set("n", "<leader>lS", function()
+	fzf.lsp_workspace_symbols()
+end, { desc = "Fzf lsp workspace symbols" })
+vim.keymap.set("n", "<leader>lca", function()
+	fzf.lsp_code_actions()
+end, { desc = "Fzf lsp code actions" })
+vim.keymap.set("n", "<leader>ldc", function()
+	fzf.lsp_declarations()
+end, { desc = "Fzf lsp declarations" })
+vim.keymap.set("n", "<leader>ldf", function()
+	fzf.lsp_definitions()
+end, { desc = "Fzf lsp definitions" })
+vim.keymap.set("n", "<leader>ldi", function()
+	fzf.lsp_document_diagnostics()
+end, { desc = "Fzf lsp document diagnostics" })
+vim.keymap.set("n", "<leader>lf", function()
+	fzf.lsp_finder()
+end, { desc = "Fzf lsp finder" })
+vim.keymap.set("n", "<leader>lic", function()
+	fzf.lsp_incoming_calls()
+end, { desc = "Fzf lsp incoming calls" })
+vim.keymap.set("n", "<leader>lim", function()
+	fzf.lsp_implementations()
+end, { desc = "Fzf lsp implementations" })
+vim.keymap.set("n", "<leader>loc", function()
+	fzf.lsp_outgoing_calls()
+end, { desc = "Fzf lsp outgoing calls" })
+vim.keymap.set("n", "<leader>lr", function()
+	fzf.lsp_references()
+end, { desc = "Fzf lsp references" })
+vim.keymap.set("n", "<leader>ls", function()
+	fzf.lsp_document_symbols()
+end, { desc = "Fzf lsp document symbols" })
+vim.keymap.set("n", "<leader>ltd", function()
+	fzf.lsp_typedefs()
+end, { desc = "Fzf lsp typedefs" })
+
 local cmp = require("blink.cmp")
-cmp.build():wait(30000)
-cmp.setup()
-require("blink.cmp").setup({
+cmp.build():wait(60000)
+cmp.setup({
 	completion = {
 		documentation = { auto_show = true, auto_show_delay_ms = 500 },
-		fuzzy = { implementation = "rust" },
-		keymap = { preset = "default" },
 		keyword = { range = "prefix" },
-		signature = { enabled = true },
-		sources = { default = { "lsp", "path", "snippets", "buffer" } },
 	},
+	-- fuzzy = { implementation = "rust" },
+	keymap = { preset = "default" },
+	signature = { enabled = true },
+	sources = { default = { "lsp", "path", "snippets", "buffer" } },
 })
 
 require("lualine").setup({
@@ -154,6 +182,7 @@ require("lualine").setup({
 
 require("conform").setup({
 	formatters_by_ft = {
+		java = { "google-java-format" },
 		lua = { "stylua" },
 		markdown = { "dprint" },
 		rust = { "rustfmt" },
@@ -162,7 +191,7 @@ require("conform").setup({
 		xml = { "prettier" },
 	},
 	format_on_save = {
-		timeout_ms = 500,
+		timeout_ms = 2000,
 		lsp_format = "fallback",
 	},
 })
@@ -172,11 +201,6 @@ vim.keymap.set("n", "<space>gg", function()
 	require("neogit").open({ kind = "split_below_all" })
 end, { desc = "Neogit" })
 
-vim.lsp.enable({
-	"lua_ls",
-	"rust-analyzer",
-	"bashls",
-})
 vim.diagnostic.config({ virtual_text = true })
 
 vim.lsp.config["lua_ls"] = {
@@ -203,13 +227,17 @@ vim.lsp.config.bashls = {
 	filetypes = { "bash", "sh" },
 }
 
+vim.lsp.enable({
+	"lua_ls",
+	"rust-analyzer",
+	"bashls",
+})
+
 require("snacks").setup({
-	opts = {
-		bigfile = true,
-		git = true,
-		gitbrowse = true,
-		scratch = true,
-	},
+	bigfile = { enabled = true },
+	git = { enabled = true },
+	gitbrowse = { enabled = true },
+	scratch = { enabled = true },
 })
 vim.keymap.set("n", "<leader>gh", function()
 	require("snacks").gitbrowse()

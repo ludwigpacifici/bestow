@@ -1,7 +1,7 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "80f5dd3f11049f1c3a87557718d4e55556a0e3f5",
+      "rev": "d3874d2a13aa19b095bdd10d37a82a8f0aa7cad3",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
@@ -13,7 +13,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf-lua": {
-      "rev": "10c19a5f08bfeed34b930a1efddda3a9a983e6e2",
+      "rev": "64590411e6cf3d603d1e1bdad3a3d051f2f5a91a",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "lualine.nvim": {
@@ -21,7 +21,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "neogit": {
-      "rev": "88000e7e60177558d1b428a0d561c92e5d81341e",
+      "rev": "f8bcc625fe1b9bd55f7853820fddac9b0996f697",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "plenary.nvim": {
