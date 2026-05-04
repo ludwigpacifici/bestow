@@ -86,20 +86,48 @@ vim.keymap.set("i", "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
 
 vim.pack.add({
+	"https://github.com/NeogitOrg/neogit",
+	"https://github.com/folke/snacks.nvim",
 	"https://github.com/folke/tokyonight.nvim",
 	"https://github.com/folke/which-key.nvim",
 	"https://github.com/ibhagwan/fzf-lua",
-	"https://github.com/nvim-lualine/lualine.nvim",
-	"https://github.com/stevearc/conform.nvim",
-	"https://github.com/NeogitOrg/neogit",
 	"https://github.com/nvim-lua/plenary.nvim",
-	"https://github.com/saghen/blink.lib",
+	"https://github.com/nvim-lualine/lualine.nvim",
+	"https://github.com/nvim-treesitter/nvim-treesitter",
 	"https://github.com/saghen/blink.cmp",
-	"https://github.com/folke/snacks.nvim",
+	"https://github.com/saghen/blink.lib",
+	"https://github.com/stevearc/conform.nvim",
 })
 vim.cmd.colorscheme("tokyonight-night")
 
 require("which-key").setup({})
+
+require("nvim-treesitter").setup({
+	install_dir = vim.fn.stdpath("data") .. "/site",
+})
+require("nvim-treesitter")
+	.install({
+		"bash",
+		"c",
+		"cpp",
+		"diff",
+		"dockerfile",
+		"editorconfig",
+		"git_config",
+		"gitcommit",
+		"gitignore",
+		"java",
+		"javascript",
+		"json",
+		"make",
+		"mermaid",
+		"rust",
+		"terraform",
+		"typescript",
+		"yaml",
+		"zig",
+	})
+	:wait(300000)
 
 local fzf = require("fzf-lua")
 fzf.setup({
