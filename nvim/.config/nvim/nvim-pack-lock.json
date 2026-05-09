@@ -20,10 +20,6 @@
       "rev": "131a558e13f9f28b15cd235557150ccb23f89286",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
-    "neogit": {
-      "rev": "395ac481e197784e410b59b987fadaf9e7481df1",
-      "src": "https://github.com/NeogitOrg/neogit"
-    },
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"

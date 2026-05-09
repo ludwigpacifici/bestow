@@ -83,10 +83,10 @@ vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Save file" })
 vim.keymap.set("n", "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
 vim.keymap.set("i", "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
 
+vim.keymap.set("n", "<leader>d", "<cmd>Explore<cr>", { desc = "Explore" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
 
 vim.pack.add({
-	"https://github.com/NeogitOrg/neogit",
 	"https://github.com/folke/snacks.nvim",
 	"https://github.com/folke/tokyonight.nvim",
 	"https://github.com/folke/which-key.nvim",
@@ -166,14 +166,14 @@ end, { desc = "Fzf keymap" })
 vim.keymap.set("n", "<leader>ff", function()
 	fzf.files()
 end, { desc = "Fzf files" })
-vim.keymap.set("n", "<leader>fof", function()
-	fzf.oldfiles()
+vim.keymap.set("n", "<leader>fh", function()
+	fzf.history()
 end, { desc = "Fzf old files" })
 vim.keymap.set("n", "<leader>fb", function()
 	fzf.buffers()
 end, { desc = "Fzf buffer" })
-vim.keymap.set("n", "<leader>fg", function()
-	fzf.grep_curbuf()
+vim.keymap.set("n", "<leader>fl", function()
+	fzf.lines()
 end, { desc = "Fzf document Grep" })
 vim.keymap.set("n", "<leader>fG", function()
 	fzf.live_grep()
@@ -260,11 +260,6 @@ require("conform").setup({
 	},
 })
 
-require("neogit").setup({ disable_hint = true, graph_style = "kitty" })
-vim.keymap.set("n", "<space>gg", function()
-	require("neogit").open({ kind = "split_below_all" })
-end, { desc = "Neogit" })
-
 vim.diagnostic.config({ virtual_text = true })
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(event)
@@ -304,16 +299,13 @@ vim.lsp.enable({
 
 require("snacks").setup({
 	bigfile = { enabled = true },
-	git = { enabled = true },
 	gitbrowse = { enabled = true },
+	lazygit = { enabled = true },
 	scratch = { enabled = true },
 })
 vim.keymap.set("n", "<leader>gh", function()
 	require("snacks").gitbrowse()
 end, { desc = "Git browse" })
-vim.keymap.set("n", "<leader>gB", function()
-	require("snacks").git.blame_line()
-end, { desc = "Git blame line" })
 vim.keymap.set("n", "<leader>.", function()
 	require("snacks").scratch()
 end, { desc = "Toggle Scratch Buffer" })
