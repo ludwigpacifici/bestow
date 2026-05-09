@@ -128,15 +128,47 @@ require("nvim-treesitter")
 		"zig",
 	})
 	:wait(300000)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = {
+		"bash",
+		"c",
+		"cpp",
+		"diff",
+		"dockerfile",
+		"editorconfig",
+		"gitconfig",
+		"gitcommit",
+		"gitignore",
+		"java",
+		"javascript",
+		"json",
+		"make",
+		"mermaid",
+		"rust",
+		"terraform",
+		"typescript",
+		"yaml",
+		"zig",
+	},
+	callback = function()
+		pcall(vim.treesitter.start)
+	end,
+})
 
 local fzf = require("fzf-lua")
 fzf.setup({
 	"ivy",
 	grep = { hidden = true },
 })
+vim.keymap.set("n", "<leader>k", function()
+	fzf.keymaps()
+end, { desc = "Fzf keymap" })
 vim.keymap.set("n", "<leader>ff", function()
 	fzf.files()
 end, { desc = "Fzf files" })
+vim.keymap.set("n", "<leader>fof", function()
+	fzf.oldfiles()
+end, { desc = "Fzf old files" })
 vim.keymap.set("n", "<leader>fb", function()
 	fzf.buffers()
 end, { desc = "Fzf buffer" })
@@ -144,7 +176,7 @@ vim.keymap.set("n", "<leader>fg", function()
 	fzf.grep_curbuf()
 end, { desc = "Fzf document Grep" })
 vim.keymap.set("n", "<leader>fG", function()
-	fzf.grep()
+	fzf.live_grep()
 end, { desc = "Fzf workspace Grep" })
 
 vim.keymap.set("n", "<leader>lDi", function()
@@ -187,9 +219,8 @@ vim.keymap.set("n", "<leader>ltd", function()
 	fzf.lsp_typedefs()
 end, { desc = "Fzf lsp typedefs" })
 
-local cmp = require("blink.cmp")
-cmp.build():wait(60000)
-cmp.setup({
+require("blink.cmp").build():wait(60000)
+require("blink.cmp").setup({
 	completion = {
 		documentation = { auto_show = true, auto_show_delay_ms = 500 },
 		keyword = { range = "prefix" },
@@ -205,6 +236,11 @@ require("lualine").setup({
 		theme = "tokyonight",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
+	},
+	sections = {
+		lualine_c = {
+			{ "filename", path = 3 },
+		},
 	},
 })
 
@@ -230,6 +266,11 @@ vim.keymap.set("n", "<space>gg", function()
 end, { desc = "Neogit" })
 
 vim.diagnostic.config({ virtual_text = true })
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(event)
+		vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+	end,
+})
 
 vim.lsp.config["lua_ls"] = {
 	settings = {
