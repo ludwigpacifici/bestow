@@ -81,17 +81,22 @@ vim.cmd("packadd nvim.difftool")
 
 vim.pack.add({
 	"https://github.com/folke/snacks.nvim",
-	"https://github.com/folke/tokyonight.nvim",
+	"https://github.com/rebelot/kanagawa.nvim",
 	"https://github.com/folke/which-key.nvim",
 	"https://github.com/ibhagwan/fzf-lua",
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/nvim-lualine/lualine.nvim",
+	"https://github.com/neovim/nvim-lspconfig",
 	"https://github.com/nvim-treesitter/nvim-treesitter",
 	"https://github.com/saghen/blink.cmp",
 	"https://github.com/saghen/blink.lib",
 	"https://github.com/stevearc/conform.nvim",
 })
-vim.cmd.colorscheme("tokyonight-night")
+
+require("kanagawa").setup({
+	dimInactive = true,
+})
+vim.cmd.colorscheme("kanagawa-dragon")
 
 require("which-key").setup({})
 
@@ -168,13 +173,21 @@ require("blink.cmp").setup({
 
 require("lualine").setup({
 	options = {
-		theme = "tokyonight",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 	},
 	sections = {
 		lualine_c = {
 			{ "filename", path = 3 },
+		},
+		lualine_x = {
+			{
+				"lsp_status",
+				symbols = { spinner = { "⧗" } },
+			},
+			"encoding",
+			"fileformat",
+			"filetype",
 		},
 	},
 })
@@ -225,15 +238,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("<leader>lf", function()
 			fzf.lsp_finder()
 		end, "Fzf lsp finder")
-		map("<leader>lic", function()
-			fzf.lsp_incoming_calls()
-		end, "Fzf lsp incoming calls")
 		map("<leader>lim", function()
 			fzf.lsp_implementations()
 		end, "Fzf lsp implementations")
-		map("<leader>loc", function()
-			fzf.lsp_outgoing_calls()
-		end, "Fzf lsp outgoing calls")
 		map("<leader>lr", function()
 			fzf.lsp_references()
 		end, "Fzf lsp references")
@@ -246,7 +253,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.lsp.config["lua_ls"] = {
+vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
 			diagnostics = {
@@ -254,26 +261,20 @@ vim.lsp.config["lua_ls"] = {
 			},
 		},
 	},
-	cmd = { "lua-language-server" },
-	filetypes = { "lua" },
-	root_markers = { ".luarc.json", ".git" },
-}
+})
 
-vim.lsp.config["rust-analyzer"] = {
-	cmd = { "rust-analyzer" },
-	filetypes = { "rust" },
-	root_markers = { "Cargo.toml" },
-}
-
-vim.lsp.config.bashls = {
-	cmd = { "bash-language-server", "start" },
-	filetypes = { "bash", "sh" },
-}
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "rust",
+	callback = function()
+		vim.cmd("compiler cargo")
+	end,
+})
 
 vim.lsp.enable({
 	"lua_ls",
-	"rust-analyzer",
+	"rust_analyzer",
 	"bashls",
+	"jdtls",
 })
 
 require("snacks").setup({
@@ -284,8 +285,7 @@ require("snacks").setup({
 })
 
 vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Save file" })
-vim.keymap.set("n", "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
-vim.keymap.set("i", "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
+vim.keymap.set("n", "<leader>q", "<cmd>quit<cr>", { desc = "Quit" })
 
 vim.keymap.set("n", "<leader>d", "<cmd>Explore<cr>", { desc = "Explore" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
@@ -302,7 +302,7 @@ end, { desc = "Fzf old files" })
 vim.keymap.set("n", "<leader>fb", function()
 	fzf.buffers()
 end, { desc = "Fzf buffer" })
-vim.keymap.set("n", "<leader>fl", function()
+vim.keymap.set("n", "<leader>fg", function()
 	fzf.lines()
 end, { desc = "Fzf document Grep" })
 vim.keymap.set("n", "<leader>fG", function()
@@ -311,6 +311,9 @@ end, { desc = "Fzf workspace Grep" })
 vim.keymap.set("n", "<leader>gb", function()
 	fzf.git_blame()
 end, { desc = "Fzf git blame" })
+vim.keymap.set("n", "<leader>p", function()
+	fzf.registers()
+end, { desc = "Fzf registers" })
 
 vim.keymap.set("n", "<leader>gh", function()
 	require("snacks").gitbrowse()
