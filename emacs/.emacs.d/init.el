@@ -232,7 +232,7 @@
 (use-package modus-themes
   :ensure t
   :config
-  (setq modsu-themes-italic-constructs t
+  (setq modus-themes-italic-constructs t
         modus-themes-bold-constructs t
         modus-themes-to-toggle '(modus-operandi-deuteranopia modus-vivendi-deuteranopia))
   (load-theme 'modus-vivendi-deuteranopia :no-confirm)
