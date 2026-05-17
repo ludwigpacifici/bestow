@@ -62,6 +62,22 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
 	end,
 })
 
+local AutoSaveGroup = vim.api.nvim_create_augroup("AutoSave", { clear = true })
+vim.api.nvim_create_autocmd("FocusLost", {
+	group = AutoSaveGroup,
+	callback = function()
+		vim.cmd.wall({ mods = { silent = true } })
+	end,
+})
+vim.api.nvim_create_autocmd({ "BufLeave", "WinLeave" }, {
+	group = AutoSaveGroup,
+	callback = function()
+		if vim.bo.modified and vim.bo.modifiable and not vim.bo.readonly and vim.bo.buftype == "" then
+			vim.cmd.update({ mods = { silent = true } })
+		end
+	end,
+})
+
 -- Current line hightlighted only for active split
 local ActiveWindowCursorlineGroup = vim.api.nvim_create_augroup("ActiveWindowCursorline", { clear = true })
 vim.api.nvim_create_autocmd("WinEnter", {
@@ -81,8 +97,8 @@ vim.cmd("packadd nvim.difftool")
 
 vim.pack.add({
 	"https://github.com/folke/snacks.nvim",
-	"https://github.com/rebelot/kanagawa.nvim",
 	"https://github.com/folke/which-key.nvim",
+	"https://github.com/rebelot/kanagawa.nvim",
 	"https://github.com/ibhagwan/fzf-lua",
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/nvim-lualine/lualine.nvim",
@@ -95,6 +111,11 @@ vim.pack.add({
 
 require("kanagawa").setup({
 	dimInactive = true,
+	theme = "dragon",
+	background = {
+		dark = "wave",
+		light = "dragon",
+	},
 })
 vim.cmd.colorscheme("kanagawa-dragon")
 
@@ -119,6 +140,7 @@ require("nvim-treesitter")
 		"json",
 		"make",
 		"mermaid",
+		"python",
 		"rust",
 		"terraform",
 		"typescript",
@@ -142,6 +164,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"json",
 		"make",
 		"mermaid",
+		"python",
 		"rust",
 		"terraform",
 		"typescript",
@@ -166,7 +189,10 @@ require("blink.cmp").setup({
 		keyword = { range = "prefix" },
 	},
 	-- fuzzy = { implementation = "rust" },
-	keymap = { preset = "default" },
+	keymap = {
+		preset = "default",
+		["<CR>"] = { "accept", "fallback" },
+	},
 	signature = { enabled = true },
 	sources = { default = { "lsp", "path", "snippets", "buffer" } },
 })
@@ -197,6 +223,7 @@ require("conform").setup({
 		java = { "google-java-format" },
 		lua = { "stylua" },
 		markdown = { "dprint" },
+		python = { "ruff_organize_imports", "ruff_format" },
 		rust = { "rustfmt" },
 		sh = { "shfmt" },
 		toml = { "taplo" },
@@ -217,28 +244,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.keymap.set("n", lhs, rhs, { buffer = event.buf, desc = desc })
 		end
 
-		map("<leader>lDi", function()
+		map("<leader>lI", function()
 			fzf.lsp_workspace_diagnostics()
 		end, "Fzf lsp workspace diagnostics")
 		map("<leader>lS", function()
 			fzf.lsp_workspace_symbols()
 		end, "Fzf lsp workspace symbols")
-		map("<leader>lca", function()
+		map("<leader>la", function()
 			fzf.lsp_code_actions()
 		end, "Fzf lsp code actions")
-		map("<leader>ldc", function()
+		map("<leader>lc", function()
 			fzf.lsp_declarations()
 		end, "Fzf lsp declarations")
-		map("<leader>ldf", function()
+		map("<leader>lf", function()
 			fzf.lsp_definitions()
 		end, "Fzf lsp definitions")
-		map("<leader>ldi", function()
+		map("<leader>li", function()
 			fzf.lsp_document_diagnostics()
 		end, "Fzf lsp document diagnostics")
-		map("<leader>lf", function()
-			fzf.lsp_finder()
-		end, "Fzf lsp finder")
-		map("<leader>lim", function()
+		map("<leader>lm", function()
 			fzf.lsp_implementations()
 		end, "Fzf lsp implementations")
 		map("<leader>lr", function()
@@ -247,7 +271,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("<leader>ls", function()
 			fzf.lsp_document_symbols()
 		end, "Fzf lsp document symbols")
-		map("<leader>ltd", function()
+		map("<leader>lt", function()
 			fzf.lsp_typedefs()
 		end, "Fzf lsp typedefs")
 	end,
@@ -275,6 +299,8 @@ vim.lsp.enable({
 	"rust_analyzer",
 	"bashls",
 	"jdtls",
+	"basedpyright",
+	"ruff",
 })
 
 require("snacks").setup({
@@ -284,11 +310,28 @@ require("snacks").setup({
 	scratch = { enabled = true },
 })
 
+local function cd_git_root()
+	local root = vim.fs.root(0, ".git")
+
+	if not root then
+		vim.notify("No git root found from current buffer", vim.log.levels.WARN)
+		return
+	end
+
+	vim.api.nvim_set_current_dir(root)
+	vim.notify("cwd: " .. root)
+end
+
+vim.api.nvim_create_user_command("GitRoot", cd_git_root, {
+	desc = "Set cwd to git root of current buffer",
+})
+
 vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Save file" })
 vim.keymap.set("n", "<leader>q", "<cmd>quit<cr>", { desc = "Quit" })
-
 vim.keymap.set("n", "<leader>d", "<cmd>Explore<cr>", { desc = "Explore" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
+
+vim.keymap.set("n", "<leader>gr", cd_git_root, { desc = "Set cwd to git root" })
 
 vim.keymap.set("n", "<leader>k", function()
 	fzf.keymaps()
